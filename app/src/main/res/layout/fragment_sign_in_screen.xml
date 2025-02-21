@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_sign_in"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="32dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="32dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/left_vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+
+    <TextView
+        android:id="@+id/textView_SignIn"
+        style="@style/HeadingText_2"
+        android:text="@string/sign_in"
+        app:layout_constraintTop_toBottomOf="@id/top_horizontal_guideline"
+        app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="32dp" />
+
+
+    <TextView
+        android:id="@+id/textView_SignIn_Subtext"
+        style="@style/SubText"
+        android:text="@string/welcome_back"
+        app:layout_constraintStart_toStartOf="@id/textView_SignIn"
+        app:layout_constraintTop_toBottomOf="@id/textView_SignIn"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="81dp" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_Email"
+        style="@style/CustomTextInputLayout"
+        android:hint="@string/email"
+        app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_horizontal_guideline_for_text_input"
+        android:layout_marginBottom="42dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText_Email"
+            style="@style/CustomTextInputEditText_Email" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_Password"
+        style="@style/CustomTextInputLayout"
+        android:hint="@string/password"
+        app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_Email"
+        android:layout_marginBottom="42dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText_Password"
+            style="@style/CustomTextInputEditText_Password" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/button_signIn"
+        style="@style/PrimaryButton"
+        android:text="@string/sign_in"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_Password"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_horizontal_guideline_for_text_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="121dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

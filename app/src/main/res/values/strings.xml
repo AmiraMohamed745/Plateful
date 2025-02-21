@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Plateful</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="make_a_plateful_of_delicious_meals">Make a plateful of delicious meals!</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username_is_required">Username is required.</string>
+    <string name="email_is_required">Email is required.</string>
+    <string name="password_is_required">Password is required.</string>
+    <string name="confirm_password_is_required">Confirm password is required.</string>
+    <string name="sign_in_as_guest">Sign in as guest</string>
+    <string name="sign_up_with_email">Sign up with email</string>
+    <string name="or_use_social_sign_up">or use social sign up</string>
+    <string name="continue_with_Goggle">Continue with Goggle</string>
+    <string name="continue_with_Facebook">Continue with Facebook</string>
+    <string name="already_have_account_log_in">Already have account? Log In</string>
+    <string name="background_welcome_content_description">Welcome screen background image of a breakfast</string>
+
+</resources>
