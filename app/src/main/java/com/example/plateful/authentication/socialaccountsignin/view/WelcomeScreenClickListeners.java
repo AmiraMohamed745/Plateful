@@ -1,4 +1,4 @@
-package com.example.plateful.authentication.signup.view;
+package com.example.plateful.authentication.signin.view;
 
 public interface onContinueWithGoogleClickListener {
     void onContinueWithGoogle();
