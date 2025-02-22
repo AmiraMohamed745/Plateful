@@ -20,6 +20,7 @@ import com.example.plateful.model.MealRepository;
 import com.example.plateful.model.MealRepositoryImpl;
 import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.MealRemoteDataSourceImpl;
+import com.example.plateful.view.DestinationNavigator;
 
 
 public class HomeScreen extends Fragment implements HomeScreenView {
