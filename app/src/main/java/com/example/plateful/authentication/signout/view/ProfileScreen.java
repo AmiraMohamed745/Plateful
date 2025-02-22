@@ -16,6 +16,7 @@ import com.example.plateful.R;
 import com.example.plateful.authentication.model.User;
 import com.example.plateful.authentication.signout.presenter.ProfileScreenPresenter;
 import com.example.plateful.authentication.signout.presenter.ProfileScreenPresenterImpl;
+import com.example.plateful.authentication.socialaccountsignin.model.GoogleSignInHelper;
 import com.example.plateful.view.DestinationNavigator;
 
 
@@ -54,7 +55,10 @@ public class ProfileScreen extends Fragment implements ProfileScreenView{
 
         buttonSignOut = view.findViewById(R.id.button_sign_out);
 
-        profileScreenPresenter = new ProfileScreenPresenterImpl(this);
+        String webClientId = "611080036624-fbcvsud6if4ejq93mp0438ob9u74upfd.apps.googleusercontent.com";
+        GoogleSignInHelper googleSignInHelper = new GoogleSignInHelper(requireContext(), webClientId);
+
+        profileScreenPresenter = new ProfileScreenPresenterImpl(this, googleSignInHelper);
         profileScreenPresenter.getCurrentUserData();
 
         buttonSignOut.setOnClickListener(onSignOutButtonClicked -> {
@@ -72,6 +76,5 @@ public class ProfileScreen extends Fragment implements ProfileScreenView{
         textView_Username.setText(user.getUsername());
         textView_Email.setText(user.getEmail());
     }
-
 }
 
