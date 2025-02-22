@@ -1,5 +1,6 @@
-package com.example.plateful.authentication.signup.view;
+package com.example.plateful.authentication.socialaccountsignin.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,12 +15,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.plateful.R;
+import com.example.plateful.authentication.socialaccountsignin.model.GoogleSignInHelper;
+import com.example.plateful.authentication.socialaccountsignin.presenter.WelcomeScreenPresenter;
+import com.example.plateful.authentication.socialaccountsignin.presenter.WelcomeScreenPresenterImpl;
+import com.example.plateful.view.DestinationNavigator;
 
 
-public class WelcomeScreen extends Fragment {
+public class WelcomeScreen extends Fragment implements WelcomeScreenClickListeners, WelcomeScreenView {
 
     // For debugging
     private static final String TAG = WelcomeScreen.class.getSimpleName();
+
+    private static final int RC_SIGN_IN = 100;
+    private WelcomeScreenPresenter presenter;
 
     // Views
     private ImageView bgWelcome;
@@ -58,5 +66,51 @@ public class WelcomeScreen extends Fragment {
 
         textViewOrUseSocialMediaSignUp = view.findViewById(R.id.textView_or_use_social_media_sign_up);
         textViewAlreadyHaveAnAccount = view.findViewById(R.id.textView_already_have_an_account);
+
+        String webClientId = "611080036624-fbcvsud6if4ejq93mp0438ob9u74upfd.apps.googleusercontent.com";
+        GoogleSignInHelper googleSignInHelper = new GoogleSignInHelper(requireContext(), webClientId);
+        presenter = new WelcomeScreenPresenterImpl(this, this, googleSignInHelper);
+
+        buttonContinueWithGoogle.setOnClickListener(v -> presenter.onGoogleSignInButtonClicked());
+        buttonSignUpWithEmail.setOnClickListener(onButtonSignUpWithEmail -> onSignUpWithEmail());
+        textViewAlreadyHaveAnAccount.setOnClickListener(onLoginText -> onAlreadyHaveAnAccountLogIn());
+    }
+
+    @Override
+    public void launchGoogleSignInIntent(Intent signInIntent) {
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            presenter.handleGoogleSignInResult(data);
+        }
+    }
+
+    @Override
+    public void showError(String errorMessage) {
+        // Not handled: no actual errors are shown on the UI
+    }
+
+    @Override
+    public void onSignUpWithEmail() {
+        DestinationNavigator.navigateToSignUpScreen(requireView());
+    }
+
+    @Override
+    public void onSignInAsGuest() {
+        // Not handled
+    }
+
+    @Override
+    public void onSuccessfulGoogleSignIn() {
+        DestinationNavigator.navigateToHomeScreen(requireView());
+    }
+
+    @Override
+    public void onAlreadyHaveAnAccountLogIn() {
+        DestinationNavigator.navigateToSignInScreen(requireView());
     }
 }
