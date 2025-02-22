@@ -20,4 +20,12 @@ public class DestinationNavigator {
         Navigation.findNavController(view).navigate(R.id.action_global_profileScreen);
     }
 
+    public static void navigateToSignUpScreen(View view) {
+        Navigation.findNavController(view).navigate(R.id.action_welcomeScreen_to_signUpScreen);
+    }
+
+    public static void navigateToSignInScreen(View view) {
+        Navigation.findNavController(view).navigate(R.id.action_welcomeScreen_to_signInScreen);
+    }
+
 }
