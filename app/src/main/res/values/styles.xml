@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <!--Should I completely remove android/app from the style file? -->
+
     <style name="CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:layout_width">325dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -21,6 +21,29 @@
         <item name="android:inputType">textPersonName</item>
     </style>
 
+    <style name="GeneralSearchTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="placeholderTextAppearance">@style/SearchPlaceholderTextAppearance</item>
+        <item name="startIconDrawable">@drawable/ic_search</item>
+        <item name="hintEnabled">false</item>
+    </style>
+
+    <style name="SearchResultsTextInputLayout" parent="GeneralSearchTextInputLayout">
+        <item name="boxStrokeColor">@color/primaryColor</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="startIconDrawable">@drawable/ic_arrow_back</item>
+        <item name="boxStrokeWidth">2dp</item>
+        <item name="placeholderTextColor">@color/subTextColor</item>
+        <item name="boxCornerRadiusTopStart">28dp</item>
+        <item name="boxCornerRadiusTopEnd">28dp</item>
+        <item name="boxCornerRadiusBottomStart">28dp</item>
+        <item name="boxCornerRadiusBottomEnd">28dp</item>
+        <item name="startIconTint">@null</item>
+        <item name="android:titleMarginTop">32dp</item>
+        <item name="android:titleMarginBottom">16dp</item>
+    </style>
+
 
     <style name="CustomTextInputEditText_Username" parent="GeneralCustomTextInputEditText">
         <item name="android:inputType">textPersonName</item>
@@ -36,9 +59,25 @@
         <item name="android:inputType">textPassword</item>
     </style>
 
+    <style name="GeneralSearchTextInputEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:inputType">text</item>
+        <item name="android:titleMarginTop">32dp</item>
+        <item name="android:titleMarginBottom">16dp</item>
+    </style>
+
 
     <style name="CustomHintText" parent="TextAppearance.MaterialComponents.Caption">
         <item name="android:textColor">@color/hintTextColor</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="SearchPlaceholderTextAppearance" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textColor">@color/subTextColor</item>
         <item name="android:fontFamily">@font/poppins_regular</item>
     </style>
 
@@ -84,6 +123,9 @@
         <item name="android:textColor">@color/subTextColor</item>
     </style>
 
+<!--
+    This divider is supposed to show on the Welcome screen twice; on the left and right, but it doesn't
+-->
     <style name="divider">
         <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">5dp</item>
