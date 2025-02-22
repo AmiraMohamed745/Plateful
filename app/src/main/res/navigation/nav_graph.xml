@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/signInScreen">
+    app:startDestination="@id/searchResultsScreen">
 
     <fragment
         android:id="@+id/signUpScreen"
@@ -63,5 +63,10 @@
     <action
         android:id="@+id/action_global_profileScreen"
         app:destination="@id/profileScreen" />
+    <fragment
+        android:id="@+id/searchResultsScreen"
+        android:name="com.example.plateful.search.SearchResultsScreen"
+        android:label="fragment_search_screen__active"
+        tools:layout="@layout/fragment_search_results_screen" />
 
 </navigation>

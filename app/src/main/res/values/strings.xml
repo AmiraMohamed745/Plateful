@@ -20,6 +20,8 @@
     <string name="continue_with_Goggle">Continue with Goggle</string>
     <string name="continue_with_Facebook">Continue with Facebook</string>
     <string name="already_have_account_log_in">Already have account? Log In</string>
+    <string name="search_for_a_meal">Search for a meal</string>
+    <string name="fragment_label_search">Search</string>
     <string name="background_welcome_content_description">Welcome screen background image of a breakfast</string>
-
+    <string name="ic_meal_content_description">Fork and knife icon to represent meal</string>
 </resources>
