@@ -9,6 +9,7 @@ import com.example.plateful.authentication.model.User;
 import com.example.plateful.authentication.model.UserRepository;
 import com.example.plateful.authentication.model.UserRepositoryImpl;
 import com.example.plateful.authentication.signout.view.ProfileScreenView;
+import com.example.plateful.authentication.socialaccountsignin.model.GoogleSignInHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -16,12 +17,15 @@ public class ProfileScreenPresenterImpl implements ProfileScreenPresenter {
 
     private static final String TAG = ProfileScreenPresenterImpl.class.getSimpleName();
 
-    private ProfileScreenView profileScreenView;
-    private AuthenticationRepository authenticationRepository;
-    private UserRepository userRepository;
+    private final ProfileScreenView profileScreenView;
+    private final GoogleSignInHelper googleSignInHelper;
+    private final AuthenticationRepository authenticationRepository;
+    private final UserRepository userRepository;
 
-    public ProfileScreenPresenterImpl(ProfileScreenView profileScreenView) {
+
+    public ProfileScreenPresenterImpl(ProfileScreenView profileScreenView, GoogleSignInHelper googleSignInHelper) {
         this.profileScreenView = profileScreenView;
+        this.googleSignInHelper = googleSignInHelper;
         this.authenticationRepository = new AuthenticationRepositoryImpl();
         this.userRepository = new UserRepositoryImpl();
     }
@@ -51,6 +55,9 @@ public class ProfileScreenPresenterImpl implements ProfileScreenPresenter {
     @Override
     public void signOutUser() {
         authenticationRepository.signOutUser();
+        if (googleSignInHelper != null) {
+            googleSignInHelper.signOutGoogleAccount();
+        }
         profileScreenView.onSignOut();
     }
 }
