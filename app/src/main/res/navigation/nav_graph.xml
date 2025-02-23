@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/searchResultsScreen">
+    app:startDestination="@id/welcomeScreen">
 
     <fragment
         android:id="@+id/signUpScreen"
@@ -48,9 +48,19 @@
 
     <fragment
         android:id="@+id/welcomeScreen"
-        android:name="com.example.plateful.authentication.signup.view.WelcomeScreen"
+        android:name="com.example.plateful.authentication.socialaccountsignin.view.WelcomeScreen"
         android:label="fragment_welcome_screen"
-        tools:layout="@layout/fragment_welcome_screen" />
+        tools:layout="@layout/fragment_welcome_screen" >
+        <action
+            android:id="@+id/action_welcomeScreen_to_signUpScreen"
+            app:destination="@id/signUpScreen" />
+        <action
+            android:id="@+id/action_welcomeScreen_to_signInScreen"
+            app:destination="@id/signInScreen" />
+        <action
+            android:id="@+id/action_welcomeScreen_to_signInScreen2"
+            app:destination="@id/signInScreen" />
+    </fragment>
 
     <action
         android:id="@+id/action_global_homeScreen"
