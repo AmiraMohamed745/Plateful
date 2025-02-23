@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/welcomeScreen">
+    app:startDestination="@id/splashScreen">
 
     <fragment
         android:id="@+id/signUpScreen"
@@ -67,16 +67,24 @@
         app:destination="@id/homeScreen" />
 
     <action
-        android:id="@+id/action_global_welcomeScreen"
-        app:destination="@id/welcomeScreen" />
-
-    <action
         android:id="@+id/action_global_profileScreen"
         app:destination="@id/profileScreen" />
     <fragment
         android:id="@+id/searchResultsScreen"
         android:name="com.example.plateful.search.SearchResultsScreen"
-        android:label="fragment_search_screen__active"
         tools:layout="@layout/fragment_search_results_screen" />
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="com.example.plateful.splashscreen.view.SplashScreen"
+        tools:layout="@layout/fragment_splash_screen">
+        <action
+            android:id="@+id/action_splashScreen_to_welcomeScreen"
+            app:destination="@id/welcomeScreen"
+            />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_welcomeScreen"
+        app:destination="@id/welcomeScreen" />
 
 </navigation>

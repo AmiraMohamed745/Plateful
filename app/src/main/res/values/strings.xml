@@ -22,6 +22,7 @@
     <string name="already_have_account_log_in">Already have account? Log In</string>
     <string name="search_for_a_meal">Search for a meal</string>
     <string name="fragment_label_search">Search</string>
+    <string name="fragment_label_splash_screen">Splash Screen</string>
     <string name="background_welcome_content_description">Welcome screen background image of a breakfast</string>
     <string name="ic_meal_content_description">Fork and knife icon to represent meal</string>
 </resources>
