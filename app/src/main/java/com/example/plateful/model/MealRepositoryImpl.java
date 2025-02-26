@@ -1,9 +1,12 @@
 package com.example.plateful.model;
 
 import com.example.plateful.network.MealRemoteDataSource;
-import com.example.plateful.network.NetworkCallBack;
+import com.example.plateful.network.RXSchedulers;
 
 import java.util.List;
+
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 
 public class MealRepositoryImpl implements MealRepository {
 
@@ -23,9 +26,13 @@ public class MealRepositoryImpl implements MealRepository {
         return mealRepositoryImplInstance;
     }
 
-    @Override
-    public void getRandomMeal(NetworkCallBack networkCallBack) {
-        mealRemoteDataSource.getRandomMeal(networkCallBack);
-    }
 
+    @Override
+    public Single<List<Meal>> fetchTenRandomMealsForDailyInspiration() {
+        return Observable.range(1, 10)
+                .flatMap(item -> mealRemoteDataSource.getRandomMeal().toObservable())
+                .map(mealResponse -> mealResponse.getMeals().get(0))
+                .toList()
+                .compose(RXSchedulers.applySchedulersSingle());
+    }
 }

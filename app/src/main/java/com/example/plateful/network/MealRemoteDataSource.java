@@ -1,9 +1,10 @@
 package com.example.plateful.network;
 
+import com.example.plateful.model.Meal;
+import com.example.plateful.model.MealResponse;
+
+import io.reactivex.rxjava3.core.Single;
+
 public interface MealRemoteDataSource {
-    // void makeNetworkCall(NetworkCallBack networkCallBack);
-    void getRandomMeal(NetworkCallBack callback);
-    // Add more methods later for the other API endpoints (country - category - ingredients thumbnails, etc)
-    // void getMealsByCuisine(NetworkCallBack callback)
-    // void getMealsByCategory(NetworkCallBack callback)
+    Single<MealResponse> getRandomMeal();
 }

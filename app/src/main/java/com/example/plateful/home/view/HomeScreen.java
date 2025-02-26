@@ -4,12 +4,16 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.plateful.R;
@@ -20,7 +24,9 @@ import com.example.plateful.model.MealRepository;
 import com.example.plateful.model.MealRepositoryImpl;
 import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.MealRemoteDataSourceImpl;
-import com.example.plateful.view.DestinationNavigator;
+import com.google.android.material.carousel.CarouselLayoutManager;
+
+import java.util.List;
 
 
 public class HomeScreen extends Fragment implements HomeScreenView {
@@ -28,6 +34,12 @@ public class HomeScreen extends Fragment implements HomeScreenView {
     private static final String TAG = HomeScreen.class.getSimpleName();
 
     private TextView textViewDailyInspiration;
+    private TextView textViewBrowseCuisines;
+
+    private RecyclerView recyclerViewDailyInspiration;
+    private DailyInspirationAdapter dailyInspirationAdapter;
+
+    private ImageView imageViewProfile;
 
     private HomeScreenPresenter homeScreenPresenter;
 
@@ -55,42 +67,47 @@ public class HomeScreen extends Fragment implements HomeScreenView {
         super.onViewCreated(view, savedInstanceState);
 
         textViewDailyInspiration = view.findViewById(R.id.textView_DailyInspiration);
+        textViewBrowseCuisines = view.findViewById(R.id.textView_Browse_Cuisines);
+
+        imageViewProfile = view.findViewById(R.id.imageView_ic_profile_photo);
+
+        recyclerViewDailyInspiration = view.findViewById(R.id.recyclerView_Daily_Inspiration);
+        recyclerViewDailyInspiration.setHasFixedSize(true);
+        CarouselLayoutManager carouselLayoutManager = new CarouselLayoutManager();
+        carouselLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerViewDailyInspiration.setLayoutManager(carouselLayoutManager);
 
         textViewDailyInspiration.setOnClickListener(view1 -> {
             Navigation.findNavController(view).navigate(R.id.action_homeScreen_to_profileScreen);
         });
 
         setUpPresenter();
-        homeScreenPresenter.loadRandomMeal(); // logging on LogCat to ensure connection is working
+        setUpDailyInspirationAdapter();
+        homeScreenPresenter.loadRandomMeal();
     }
 
     @Override
     public void showError(String errorMessage) {
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setMessage(errorMessage).setTitle("An error occurred");
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     @Override
-    public void displayRandomMeal(Meal meal) {
-        textViewDailyInspiration.setText(meal.getName());
+    public void displayRandomMeals(List<Meal> meals) {
+        dailyInspirationAdapter.populateDailyInspirationRecyclerView(meals);
+    }
+
+
+    private void setUpDailyInspirationAdapter() {
+        dailyInspirationAdapter = new DailyInspirationAdapter(requireContext());
+        recyclerViewDailyInspiration.setAdapter(dailyInspirationAdapter);
     }
 
     @Override
-    public void displayMealByCuisine(Meal meal) {
-
-    }
-
-    @Override
-    public void displayMealByCategory(Meal meal) {
-
-    }
-
-    @Override
-    public void addMealToWeeklyPlan(Meal meal) {
-
-    }
-
-    @Override
-    public void addMealToFavorites(Meal meal) {
-
+    public void onDestroyView() {
+        homeScreenPresenter.cleanUpDisposables();
+        super.onDestroyView();
     }
 }

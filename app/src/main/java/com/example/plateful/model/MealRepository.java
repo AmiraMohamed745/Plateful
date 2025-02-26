@@ -1,10 +1,9 @@
 package com.example.plateful.model;
 
-import com.example.plateful.network.NetworkCallBack;
-
 import java.util.List;
 
-public interface MealRepository {
-    void getRandomMeal(NetworkCallBack callback);
+import io.reactivex.rxjava3.core.Single;
 
+public interface MealRepository {
+    Single<List<Meal>> fetchTenRandomMealsForDailyInspiration();
 }
