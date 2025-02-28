@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".search.SearchResultsScreen"
+    tools:context=".search.view.SearchResultsScreen"
     >
 
     <androidx.constraintlayout.widget.Guideline
@@ -51,6 +51,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="0dp"
         android:layout_width="0dp"
+        android:layout_marginTop="16dp"
         tools:layout_editor_absoluteX="26dp"
         tools:layout_editor_absoluteY="93dp" />
 
