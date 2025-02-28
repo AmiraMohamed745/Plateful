@@ -25,6 +25,7 @@ import com.example.plateful.model.MealRepositoryImpl;
 import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.MealRemoteDataSourceImpl;
 import com.example.plateful.view.AlertDialogMessage;
+import com.example.plateful.view.DestinationNavigator;
 import com.google.android.material.carousel.CarouselLayoutManager;
 
 import java.util.List;
@@ -85,14 +86,12 @@ public class HomeScreen extends Fragment implements HomeScreenView {
         setUpPresenter();
         setUpDailyInspirationAdapter();
         homeScreenPresenter.loadRandomMeal();
+
+        imageViewProfile.setOnClickListener(DestinationNavigator::navigateToProfileScreen);
     }
 
     @Override
     public void showError(String errorMessage) {
-/*        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setMessage(errorMessage).setTitle("An error occurred");
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();*/
         AlertDialogMessage.makeAlertDialog(errorMessage, requireContext());
     }
 

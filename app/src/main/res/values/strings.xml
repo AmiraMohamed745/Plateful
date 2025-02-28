@@ -36,5 +36,6 @@
     <string name="bottom_nav_destination_search">Search</string>
     <string name="bottom_nav_destination_favorite">Favorite</string>
     <string name="bottom_nav_destination_plan">Plan</string>
+    <string name="your_username">Your username</string>
 
 </resources>
