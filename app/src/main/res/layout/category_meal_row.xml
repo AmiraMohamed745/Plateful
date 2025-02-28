@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView_CategoryMeal"
+    style="@style/LargeCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:foreground="?android:attr/selectableItemBackgroundBorderless">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout_CategoryMeal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:id="@+id/imageView_Meal_Image"
+            android:layout_width="0dp"
+            android:layout_height="150dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/meal_daily_inspiration_content_description"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_placeholder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/imageButton_add_to_favorite_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/bg_heart_button"
+            android:padding="4dp"
+            android:src="@drawable/ic_outlined_heart"
+            app:layout_constraintEnd_toEndOf="@id/imageView_Meal_Image"
+            app:layout_constraintTop_toTopOf="@id/imageView_Meal_Image" />
+
+        <TextView
+            android:id="@+id/textView_Meal_Name"
+            style="@style/SubTitle_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/imageView_Meal_Image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/button_Add_To_Plan"
+            app:layout_constraintVertical_chainStyle="spread_inside"
+            tools:text="Roasted Eggplant with Mint Sauce and Feta" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_Add_To_Plan"
+            style="@style/BlackButton_Rounded_Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:elevation="18dp"
+            android:text="@string/add_to_plan"
+            android:translationZ="28dp"
+            app:iconSize="17dp"
+            app:icon="@drawable/ic_calendar"
+            app:layout_constraintTop_toBottomOf="@id/textView_Meal_Name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+
