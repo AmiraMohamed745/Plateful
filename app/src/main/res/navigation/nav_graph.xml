@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeScreen">
+    app:startDestination="@id/mainSearchScreen">
 
     <fragment
         android:id="@+id/signUpScreen"
@@ -71,8 +71,12 @@
         app:destination="@id/profileScreen" />
     <fragment
         android:id="@+id/searchResultsScreen"
-        android:name="com.example.plateful.search.SearchResultsScreen"
-        tools:layout="@layout/fragment_search_results_screen" />
+        android:name="com.example.plateful.search.view.SearchResultsScreen"
+        tools:layout="@layout/fragment_search_results_screen" >
+        <argument
+            android:name="category"
+            app:argType="com.example.plateful.search.category.model.Category" />
+    </fragment>
     <fragment
         android:id="@+id/splashScreen"
         android:name="com.example.plateful.splashscreen.view.SplashScreen"
@@ -86,5 +90,35 @@
     <action
         android:id="@+id/action_global_welcomeScreen"
         app:destination="@id/welcomeScreen" />
+    <fragment
+        android:id="@+id/mainSearchScreen"
+        android:name="com.example.plateful.search.mainsearch.view.MainSearchScreen"
+        android:label="fragment_main_search_screen"
+        tools:layout="@layout/fragment_main_search_screen" >
+        <action
+            android:id="@+id/action_mainSearchScreen_to_viewAllCategoriesScreen"
+            app:destination="@id/viewAllCategoriesScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewAllCategoriesScreen"
+        android:name="com.example.plateful.search.category.view.ViewAllCategoriesScreen"
+        android:label="fragment_view_all_categories_screen"
+        tools:layout="@layout/fragment_view_all_categories_screen" >
+        <action
+            android:id="@+id/action_viewAllCategoriesScreen_to_allCategoryMeals"
+            app:destination="@id/allCategoryMeals" />
+    </fragment>
+    <fragment
+        android:id="@+id/allCategoryMeals"
+        android:name="com.example.plateful.search.category.view.AllCategoryMeals"
+        android:label="fragment_all_category_meals"
+        tools:layout="@layout/fragment_all_category_meals" >
+        <argument
+            android:name="category"
+            app:argType="com.example.plateful.search.category.model.Category" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_searchResultsScreen"
+        app:destination="@id/searchResultsScreen" />
 
 </navigation>
