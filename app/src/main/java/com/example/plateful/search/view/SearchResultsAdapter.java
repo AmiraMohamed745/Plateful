@@ -1,4 +1,4 @@
-package com.example.plateful.search;
+package com.example.plateful.search.view;
 
 import android.content.Context;
 import android.util.Log;
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.plateful.R;
 import com.example.plateful.model.Meal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdapter.ViewHolder> {
@@ -22,12 +23,9 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     // For debugging
     private static final String TAG = SearchResultsAdapter.class.getSimpleName();
 
-    private final Context context;
-    private List<Meal> searchResultOutputList;
+    private final List<Meal> searchResultOutputList = new ArrayList<>();
 
-    public SearchResultsAdapter(Context context) {
-        this.context = context;
-    }
+    public SearchResultsAdapter(Context context) {}
 
     @NonNull
     @Override

@@ -2,10 +2,14 @@ package com.example.plateful.view;
 
 import android.view.View;
 
+import androidx.navigation.NavDirections;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import com.example.plateful.R;
+import com.example.plateful.search.category.model.Category;
+import com.example.plateful.search.category.view.ViewAllCategoriesScreenDirections;
+import com.example.plateful.search.view.SearchResultsScreenDirections;
 
 public class DestinationNavigator {
 
@@ -31,6 +35,22 @@ public class DestinationNavigator {
 
     public static void navigateToSignInScreen(View view) {
         Navigation.findNavController(view).navigate(R.id.action_welcomeScreen_to_signInScreen);
+    }
+
+    public static void navigateToViewAllCategoriesScreen(View view) {
+        Navigation.findNavController(view).navigate(R.id.action_mainSearchScreen_to_viewAllCategoriesScreen);
+    }
+
+    public static void navigateToAllCategoryMealsScreen(View view, Category category) {
+        ViewAllCategoriesScreenDirections.ActionViewAllCategoriesScreenToAllCategoryMeals action =
+                ViewAllCategoriesScreenDirections.actionViewAllCategoriesScreenToAllCategoryMeals(category);
+        Navigation.findNavController(view).navigate(action);
+    }
+
+    public static void navigateToSearchResultsScreen(View view, Category category) {
+        NavDirections action =
+                SearchResultsScreenDirections.actionGlobalSearchResultsScreen(category);
+        Navigation.findNavController(view).navigate(action);
     }
 
 }

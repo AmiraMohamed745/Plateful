@@ -24,6 +24,7 @@ import com.example.plateful.model.MealRepository;
 import com.example.plateful.model.MealRepositoryImpl;
 import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.MealRemoteDataSourceImpl;
+import com.example.plateful.view.AlertDialogMessage;
 import com.google.android.material.carousel.CarouselLayoutManager;
 
 import java.util.List;
@@ -46,7 +47,7 @@ public class HomeScreen extends Fragment implements HomeScreenView {
     private void setUpPresenter() {
         MealRemoteDataSource mealRemoteDataSource = new MealRemoteDataSourceImpl(requireContext());
         MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource);
-        homeScreenPresenter = new HomeScreenPresenterImpl(this, mealRepository); // not sure about the casting (HomeScreenView)
+        homeScreenPresenter = new HomeScreenPresenterImpl(this, mealRepository);
     }
 
     @Override
@@ -88,10 +89,11 @@ public class HomeScreen extends Fragment implements HomeScreenView {
 
     @Override
     public void showError(String errorMessage) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+/*        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setMessage(errorMessage).setTitle("An error occurred");
         AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        alertDialog.show();*/
+        AlertDialogMessage.makeAlertDialog(errorMessage, requireContext());
     }
 
     @Override
