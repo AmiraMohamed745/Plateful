@@ -12,6 +12,8 @@
     <color name="hintTextColor">#6C6C6C</color>
     <color name="textColor">#000000</color>
     <color name="subTextColor">#4F4F4F</color>
+    <color name="lightGrey">#CBCBCB</color>
+    <color name="darkGrey">#8E8A8A</color>
     <color name="red">#ff0000</color>
 
 </resources>

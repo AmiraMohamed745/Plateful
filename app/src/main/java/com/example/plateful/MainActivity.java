@@ -22,8 +22,7 @@ public class MainActivity extends AppCompatActivity {
             R.id.homeScreen,
             R.id.favoriteMealsScreen,
             R.id.mainSearchScreen,
-            R.id.weeklyPlanScreen,
-            R.id.profileScreen
+            R.id.weeklyPlanScreen
     );
 
     @Override

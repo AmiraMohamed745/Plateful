@@ -34,33 +34,74 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp" />
 
-    <TextView
-        android:id="@+id/textView_username"
+    <FrameLayout
+        android:id="@+id/frameLayout_ProfilePhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="143dp"
-        android:text="TextView"
+        android:layout_marginTop="150dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView_username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <ImageView
+            android:id="@+id/imageView_profile"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@drawable/profile_image_placeholder"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/imageView_add_photo"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/ic_add_photo" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView_username"
+        style="@style/HeadingText_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/your_username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout_ProfilePhoto" />
 
     <TextView
         android:id="@+id/textView_email"
+        style="@style/SubTitle_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="107dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/textView_username"
+        android:layout_marginTop="8dp"
+        android:text="@string/email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_username" />
 
     <Button
         android:id="@+id/button_sign_out"
         style="@style/PrimaryButton"
         android:text="@string/sign_out"
-        app:layout_constraintTop_toBottomOf="@id/textView_email"
-        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="200dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="39dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="28dp"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="@+id/left_vertical_guideline"
+        app:layout_constraintTop_toTopOf="@+id/top_horizontal_guideline" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
