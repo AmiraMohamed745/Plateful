@@ -2,6 +2,7 @@ package com.example.plateful.view;
 
 import android.view.View;
 
+import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
@@ -51,6 +52,22 @@ public class DestinationNavigator {
         NavDirections action =
                 SearchResultsScreenDirections.actionGlobalSearchResultsScreen(category);
         Navigation.findNavController(view).navigate(action);
+    }
+
+    public static void navigateToHomeScreen(NavController navController) {
+        navController.navigate(R.id.action_global_homeScreen);
+    }
+
+    public static void navigateToMainSearchScreen(NavController navController) {
+        navController.navigate(R.id.action_global_mainSearchScreen);
+    }
+
+    public static void navigateToFavoriteMealsScreen(NavController navController) {
+        navController.navigate(R.id.action_global_favoriteMealsScreen);
+    }
+
+    public static void navigateToWeeklyPlanScreen(NavController navController) {
+        navController.navigate(R.id.action_global_weeklyPlanScreen);
     }
 
 }

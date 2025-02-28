@@ -265,4 +265,14 @@
         <item name="android:background">@color/white</item>
     </style>
 
+    <style name="CustomBottomNav" parent="@style/Widget.Material3.BottomNavigationView">
+        <item name="itemActiveIndicatorStyle">@style/CustomActiveIndicator</item>
+        <item name="itemRippleColor">@null</item>
+    </style>
+
+    <style name="CustomActiveIndicator" parent="@style/Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/primaryColorDark</item>
+        <item name="android:alpha">0.2</item>
+    </style>
+
 </resources>
