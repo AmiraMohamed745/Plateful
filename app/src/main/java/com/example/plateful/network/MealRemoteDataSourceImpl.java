@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.plateful.model.Meal;
 import com.example.plateful.model.MealResponse;
+import com.example.plateful.search.category.model.CategoryResponse;
 
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import io.reactivex.rxjava3.core.Single;
@@ -52,4 +53,21 @@ public class MealRemoteDataSourceImpl implements MealRemoteDataSource {
     public Single<MealResponse> getRandomMeal() {
         return mealService.getRandomMealsForDailyInspiration();
     }
+
+    @Override
+    public Single<CategoryResponse> getAllCategories() {
+        return mealService.getAllCategories();
+    }
+
+    @Override
+    public Single<MealResponse> getMealsByCategory(String categoryName) {
+        return mealService.getMealsByCategory(categoryName);
+    }
+
+    @Override
+    public Single<MealResponse> searchMealByName(String searchQuery) {
+        return mealService.searchMealByName(searchQuery);
+    }
+
+
 }

@@ -24,7 +24,10 @@
     <string name="browse_cuisines">Browse Cuisines</string>
     <string name="add_to_plan">Add to plan</string>
     <string name="search_for_a_meal">Search for a meal</string>
+    <string name="main_search_bar_placeholder">Search</string>
+    <string name="search_by_category">Search by category</string>
     <string name="fragment_label_search">Search</string>
+    <string name="view_all"><u>View All</u></string>
     <string name="fragment_label_splash_screen">Splash Screen</string>
     <string name="background_welcome_content_description">Welcome screen background image of a breakfast</string>
     <string name="ic_meal_content_description">Fork and knife icon to represent meal</string>
