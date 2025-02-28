@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainSearchScreen">
+    app:startDestination="@id/homeScreen">
 
     <fragment
         android:id="@+id/signUpScreen"
@@ -120,5 +120,24 @@
     <action
         android:id="@+id/action_global_searchResultsScreen"
         app:destination="@id/searchResultsScreen" />
+    <fragment
+        android:id="@+id/favoriteMealsScreen"
+        android:name="com.example.plateful.favoritemeal.FavoriteMealsScreen"
+        android:label="fragment_favorite_meals_screen"
+        tools:layout="@layout/fragment_favorite_meals_screen" />
+    <fragment
+        android:id="@+id/weeklyPlanScreen"
+        android:name="com.example.plateful.weeklyplan.WeeklyPlanScreen"
+        android:label="fragment_weekly_plan_screen"
+        tools:layout="@layout/fragment_weekly_plan_screen" />
+    <action
+        android:id="@+id/action_global_mainSearchScreen"
+        app:destination="@id/mainSearchScreen" />
+    <action
+        android:id="@+id/action_global_favoriteMealsScreen"
+        app:destination="@id/favoriteMealsScreen" />
+    <action
+        android:id="@+id/action_global_weeklyPlanScreen"
+        app:destination="@id/weeklyPlanScreen" />
 
 </navigation>
