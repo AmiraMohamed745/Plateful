@@ -47,7 +47,7 @@
 
     <TextView
         android:id="@+id/textView_Signup_Subtext"
-        style="@style/SubText"
+        style="@style/SubTitle_2"
         android:text="@string/make_a_plateful_of_delicious_meals"
         app:layout_constraintStart_toStartOf="@id/textView_Signup"
         app:layout_constraintTop_toBottomOf="@id/textView_Signup"

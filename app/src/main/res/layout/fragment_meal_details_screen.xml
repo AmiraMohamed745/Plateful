@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".details.view.MealDetailsScreen">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/top_horizontal_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="32dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/bottom_horizontal_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="62dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/left_vertical_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/right_vertical_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/top_horizontal_guideline_between_profile_photo_and_daily_inspiration_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="82dp" />
+
+        <ImageView
+            android:id="@+id/imageView_BackArrow"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@id/top_horizontal_guideline"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="32dp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView_Meal_Details"
+            style="@style/LargeCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+            app:layout_constraintTop_toTopOf="@id/top_horizontal_guideline_between_profile_photo_and_daily_inspiration_text">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout_DailyInspiration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp">
+
+                <ImageView
+                    android:id="@+id/imageView_Meal_Image"
+                    android:layout_width="0dp"
+                    android:layout_height="200dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/meal_daily_inspiration_content_description"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/bg_placeholder"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView_Meal_Name"
+                    style="@style/HeadingText_4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imageView_Meal_Image"
+                    tools:text="Roasted Eggplant with Mint Sauce and Feta" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier_between_card_and_text_beneath"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="cardView_Meal_Details"
+            app:layout_constraintEnd_toEndOf="@id/right_vertical_guideline"
+            app:layout_constraintStart_toStartOf="@id/left_vertical_guideline" />
+
+        <TextView
+            android:id="@+id/textView_Cuisine"
+            style="@style/HeadingText_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:text="@string/cuisine"
+            app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@id/barrier_between_card_and_text_beneath"
+            tools:text="Cuisine: " />
+
+        <TextView
+            android:id="@+id/textView_Cuisine_Value"
+            style="@style/SubTitle_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toEndOf="@id/textView_Cuisine"
+            app:layout_constraintTop_toBottomOf="@id/barrier_between_card_and_text_beneath"
+            tools:text="Italian" />
+
+        <TextView
+            android:id="@+id/textView_Category"
+            style="@style/HeadingText_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:text="@string/category"
+            app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@id/textView_Cuisine"
+            tools:text="Category: " />
+
+        <TextView
+            android:id="@+id/textView_Category_Value"
+            style="@style/SubTitle_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toEndOf="@id/textView_Category"
+            app:layout_constraintTop_toBottomOf="@id/textView_Cuisine_Value"
+            tools:text="Chicken" />
+
+        <TextView
+            android:id="@+id/textView_Instructions"
+            style="@style/HeadingText_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:text="@string/instructions"
+            app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@id/textView_Category_Value"
+            tools:text="Ingredients: " />
+
+        <TextView
+            android:id="@+id/textView_Instructions_Value"
+            style="@style/SubTitle_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+            app:layout_constraintEnd_toEndOf="@id/right_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@id/textView_Instructions"
+            tools:text="Instructions Instructions InstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructionsInstructions" />
+
+        <TextView
+            android:id="@+id/textView_Ingredients"
+            style="@style/HeadingText_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:text="@string/ingredients"
+            app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@id/textView_Instructions_Value"
+            tools:text="Ingredients: " />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_Ingredients"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@id/right_vertical_guideline"
+            app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@id/textView_Ingredients"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="135dp" />
+
+        <TextView
+            android:id="@+id/textView_Video"
+            style="@style/HeadingText_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:text="@string/video"
+            app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@id/recyclerView_Ingredients"
+            tools:text="Video: " />
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtube_player_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@id/right_vertical_guideline"
+            app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@id/textView_Video" />
+
+        <Button
+            android:id="@+id/button_addToFavorites"
+            style="@style/PrimaryButton"
+            android:layout_marginTop="16dp"
+            android:text="@string/add_to_favorite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/youtube_player_view" />
+
+        <Button
+            android:id="@+id/button_addToPlan"
+            style="@style/PrimaryButton"
+            android:text="@string/add_to_plan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_addToFavorites"
+            app:layout_constraintBottom_toBottomOf="@id/bottom_horizontal_guideline"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

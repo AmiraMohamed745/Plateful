@@ -1,71 +1,59 @@
 package com.example.plateful.home.presenter;
 
-import android.util.Log;
-
 import com.example.plateful.home.view.HomeScreenView;
 import com.example.plateful.model.Meal;
 import com.example.plateful.model.MealRepository;
-import com.example.plateful.network.NetworkCallBack;
 
-import java.util.List;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 public class HomeScreenPresenterImpl implements HomeScreenPresenter {
 
     private static final String TAG = HomeScreenPresenterImpl.class.getName();
 
-    private HomeScreenView homeScreenView;
-    private MealRepository mealRepository;
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final HomeScreenView homeScreenView;
+    private final MealRepository mealRepository;
 
     public HomeScreenPresenterImpl(HomeScreenView homeScreenView, MealRepository mealRepository) {
         this.homeScreenView = homeScreenView;
         this.mealRepository = mealRepository;
     }
 
+
     @Override
     public void loadRandomMeal() {
-        mealRepository.getRandomMeal(new NetworkCallBack() {
-            @Override
-            public void onSuccessResult(List<Meal> meals) {
-                if (meals != null && !meals.isEmpty()) {
-                    Meal randomMeal = meals.get(0);
-                    homeScreenView.displayRandomMeal(randomMeal);
-                    Log.d(TAG, "Meal Name: " + randomMeal.getName());
-                    Log.d(TAG, "Category: " + randomMeal.getCategory());
-                    Log.d(TAG, "Country: " + randomMeal.getArea());
-                    Log.d(TAG, "Image URL: " + randomMeal.getImageUrl());
-                    Log.d(TAG, "Instructions: " + randomMeal.getInstructions());
-                    Log.d(TAG, "Video URL: " + randomMeal.getVideoUrl());
-                } else {
-                    homeScreenView.showError("No meals received from API.");
-                }
-            }
-
-            @Override
-            public void onFailureResult(String errorMessage) {
-                homeScreenView.showError(errorMessage);
-            }
-        });
+        Disposable disposable = mealRepository.fetchTenRandomMealsForDailyInspiration()
+                .subscribe(
+                        homeScreenView::displayRandomMeals,
+                        error -> homeScreenView.showError(showUserFriendlyErrorMessage(error))
+                );
+        compositeDisposable.add(disposable);
     }
 
     @Override
-    public void loadMealByCuisine(String area) {
-
+    public void addMealToFavorites(Meal meal) {
+        compositeDisposable.add(
+                mealRepository.insertMeal(meal)
+                        .subscribe(
+                                () -> homeScreenView.onMealAddedToFavorites(meal),
+                                error -> homeScreenView.showError(error.getMessage())
+                        )
+        );
     }
+
+    private String showUserFriendlyErrorMessage(Throwable error) {
+        if (error.getMessage().contains("Unable to resolve host")) {
+            return "Please check your internet connection.";
+        } else {
+            return "Something went wrong. Please try again.";
+        }
+    }
+
 
     @Override
-    public void loadMealByCategory(String category) {
-
+    public void cleanUpDisposables() {
+        compositeDisposable.clear();
     }
-
-    @Override
-    public void onAddMealToWeeklyPlan(Meal meal) {
-
-    }
-
-    @Override
-    public void onAddMealToFavorites(Meal meal) {
-
-    }
-
 
 }

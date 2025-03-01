@@ -8,10 +8,8 @@ import java.util.List;
 public class MealResponse {
 
     @SerializedName("meals")
-    @Expose /* do I need expose? */
     private List<Meal> meals;
 
-    /* Do I need the constructors? */
     public MealResponse() {
     }
 
@@ -24,7 +22,6 @@ public class MealResponse {
         return meals;
     }
 
-    /* Do I need a setter? */
     public void setMeals(List<Meal> meals) {
         this.meals = meals;
     }

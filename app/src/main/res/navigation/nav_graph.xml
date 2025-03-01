@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/signInScreen">
+    app:startDestination="@id/homeScreen">
 
     <fragment
         android:id="@+id/signUpScreen"
@@ -48,20 +48,108 @@
 
     <fragment
         android:id="@+id/welcomeScreen"
-        android:name="com.example.plateful.authentication.signup.view.WelcomeScreen"
+        android:name="com.example.plateful.authentication.socialaccountsignin.view.WelcomeScreen"
         android:label="fragment_welcome_screen"
-        tools:layout="@layout/fragment_welcome_screen" />
+        tools:layout="@layout/fragment_welcome_screen" >
+        <action
+            android:id="@+id/action_welcomeScreen_to_signUpScreen"
+            app:destination="@id/signUpScreen" />
+        <action
+            android:id="@+id/action_welcomeScreen_to_signInScreen"
+            app:destination="@id/signInScreen" />
+        <action
+            android:id="@+id/action_welcomeScreen_to_signInScreen2"
+            app:destination="@id/signInScreen" />
+    </fragment>
 
     <action
         android:id="@+id/action_global_homeScreen"
         app:destination="@id/homeScreen" />
 
     <action
-        android:id="@+id/action_global_welcomeScreen"
-        app:destination="@id/welcomeScreen" />
-
-    <action
         android:id="@+id/action_global_profileScreen"
         app:destination="@id/profileScreen" />
+    <fragment
+        android:id="@+id/searchResultsScreen"
+        android:name="com.example.plateful.search.view.SearchResultsScreen"
+        tools:layout="@layout/fragment_search_results_screen" >
+        <argument
+            android:name="category"
+            app:argType="com.example.plateful.search.category.model.Category" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashScreen"
+        android:name="com.example.plateful.splashscreen.view.SplashScreen"
+        tools:layout="@layout/fragment_splash_screen">
+        <action
+            android:id="@+id/action_splashScreen_to_welcomeScreen"
+            app:destination="@id/welcomeScreen"
+            />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_welcomeScreen"
+        app:destination="@id/welcomeScreen" />
+    <fragment
+        android:id="@+id/mainSearchScreen"
+        android:name="com.example.plateful.search.mainsearch.view.MainSearchScreen"
+        android:label="fragment_main_search_screen"
+        tools:layout="@layout/fragment_main_search_screen" >
+        <action
+            android:id="@+id/action_mainSearchScreen_to_viewAllCategoriesScreen"
+            app:destination="@id/viewAllCategoriesScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewAllCategoriesScreen"
+        android:name="com.example.plateful.search.category.view.ViewAllCategoriesScreen"
+        android:label="fragment_view_all_categories_screen"
+        tools:layout="@layout/fragment_view_all_categories_screen" >
+        <action
+            android:id="@+id/action_viewAllCategoriesScreen_to_allCategoryMeals"
+            app:destination="@id/allCategoryMeals" />
+    </fragment>
+    <fragment
+        android:id="@+id/allCategoryMeals"
+        android:name="com.example.plateful.search.category.view.AllCategoryMeals"
+        android:label="fragment_all_category_meals"
+        tools:layout="@layout/fragment_all_category_meals" >
+        <argument
+            android:name="category"
+            app:argType="com.example.plateful.search.category.model.Category" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_searchResultsScreen"
+        app:destination="@id/searchResultsScreen" />
+    <fragment
+        android:id="@+id/favoriteMealsScreen"
+        android:name="com.example.plateful.favoritemeal.view.FavoriteMealsScreen"
+        android:label="fragment_favorite_meals_screen"
+        tools:layout="@layout/fragment_favorite_meals_screen" />
+    <fragment
+        android:id="@+id/weeklyPlanScreen"
+        android:name="com.example.plateful.weeklyplan.WeeklyPlanScreen"
+        android:label="fragment_weekly_plan_screen"
+        tools:layout="@layout/fragment_weekly_plan_screen" />
+    <action
+        android:id="@+id/action_global_mainSearchScreen"
+        app:destination="@id/mainSearchScreen" />
+    <action
+        android:id="@+id/action_global_favoriteMealsScreen"
+        app:destination="@id/favoriteMealsScreen" />
+    <action
+        android:id="@+id/action_global_weeklyPlanScreen"
+        app:destination="@id/weeklyPlanScreen" />
+    <fragment
+        android:id="@+id/mealDetailsScreen"
+        android:name="com.example.plateful.details.view.MealDetailsScreen"
+        android:label="fragment_meal_details_screen"
+        tools:layout="@layout/fragment_meal_details_screen" >
+        <argument
+            android:name="meal"
+            app:argType="com.example.plateful.model.Meal" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_mealDetailsScreen"
+        app:destination="@id/mealDetailsScreen" />
 
 </navigation>

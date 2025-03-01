@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.google.gms.google.services)
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -47,6 +48,17 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation(libs.play.services.auth)
+    implementation(libs.lottie)
+    implementation(libs.cardview)
+    implementation(libs.material)
+    implementation(libs.rxandroid)
+    implementation(libs.rxjava)
+    implementation(libs.room.rxjava3)
+    implementation (libs.rxjava3.retrofit.adapter)
+    implementation(libs.core)
+    annotationProcessor (libs.room.compiler)
+    implementation (libs.room.runtime)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -1,241 +1,223 @@
 package com.example.plateful.model;
 
-import androidx.annotation.NonNull;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import com.google.gson.annotations.Expose;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Meal {
+@Entity(tableName = "meal_table")
+public class Meal implements Parcelable {
 
-    // General information
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "id")
     @SerializedName("idMeal")
-    @Expose
     private String idMeal;
 
+    @ColumnInfo(name = "name")
     @SerializedName("strMeal")
-    @Expose
     private String name;
 
-    @SerializedName("strDrinkAlternate")
-    @Expose /* can I delete it since I won't need it in the application? */
-    private Object strDrinkAlternate; /* What does it mean that it is of Object type? */
-
+    @ColumnInfo(name = "category")
     @SerializedName("strCategory")
-    @Expose
     private String category;
 
+    @ColumnInfo(name = "cuisine")
     @SerializedName("strArea")
-    @Expose
-    private String area; /* should it be country or nationality? */
+    private String cuisine;
 
+    @ColumnInfo(name = "instructions")
     @SerializedName("strInstructions")
-    @Expose
     private String instructions;
 
+    @ColumnInfo(name = "image")
     @SerializedName("strMealThumb")
-    @Expose
     private String imageUrl;
 
-    @SerializedName("strTags")
-    @Expose
-    private String strTags; /* can I delete it since I won't need it in the application? */
 
+    @ColumnInfo(name = "video")
     @SerializedName("strYoutube")
-    @Expose
     private String videoUrl;
 
-    // Ingredients (rename to ingredient without str)
+    @ColumnInfo(name = "ingredient_1")
     @SerializedName("strIngredient1")
-    @Expose
     private String strIngredient1;
 
+    @ColumnInfo(name = "ingredient_2")
     @SerializedName("strIngredient2")
-    @Expose
     private String strIngredient2;
 
+    @ColumnInfo(name = "ingredient_3")
     @SerializedName("strIngredient3")
-    @Expose
     private String strIngredient3;
 
+    @ColumnInfo(name = "ingredient_4")
     @SerializedName("strIngredient4")
-    @Expose
     private String strIngredient4;
 
+    @ColumnInfo(name = "ingredient_5")
     @SerializedName("strIngredient5")
-    @Expose
     private String strIngredient5;
 
+    @ColumnInfo(name = "ingredient_6")
     @SerializedName("strIngredient6")
-    @Expose
     private String strIngredient6;
 
+    @ColumnInfo(name = "ingredient_7")
     @SerializedName("strIngredient7")
-    @Expose
     private String strIngredient7;
 
+    @ColumnInfo(name = "ingredient_8")
     @SerializedName("strIngredient8")
-    @Expose
     private String strIngredient8;
 
+    @ColumnInfo(name = "ingredient_9")
     @SerializedName("strIngredient9")
-    @Expose
     private String strIngredient9;
 
+    @ColumnInfo(name = "ingredient_10")
     @SerializedName("strIngredient10")
-    @Expose
     private String strIngredient10;
 
+    @ColumnInfo(name = "ingredient_11")
     @SerializedName("strIngredient11")
-    @Expose
     private String strIngredient11;
 
+    @ColumnInfo(name = "ingredient_12")
     @SerializedName("strIngredient12")
-    @Expose
     private String strIngredient12;
 
+    @ColumnInfo(name = "ingredient_13")
     @SerializedName("strIngredient13")
-    @Expose
     private String strIngredient13;
 
+    @ColumnInfo(name = "ingredient_14")
     @SerializedName("strIngredient14")
-    @Expose
     private String strIngredient14;
 
+    @ColumnInfo(name = "ingredient_15")
     @SerializedName("strIngredient15")
-    @Expose
     private String strIngredient15;
 
+    @ColumnInfo(name = "ingredient_16")
     @SerializedName("strIngredient16")
-    @Expose
     private Object strIngredient16;
 
+    @ColumnInfo(name = "ingredient_17")
     @SerializedName("strIngredient17")
-    @Expose
     private Object strIngredient17;
 
+    @ColumnInfo(name = "ingredient_18")
     @SerializedName("strIngredient18")
-    @Expose
     private Object strIngredient18;
 
+    @ColumnInfo(name = "ingredient_19")
     @SerializedName("strIngredient19")
-    @Expose
     private Object strIngredient19;
 
+    @ColumnInfo(name = "ingredient_20")
     @SerializedName("strIngredient20")
-    @Expose
     private Object strIngredient20;
 
-    // Measurements
+    @ColumnInfo(name = "measure_1")
     @SerializedName("strMeasure1")
-    @Expose
     private String strMeasure1;
 
+    @ColumnInfo(name = "measure_2")
     @SerializedName("strMeasure2")
-    @Expose
     private String strMeasure2;
 
+    @ColumnInfo(name = "measure_3")
     @SerializedName("strMeasure3")
-    @Expose
     private String strMeasure3;
 
+    @ColumnInfo(name = "measure_4")
     @SerializedName("strMeasure4")
-    @Expose
     private String strMeasure4;
 
+    @ColumnInfo(name = "measure_5")
     @SerializedName("strMeasure5")
-    @Expose
     private String strMeasure5;
 
+    @ColumnInfo(name = "measure_6")
     @SerializedName("strMeasure6")
-    @Expose
     private String strMeasure6;
 
+    @ColumnInfo(name = "measure_7")
     @SerializedName("strMeasure7")
-    @Expose
     private String strMeasure7;
 
+    @ColumnInfo(name = "measure_8")
     @SerializedName("strMeasure8")
-    @Expose
     private String strMeasure8;
 
+    @ColumnInfo(name = "measure_9")
     @SerializedName("strMeasure9")
-    @Expose
     private String strMeasure9;
 
+    @ColumnInfo(name = "measure_10")
     @SerializedName("strMeasure10")
-    @Expose
     private String strMeasure10;
 
+    @ColumnInfo(name = "measure_11")
     @SerializedName("strMeasure11")
-    @Expose
     private String strMeasure11;
 
+    @ColumnInfo(name = "measure_12")
     @SerializedName("strMeasure12")
-    @Expose
     private String strMeasure12;
 
+    @ColumnInfo(name = "measure_13")
     @SerializedName("strMeasure13")
-    @Expose
     private String strMeasure13;
 
+    @ColumnInfo(name = "measure_14")
     @SerializedName("strMeasure14")
-    @Expose
     private String strMeasure14;
 
+    @ColumnInfo(name = "measure_15")
     @SerializedName("strMeasure15")
-    @Expose
     private String strMeasure15;
 
+    @ColumnInfo(name = "measure_16")
     @SerializedName("strMeasure16")
-    @Expose
     private Object strMeasure16;
 
+    @ColumnInfo(name = "measure_17")
     @SerializedName("strMeasure17")
-    @Expose
     private Object strMeasure17;
 
+    @ColumnInfo(name = "measure_18")
     @SerializedName("strMeasure18")
-    @Expose
     private Object strMeasure18;
 
+    @ColumnInfo(name = "measure_19")
     @SerializedName("strMeasure19")
-    @Expose
     private Object strMeasure19;
 
+    @ColumnInfo(name = "measure_20")
     @SerializedName("strMeasure20")
-    @Expose
     private Object strMeasure20;
 
-    @SerializedName("strSource")
-    @Expose
-    private Object strSource; /* can I delete it since I won't need it in the application? */
-
-    @SerializedName("strImageSource")
-    @Expose
-    private Object strImageSource; /* can I delete it since I won't need it in the application? */
-
-    @SerializedName("strCreativeCommonsConfirmed")
-    @Expose
-    private Object strCreativeCommonsConfirmed; /* can I delete it since I won't need it in the application? */
-
-    @SerializedName("dateModified")
-    @Expose
-    private Object dateModified; /* can I delete it since I won't need it in the application? */
-
+    @ColumnInfo(name = "is_favorite")
+    private boolean isFavorite;
 
     public Meal() {
     }
 
-    public Meal(String idMeal, String strMeal, Object strDrinkAlternate, String strCategory, String strArea, String strInstructions, String strMealThumb, String strTags, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, Object strIngredient16, Object strIngredient17, Object strIngredient18, Object strIngredient19, Object strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, Object strMeasure16, Object strMeasure17, Object strMeasure18, Object strMeasure19, Object strMeasure20, Object strSource, Object strImageSource, Object strCreativeCommonsConfirmed, Object dateModified) {
+    public Meal(String idMeal, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, Object strIngredient16, Object strIngredient17, Object strIngredient18, Object strIngredient19, Object strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, Object strMeasure16, Object strMeasure17, Object strMeasure18, Object strMeasure19, Object strMeasure20, boolean isFavorite) {
         super();
         this.idMeal = idMeal;
         this.name = strMeal;
-        this.strDrinkAlternate = strDrinkAlternate;
         this.category = strCategory;
-        this.area = strArea;
+        this.cuisine = strArea;
         this.instructions = strInstructions;
         this.imageUrl = strMealThumb;
-        this.strTags = strTags;
         this.videoUrl = strYoutube;
         this.strIngredient1 = strIngredient1;
         this.strIngredient2 = strIngredient2;
@@ -277,11 +259,61 @@ public class Meal {
         this.strMeasure18 = strMeasure18;
         this.strMeasure19 = strMeasure19;
         this.strMeasure20 = strMeasure20;
-        this.strSource = strSource;
-        this.strImageSource = strImageSource;
-        this.strCreativeCommonsConfirmed = strCreativeCommonsConfirmed;
-        this.dateModified = dateModified;
+        this.isFavorite = isFavorite;
     }
+
+    protected Meal(Parcel in) {
+        idMeal = in.readString();
+        name = in.readString();
+        category = in.readString();
+        cuisine = in.readString();
+        instructions = in.readString();
+        imageUrl = in.readString();
+        videoUrl = in.readString();
+        strIngredient1 = in.readString();
+        strIngredient2 = in.readString();
+        strIngredient3 = in.readString();
+        strIngredient4 = in.readString();
+        strIngredient5 = in.readString();
+        strIngredient6 = in.readString();
+        strIngredient7 = in.readString();
+        strIngredient8 = in.readString();
+        strIngredient9 = in.readString();
+        strIngredient10 = in.readString();
+        strIngredient11 = in.readString();
+        strIngredient12 = in.readString();
+        strIngredient13 = in.readString();
+        strIngredient14 = in.readString();
+        strIngredient15 = in.readString();
+        strMeasure1 = in.readString();
+        strMeasure2 = in.readString();
+        strMeasure3 = in.readString();
+        strMeasure4 = in.readString();
+        strMeasure5 = in.readString();
+        strMeasure6 = in.readString();
+        strMeasure7 = in.readString();
+        strMeasure8 = in.readString();
+        strMeasure9 = in.readString();
+        strMeasure10 = in.readString();
+        strMeasure11 = in.readString();
+        strMeasure12 = in.readString();
+        strMeasure13 = in.readString();
+        strMeasure14 = in.readString();
+        strMeasure15 = in.readString();
+        isFavorite = in.readByte() != 0;
+    }
+
+    public static final Creator<Meal> CREATOR = new Creator<Meal>() {
+        @Override
+        public Meal createFromParcel(Parcel in) {
+            return new Meal(in);
+        }
+
+        @Override
+        public Meal[] newArray(int size) {
+            return new Meal[size];
+        }
+    };
 
     public String getIdMeal() {
         return idMeal;
@@ -299,14 +331,6 @@ public class Meal {
         this.name = name;
     }
 
-    public Object getStrDrinkAlternate() {
-        return strDrinkAlternate;
-    }
-
-    public void setStrDrinkAlternate(Object strDrinkAlternate) {
-        this.strDrinkAlternate = strDrinkAlternate;
-    }
-
     public String getCategory() {
         return category;
     }
@@ -315,12 +339,12 @@ public class Meal {
         this.category = category;
     }
 
-    public String getArea() {
-        return area;
+    public String getCuisine() {
+        return cuisine;
     }
 
-    public void setArea(String area) {
-        this.area = area;
+    public void setCuisine(String cuisine) {
+        this.cuisine = cuisine;
     }
 
     public String getInstructions() {
@@ -337,14 +361,6 @@ public class Meal {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public String getStrTags() {
-        return strTags;
-    }
-
-    public void setStrTags(String strTags) {
-        this.strTags = strTags;
     }
 
     public String getVideoUrl() {
@@ -675,36 +691,12 @@ public class Meal {
         this.strMeasure20 = strMeasure20;
     }
 
-    public Object getStrSource() {
-        return strSource;
+    public boolean isFavorite() {
+        return isFavorite;
     }
 
-    public void setStrSource(Object strSource) {
-        this.strSource = strSource;
-    }
-
-    public Object getStrImageSource() {
-        return strImageSource;
-    }
-
-    public void setStrImageSource(Object strImageSource) {
-        this.strImageSource = strImageSource;
-    }
-
-    public Object getStrCreativeCommonsConfirmed() {
-        return strCreativeCommonsConfirmed;
-    }
-
-    public void setStrCreativeCommonsConfirmed(Object strCreativeCommonsConfirmed) {
-        this.strCreativeCommonsConfirmed = strCreativeCommonsConfirmed;
-    }
-
-    public Object getDateModified() {
-        return dateModified;
-    }
-
-    public void setDateModified(Object dateModified) {
-        this.dateModified = dateModified;
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
     }
 
     @NonNull
@@ -713,12 +705,10 @@ public class Meal {
         return "Meal{" +
                 "idMeal='" + idMeal + '\'' +
                 ", strMeal='" + name + '\'' +
-                ", strDrinkAlternate=" + strDrinkAlternate +
                 ", strCategory='" + category + '\'' +
-                ", strArea='" + area + '\'' +
+                ", strArea='" + cuisine + '\'' +
                 ", strInstructions='" + instructions + '\'' +
                 ", strMealThumb='" + imageUrl + '\'' +
-                ", strTags='" + strTags + '\'' +
                 ", strYoutube='" + videoUrl + '\'' +
                 ", strIngredient1='" + strIngredient1 + '\'' +
                 ", strIngredient2='" + strIngredient2 + '\'' +
@@ -760,10 +750,54 @@ public class Meal {
                 ", strMeasure18=" + strMeasure18 +
                 ", strMeasure19=" + strMeasure19 +
                 ", strMeasure20=" + strMeasure20 +
-                ", strSource=" + strSource +
-                ", strImageSource=" + strImageSource +
-                ", strCreativeCommonsConfirmed=" + strCreativeCommonsConfirmed +
-                ", dateModified=" + dateModified +
+                ", isFavorite=" + isFavorite +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(idMeal);
+        parcel.writeString(name);
+        parcel.writeString(category);
+        parcel.writeString(cuisine);
+        parcel.writeString(instructions);
+        parcel.writeString(imageUrl);
+        parcel.writeString(videoUrl);
+        parcel.writeString(strIngredient1);
+        parcel.writeString(strIngredient2);
+        parcel.writeString(strIngredient3);
+        parcel.writeString(strIngredient4);
+        parcel.writeString(strIngredient5);
+        parcel.writeString(strIngredient6);
+        parcel.writeString(strIngredient7);
+        parcel.writeString(strIngredient8);
+        parcel.writeString(strIngredient9);
+        parcel.writeString(strIngredient10);
+        parcel.writeString(strIngredient11);
+        parcel.writeString(strIngredient12);
+        parcel.writeString(strIngredient13);
+        parcel.writeString(strIngredient14);
+        parcel.writeString(strIngredient15);
+        parcel.writeString(strMeasure1);
+        parcel.writeString(strMeasure2);
+        parcel.writeString(strMeasure3);
+        parcel.writeString(strMeasure4);
+        parcel.writeString(strMeasure5);
+        parcel.writeString(strMeasure6);
+        parcel.writeString(strMeasure7);
+        parcel.writeString(strMeasure8);
+        parcel.writeString(strMeasure9);
+        parcel.writeString(strMeasure10);
+        parcel.writeString(strMeasure11);
+        parcel.writeString(strMeasure12);
+        parcel.writeString(strMeasure13);
+        parcel.writeString(strMeasure14);
+        parcel.writeString(strMeasure15);
+        parcel.writeByte((byte) (isFavorite ? 1 : 0));
     }
 }
