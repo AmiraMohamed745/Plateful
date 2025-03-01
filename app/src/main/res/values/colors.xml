@@ -7,7 +7,7 @@
     <color name="primaryColor">#05AB92</color>
     <color name="primaryColorDark">#008D77</color>
     <color name="primaryColorLight">#41AA96</color>
-    <color name="primaryColorVeryLight">#1A05AB92</color> <!--this will be the color for the main search bar-->
+    <color name="primaryColorVeryLight">#1A05AB92</color>
     <color name="onPrimary">#FFFFFF</color>
     <color name="hintTextColor">#6C6C6C</color>
     <color name="textColor">#000000</color>

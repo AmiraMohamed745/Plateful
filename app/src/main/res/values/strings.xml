@@ -41,5 +41,13 @@
     <string name="you_still_have_not_added_any_meals_yet">You haven\'t added any meals yet.</string>
     <string name="meal_deleted">Meal deleted from favorites</string>
     <string name="undo">UNDO</string>
+    <string name="add_to_favorite">Add to favorite</string>
+    <string name="cuisine">Cuisine: </string>
+    <string name="category">Category: </string>
+    <string name="ingredients">Ingredients: </string>
+    <string name="instructions">Instructions: </string>
+    <string name="video">Video: </string>
+
+
 
 </resources>
