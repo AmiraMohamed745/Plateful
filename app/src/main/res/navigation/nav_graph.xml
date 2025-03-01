@@ -122,7 +122,7 @@
         app:destination="@id/searchResultsScreen" />
     <fragment
         android:id="@+id/favoriteMealsScreen"
-        android:name="com.example.plateful.favoritemeal.FavoriteMealsScreen"
+        android:name="com.example.plateful.favoritemeal.view.FavoriteMealsScreen"
         android:label="fragment_favorite_meals_screen"
         tools:layout="@layout/fragment_favorite_meals_screen" />
     <fragment
