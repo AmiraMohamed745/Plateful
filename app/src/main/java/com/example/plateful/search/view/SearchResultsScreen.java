@@ -45,7 +45,7 @@ public class SearchResultsScreen extends Fragment implements SearchResultsScreen
 
     private void setUpPresenter() {
         MealRemoteDataSource mealRemoteDataSource = new MealRemoteDataSourceImpl(requireContext());
-        MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource);
+        MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource, null);
         searchResultsPresenter = new SearchResultsPresenterImpl(this, mealRepository);
     }
 

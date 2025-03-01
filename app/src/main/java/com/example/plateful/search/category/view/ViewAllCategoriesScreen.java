@@ -41,7 +41,7 @@ public class ViewAllCategoriesScreen extends Fragment implements MainSearchScree
 
     private void setUpPresenter() {
         MealRemoteDataSource mealRemoteDataSource = new MealRemoteDataSourceImpl(requireContext());
-        MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource);
+        MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource, null);
         mainSearchScreenPresenter = new MainSearchScreenPresenterImpl((MainSearchScreenView) this, mealRepository);
     }
 

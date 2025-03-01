@@ -37,5 +37,9 @@
     <string name="bottom_nav_destination_favorite">Favorite</string>
     <string name="bottom_nav_destination_plan">Plan</string>
     <string name="your_username">Your username</string>
+    <string name="your_favorite_meals">Your Favorite Meals</string>
+    <string name="you_still_have_not_added_any_meals_yet">You haven\'t added any meals yet.</string>
+    <string name="meal_deleted">Meal deleted from favorites</string>
+    <string name="undo">UNDO</string>
 
 </resources>

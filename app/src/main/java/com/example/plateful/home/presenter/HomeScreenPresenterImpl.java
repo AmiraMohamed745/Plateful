@@ -25,10 +25,21 @@ public class HomeScreenPresenterImpl implements HomeScreenPresenter {
     public void loadRandomMeal() {
         Disposable disposable = mealRepository.fetchTenRandomMealsForDailyInspiration()
                 .subscribe(
-                        meals -> homeScreenView.displayRandomMeals(meals),
+                        homeScreenView::displayRandomMeals,
                         error -> homeScreenView.showError(showUserFriendlyErrorMessage(error))
                 );
         compositeDisposable.add(disposable);
+    }
+
+    @Override
+    public void addMealToFavorites(Meal meal) {
+        compositeDisposable.add(
+                mealRepository.insertMeal(meal)
+                        .subscribe(
+                                () -> homeScreenView.onMealAddedToFavorites(meal),
+                                error -> homeScreenView.showError(error.getMessage())
+                        )
+        );
     }
 
     private String showUserFriendlyErrorMessage(Throwable error) {

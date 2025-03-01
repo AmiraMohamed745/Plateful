@@ -28,7 +28,8 @@ public class DailyInspirationAdapter extends RecyclerView.Adapter<DailyInspirati
     private static final String TAG = DailyInspirationAdapter.class.getSimpleName();
 
     private final Context context;
-    private List<Meal> meals = new ArrayList<>();
+    private final List<Meal> meals = new ArrayList<>();
+    private OnAddToFavoriteClickListener onAddToFavoriteClickListener;
 
     public DailyInspirationAdapter(Context context) {
         this.context = context;
@@ -36,7 +37,7 @@ public class DailyInspirationAdapter extends RecyclerView.Adapter<DailyInspirati
 
     @NonNull
     @Override
-    public DailyInspirationAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup recyclerView, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup recyclerView, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(recyclerView.getContext());
         View view = inflater.inflate(R.layout.daily_inspiration_row, recyclerView, false);
         ViewHolder viewHolder = new ViewHolder(view);
@@ -52,9 +53,30 @@ public class DailyInspirationAdapter extends RecyclerView.Adapter<DailyInspirati
                 .error(R.drawable.bg_placeholder)
                 .into(holder.imageViewMealImage);
         holder.textView_MealName.setText(meal.getName());
+        if(meal.isFavorite()){
+            holder.imageButtonAddToFavorite.setImageResource(R.drawable.ic_filled_heart);
+        } else {
+            holder.imageButtonAddToFavorite.setImageResource(R.drawable.ic_outlined_heart);
+        }
+        holder.imageButtonAddToFavorite.setOnClickListener(view -> {
+            onAddToFavoriteClickListener.onAddToFavoriteImageButtonClicked(meal);
+        });
         Log.i(TAG, "onBindViewHolder: ");
     }
 
+    public void updateMealFavoriteStatus(Meal meal, boolean isFavorite) {
+        for (int i = 0; i < meals.size(); i++) {
+            if (meals.get(i).getIdMeal().equals(meal.getIdMeal())) {
+                meals.get(i).setFavorite(isFavorite);
+                notifyItemChanged(i);
+                break;
+            }
+        }
+    }
+
+    public void setOnAddToFavoriteClickListener(OnAddToFavoriteClickListener listener) {
+        this.onAddToFavoriteClickListener = listener;
+    }
 
     @Override
     public int getItemCount() {

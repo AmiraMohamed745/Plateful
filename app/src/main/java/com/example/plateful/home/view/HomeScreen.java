@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.plateful.R;
+import com.example.plateful.database.MealLocalDataSource;
+import com.example.plateful.database.MealLocalDataSourceImpl;
 import com.example.plateful.home.presenter.HomeScreenPresenter;
 import com.example.plateful.home.presenter.HomeScreenPresenterImpl;
 import com.example.plateful.model.Meal;
@@ -47,7 +49,8 @@ public class HomeScreen extends Fragment implements HomeScreenView {
 
     private void setUpPresenter() {
         MealRemoteDataSource mealRemoteDataSource = new MealRemoteDataSourceImpl(requireContext());
-        MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource);
+        MealLocalDataSource mealLocalDataSource = MealLocalDataSourceImpl.getInstance(requireContext());
+        MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource, mealLocalDataSource);
         homeScreenPresenter = new HomeScreenPresenterImpl(this, mealRepository);
     }
 
@@ -87,6 +90,10 @@ public class HomeScreen extends Fragment implements HomeScreenView {
         setUpDailyInspirationAdapter();
         homeScreenPresenter.loadRandomMeal();
 
+        dailyInspirationAdapter.setOnAddToFavoriteClickListener(meal -> {
+            homeScreenPresenter.addMealToFavorites(meal);
+        });
+
         imageViewProfile.setOnClickListener(DestinationNavigator::navigateToProfileScreen);
     }
 
@@ -100,6 +107,11 @@ public class HomeScreen extends Fragment implements HomeScreenView {
         dailyInspirationAdapter.populateDailyInspirationRecyclerView(meals);
     }
 
+    @Override
+    public void onMealAddedToFavorites(Meal meal) {
+        dailyInspirationAdapter.updateMealFavoriteStatus(meal, true);
+    }
+
 
     private void setUpDailyInspirationAdapter() {
         dailyInspirationAdapter = new DailyInspirationAdapter(requireContext());
@@ -111,4 +123,5 @@ public class HomeScreen extends Fragment implements HomeScreenView {
         homeScreenPresenter.cleanUpDisposables();
         super.onDestroyView();
     }
+
 }
