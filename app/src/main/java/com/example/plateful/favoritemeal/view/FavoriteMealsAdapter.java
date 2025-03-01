@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.plateful.R;
 import com.example.plateful.model.Meal;
+import com.example.plateful.view.DestinationNavigator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,9 @@ public class FavoriteMealsAdapter extends RecyclerView.Adapter<FavoriteMealsAdap
                 .error(R.drawable.bg_placeholder)
                 .into(holder.imageViewMealImage);
         holder.textView_MealName.setText(meal.getName());
+        holder.cardViewFavoriteMeal.setOnClickListener(view -> {
+            DestinationNavigator.navigateToMealDetailsScreen(view, meal);
+        });
         Log.i(TAG, "onBindViewHolder: ");
     }
 
