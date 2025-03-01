@@ -43,7 +43,7 @@ public class AllCategoryMeals extends Fragment implements AllCategoryMealsView{
 
     private void setUpPresenter() {
         MealRemoteDataSource mealRemoteDataSource = new MealRemoteDataSourceImpl(requireContext());
-        MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource);
+        MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource, null);
         allCategoryMealsPresenter = new AllCategoryMealsPresenterImpl((AllCategoryMealsView) this, mealRepository);
     }
 
