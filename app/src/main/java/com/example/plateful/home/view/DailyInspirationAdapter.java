@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.plateful.R;
 import com.example.plateful.model.Meal;
+import com.example.plateful.view.DestinationNavigator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,11 @@ public class DailyInspirationAdapter extends RecyclerView.Adapter<DailyInspirati
             holder.imageButtonAddToFavorite.setImageResource(R.drawable.ic_outlined_heart);
         }
         holder.imageButtonAddToFavorite.setOnClickListener(view -> {
+            view.setClickable(true);
             onAddToFavoriteClickListener.onAddToFavoriteImageButtonClicked(meal);
+        });
+        holder.textView_MealName.setOnClickListener(view -> {
+            DestinationNavigator.navigateToMealDetailsScreen(view, meal);
         });
         Log.i(TAG, "onBindViewHolder: ");
     }

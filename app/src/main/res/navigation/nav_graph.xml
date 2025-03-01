@@ -139,5 +139,17 @@
     <action
         android:id="@+id/action_global_weeklyPlanScreen"
         app:destination="@id/weeklyPlanScreen" />
+    <fragment
+        android:id="@+id/mealDetailsScreen"
+        android:name="com.example.plateful.details.view.MealDetailsScreen"
+        android:label="fragment_meal_details_screen"
+        tools:layout="@layout/fragment_meal_details_screen" >
+        <argument
+            android:name="meal"
+            app:argType="com.example.plateful.model.Meal" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_mealDetailsScreen"
+        app:destination="@id/mealDetailsScreen" />
 
 </navigation>

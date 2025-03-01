@@ -38,7 +38,7 @@ public class HomeScreen extends Fragment implements HomeScreenView {
     private static final String TAG = HomeScreen.class.getSimpleName();
 
     private TextView textViewDailyInspiration;
-    private TextView textViewBrowseCuisines;
+    //private TextView textViewBrowseCuisines;
 
     private RecyclerView recyclerViewDailyInspiration;
     private DailyInspirationAdapter dailyInspirationAdapter;
@@ -72,7 +72,7 @@ public class HomeScreen extends Fragment implements HomeScreenView {
         super.onViewCreated(view, savedInstanceState);
 
         textViewDailyInspiration = view.findViewById(R.id.textView_DailyInspiration);
-        textViewBrowseCuisines = view.findViewById(R.id.textView_Browse_Cuisines);
+        //textViewBrowseCuisines = view.findViewById(R.id.textView_Browse_Cuisines);
 
         imageViewProfile = view.findViewById(R.id.imageView_ic_profile_photo);
 

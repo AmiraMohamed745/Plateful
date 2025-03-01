@@ -8,6 +8,8 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 
 import com.example.plateful.R;
+import com.example.plateful.details.view.MealDetailsScreenDirections;
+import com.example.plateful.model.Meal;
 import com.example.plateful.search.category.model.Category;
 import com.example.plateful.search.category.view.ViewAllCategoriesScreenDirections;
 import com.example.plateful.search.view.SearchResultsScreenDirections;
@@ -68,6 +70,12 @@ public class DestinationNavigator {
 
     public static void navigateToWeeklyPlanScreen(NavController navController) {
         navController.navigate(R.id.action_global_weeklyPlanScreen);
+    }
+
+    public static void navigateToMealDetailsScreen(View view, Meal meal) {
+        NavDirections action =
+                MealDetailsScreenDirections.actionGlobalMealDetailsScreen(meal);
+        Navigation.findNavController(view).navigate(action);
     }
 
 }

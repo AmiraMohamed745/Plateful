@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.rxjava)
     implementation(libs.room.rxjava3)
     implementation (libs.rxjava3.retrofit.adapter)
+    implementation(libs.core)
     annotationProcessor (libs.room.compiler)
     implementation (libs.room.runtime)
     testImplementation(libs.junit)

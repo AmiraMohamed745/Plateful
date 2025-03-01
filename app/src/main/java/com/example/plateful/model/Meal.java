@@ -1,5 +1,8 @@
 package com.example.plateful.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -8,7 +11,7 @@ import androidx.room.PrimaryKey;
 import com.google.gson.annotations.SerializedName;
 
 @Entity(tableName = "meal_table")
-public class Meal {
+public class Meal implements Parcelable {
 
     @PrimaryKey
     @NonNull
@@ -258,6 +261,59 @@ public class Meal {
         this.strMeasure20 = strMeasure20;
         this.isFavorite = isFavorite;
     }
+
+    protected Meal(Parcel in) {
+        idMeal = in.readString();
+        name = in.readString();
+        category = in.readString();
+        cuisine = in.readString();
+        instructions = in.readString();
+        imageUrl = in.readString();
+        videoUrl = in.readString();
+        strIngredient1 = in.readString();
+        strIngredient2 = in.readString();
+        strIngredient3 = in.readString();
+        strIngredient4 = in.readString();
+        strIngredient5 = in.readString();
+        strIngredient6 = in.readString();
+        strIngredient7 = in.readString();
+        strIngredient8 = in.readString();
+        strIngredient9 = in.readString();
+        strIngredient10 = in.readString();
+        strIngredient11 = in.readString();
+        strIngredient12 = in.readString();
+        strIngredient13 = in.readString();
+        strIngredient14 = in.readString();
+        strIngredient15 = in.readString();
+        strMeasure1 = in.readString();
+        strMeasure2 = in.readString();
+        strMeasure3 = in.readString();
+        strMeasure4 = in.readString();
+        strMeasure5 = in.readString();
+        strMeasure6 = in.readString();
+        strMeasure7 = in.readString();
+        strMeasure8 = in.readString();
+        strMeasure9 = in.readString();
+        strMeasure10 = in.readString();
+        strMeasure11 = in.readString();
+        strMeasure12 = in.readString();
+        strMeasure13 = in.readString();
+        strMeasure14 = in.readString();
+        strMeasure15 = in.readString();
+        isFavorite = in.readByte() != 0;
+    }
+
+    public static final Creator<Meal> CREATOR = new Creator<Meal>() {
+        @Override
+        public Meal createFromParcel(Parcel in) {
+            return new Meal(in);
+        }
+
+        @Override
+        public Meal[] newArray(int size) {
+            return new Meal[size];
+        }
+    };
 
     public String getIdMeal() {
         return idMeal;
@@ -696,5 +752,52 @@ public class Meal {
                 ", strMeasure20=" + strMeasure20 +
                 ", isFavorite=" + isFavorite +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(idMeal);
+        parcel.writeString(name);
+        parcel.writeString(category);
+        parcel.writeString(cuisine);
+        parcel.writeString(instructions);
+        parcel.writeString(imageUrl);
+        parcel.writeString(videoUrl);
+        parcel.writeString(strIngredient1);
+        parcel.writeString(strIngredient2);
+        parcel.writeString(strIngredient3);
+        parcel.writeString(strIngredient4);
+        parcel.writeString(strIngredient5);
+        parcel.writeString(strIngredient6);
+        parcel.writeString(strIngredient7);
+        parcel.writeString(strIngredient8);
+        parcel.writeString(strIngredient9);
+        parcel.writeString(strIngredient10);
+        parcel.writeString(strIngredient11);
+        parcel.writeString(strIngredient12);
+        parcel.writeString(strIngredient13);
+        parcel.writeString(strIngredient14);
+        parcel.writeString(strIngredient15);
+        parcel.writeString(strMeasure1);
+        parcel.writeString(strMeasure2);
+        parcel.writeString(strMeasure3);
+        parcel.writeString(strMeasure4);
+        parcel.writeString(strMeasure5);
+        parcel.writeString(strMeasure6);
+        parcel.writeString(strMeasure7);
+        parcel.writeString(strMeasure8);
+        parcel.writeString(strMeasure9);
+        parcel.writeString(strMeasure10);
+        parcel.writeString(strMeasure11);
+        parcel.writeString(strMeasure12);
+        parcel.writeString(strMeasure13);
+        parcel.writeString(strMeasure14);
+        parcel.writeString(strMeasure15);
+        parcel.writeByte((byte) (isFavorite ? 1 : 0));
     }
 }
