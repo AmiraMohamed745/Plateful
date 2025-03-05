@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeScreen">
+    app:startDestination="@id/splashScreen">
 
     <fragment
         android:id="@+id/signUpScreen"
@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_homeScreen_to_profileScreen"
             app:destination="@id/profileScreen" />
+        <action
+            android:id="@+id/action_homeScreen_to_viewAllCuisinesScreen"
+            app:destination="@id/viewAllCuisinesScreen" />
     </fragment>
 
 
@@ -151,5 +154,23 @@
     <action
         android:id="@+id/action_global_mealDetailsScreen"
         app:destination="@id/mealDetailsScreen" />
+    <fragment
+        android:id="@+id/viewAllCuisinesScreen"
+        android:name="com.example.plateful.home.cuisines.view.ViewAllCuisinesScreen"
+        android:label="fragment_view_all_cuisines_screen"
+        tools:layout="@layout/fragment_view_all_cuisines_screen" >
+        <action
+            android:id="@+id/action_viewAllCuisinesScreen_to_allCuisineMealsScreen"
+            app:destination="@id/allCuisineMealsScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/allCuisineMealsScreen"
+        android:name="com.example.plateful.home.cuisines.view.AllCuisineMealsScreen"
+        android:label="fragment_all_cuisine_meals_screen"
+        tools:layout="@layout/fragment_all_cuisine_meals_screen" >
+        <argument
+            android:name="cuisine"
+            app:argType="com.example.plateful.home.model.Cuisine" />
+    </fragment>
 
 </navigation>

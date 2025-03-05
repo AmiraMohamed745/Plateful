@@ -3,6 +3,7 @@ package com.example.plateful.network;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.plateful.home.model.CuisineResponse;
 import com.example.plateful.model.Meal;
 import com.example.plateful.model.MealResponse;
 import com.example.plateful.search.category.model.CategoryResponse;
@@ -67,6 +68,16 @@ public class MealRemoteDataSourceImpl implements MealRemoteDataSource {
     @Override
     public Single<MealResponse> searchMealByName(String searchQuery) {
         return mealService.searchMealByName(searchQuery);
+    }
+
+    @Override
+    public Single<CuisineResponse> getAllCuisines(String cuisineParameter) {
+        return mealService.getAllCuisines(cuisineParameter);
+    }
+
+    @Override
+    public Single<MealResponse> getMealsByCuisine(String cuisineName) {
+        return mealService.getMealsByCuisine(cuisineName);
     }
 
 

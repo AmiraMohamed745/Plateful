@@ -1,8 +1,10 @@
 package com.example.plateful.home.presenter;
 
+import com.example.plateful.home.model.Cuisine;
 import com.example.plateful.home.view.HomeScreenView;
 import com.example.plateful.model.Meal;
 import com.example.plateful.model.MealRepository;
+import com.example.plateful.network.RXSchedulers;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -39,6 +41,23 @@ public class HomeScreenPresenterImpl implements HomeScreenPresenter {
                                 () -> homeScreenView.onMealAddedToFavorites(meal),
                                 error -> homeScreenView.showError(error.getMessage())
                         )
+        );
+    }
+
+    @Override
+    public void loadCuisines() {
+        compositeDisposable.add(mealRepository.fetchMealCuisines()
+                .map(cuisines -> {
+                    for (Cuisine cuisine : cuisines) {
+                        int imageRes = CuisineImageMapper.getImageForCuisine(cuisine.getCuisineName());
+                        cuisine.setImageResId(imageRes);
+                    }
+                    return cuisines;
+                })
+                .compose(RXSchedulers.applySchedulersSingle())
+                .subscribe(
+                        homeScreenView::displayCuisines,
+                        error -> homeScreenView.showError(error.getMessage()))
         );
     }
 

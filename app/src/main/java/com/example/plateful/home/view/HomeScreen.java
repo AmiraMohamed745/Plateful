@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import com.example.plateful.R;
 import com.example.plateful.database.MealLocalDataSource;
 import com.example.plateful.database.MealLocalDataSourceImpl;
+import com.example.plateful.home.model.Cuisine;
 import com.example.plateful.home.presenter.HomeScreenPresenter;
 import com.example.plateful.home.presenter.HomeScreenPresenterImpl;
 import com.example.plateful.model.Meal;
@@ -38,10 +40,13 @@ public class HomeScreen extends Fragment implements HomeScreenView {
     private static final String TAG = HomeScreen.class.getSimpleName();
 
     private TextView textViewDailyInspiration;
-    //private TextView textViewBrowseCuisines;
+    private TextView textViewBrowseCuisines;
+    private TextView textViewViewAll;
 
     private RecyclerView recyclerViewDailyInspiration;
+    private RecyclerView recyclerViewBrowseCuisines;
     private DailyInspirationAdapter dailyInspirationAdapter;
+    private BrowseCuisinesAdapter browseCuisinesAdapter;
 
     private ImageView imageViewProfile;
 
@@ -72,15 +77,24 @@ public class HomeScreen extends Fragment implements HomeScreenView {
         super.onViewCreated(view, savedInstanceState);
 
         textViewDailyInspiration = view.findViewById(R.id.textView_DailyInspiration);
-        //textViewBrowseCuisines = view.findViewById(R.id.textView_Browse_Cuisines);
+        textViewBrowseCuisines = view.findViewById(R.id.textView_Browse_Cuisines);
+        textViewViewAll = view.findViewById(R.id.textView_ViewAll);
 
         imageViewProfile = view.findViewById(R.id.imageView_ic_profile_photo);
 
         recyclerViewDailyInspiration = view.findViewById(R.id.recyclerView_Daily_Inspiration);
         recyclerViewDailyInspiration.setHasFixedSize(true);
+        recyclerViewDailyInspiration.setNestedScrollingEnabled(false);
         CarouselLayoutManager carouselLayoutManager = new CarouselLayoutManager();
         carouselLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewDailyInspiration.setLayoutManager(carouselLayoutManager);
+
+        recyclerViewBrowseCuisines = view.findViewById(R.id.recyclerView_Browse_Cuisines);
+        recyclerViewBrowseCuisines.setHasFixedSize(true);
+        recyclerViewBrowseCuisines.setNestedScrollingEnabled(false);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
+        gridLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerViewBrowseCuisines.setLayoutManager(gridLayoutManager);
 
         textViewDailyInspiration.setOnClickListener(view1 -> {
             Navigation.findNavController(view).navigate(R.id.action_homeScreen_to_profileScreen);
@@ -92,6 +106,12 @@ public class HomeScreen extends Fragment implements HomeScreenView {
 
         dailyInspirationAdapter.setOnAddToFavoriteClickListener(meal -> {
             homeScreenPresenter.addMealToFavorites(meal);
+        });
+
+        setUBrowseCuisinesAdapter();
+        homeScreenPresenter.loadCuisines();
+        textViewViewAll.setOnClickListener(view1 -> {
+            DestinationNavigator.navigateToViewAllCuisinesScreen(requireView());
         });
 
         imageViewProfile.setOnClickListener(DestinationNavigator::navigateToProfileScreen);
@@ -108,6 +128,11 @@ public class HomeScreen extends Fragment implements HomeScreenView {
     }
 
     @Override
+    public void displayCuisines(List<Cuisine> cuisines) {
+        browseCuisinesAdapter.setCuisinesList(cuisines);
+    }
+
+    @Override
     public void onMealAddedToFavorites(Meal meal) {
         dailyInspirationAdapter.updateMealFavoriteStatus(meal, true);
     }
@@ -116,6 +141,11 @@ public class HomeScreen extends Fragment implements HomeScreenView {
     private void setUpDailyInspirationAdapter() {
         dailyInspirationAdapter = new DailyInspirationAdapter(requireContext());
         recyclerViewDailyInspiration.setAdapter(dailyInspirationAdapter);
+    }
+
+    private void setUBrowseCuisinesAdapter() {
+        browseCuisinesAdapter = new BrowseCuisinesAdapter(requireContext());
+        recyclerViewBrowseCuisines.setAdapter(browseCuisinesAdapter);
     }
 
     @Override

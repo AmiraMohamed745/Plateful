@@ -1,6 +1,8 @@
 package com.example.plateful.model;
 
 import com.example.plateful.database.MealLocalDataSource;
+import com.example.plateful.home.model.Cuisine;
+import com.example.plateful.home.model.CuisineResponse;
 import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.RXSchedulers;
 import com.example.plateful.search.category.model.Category;
@@ -68,6 +70,18 @@ public class MealRepositoryImpl implements MealRepository {
                                     .collect(Collectors.toList());
                         })
                 .compose(RXSchedulers.applySchedulersSingle());
+    }
+
+    @Override
+    public Single<List<Cuisine>> fetchMealCuisines() {
+        return mealRemoteDataSource.getAllCuisines("list")
+                .map(CuisineResponse::getCuisines);
+    }
+
+    @Override
+    public Single<List<Meal>> fetchMealsByCuisine(String cuisineName) {
+        return mealRemoteDataSource.getMealsByCuisine(cuisineName)
+                .map(MealResponse::getMeals);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.plateful.model;
 
+import com.example.plateful.home.model.Cuisine;
 import com.example.plateful.search.category.model.Category;
 
 import java.util.List;
@@ -17,6 +18,10 @@ public interface MealRepository {
     Single<List<Meal>> fetchMealsByCategory(String categoryName);
 
     Single<List<Meal>> fetchMealsByName(String searchQuery, String categoryName);
+
+    Single<List<Cuisine>> fetchMealCuisines();
+
+    Single<List<Meal>> fetchMealsByCuisine(String cuisineName);
 
     Flowable<List<Meal>> fetchStoredFavoriteMeals();
 

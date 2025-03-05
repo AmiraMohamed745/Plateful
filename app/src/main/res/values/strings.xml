@@ -22,6 +22,7 @@
     <string name="already_have_account_log_in">Already have account? Log In</string>
     <string name="daily_inspiration">Daily Inspiration</string>
     <string name="browse_cuisines">Browse Cuisines</string>
+    <string name="browse_all_cuisines">Browse All Cuisines</string>
     <string name="add_to_plan">Add to plan</string>
     <string name="search_for_a_meal">Search for a meal</string>
     <string name="main_search_bar_placeholder">Search</string>
@@ -47,7 +48,6 @@
     <string name="ingredients">Ingredients: </string>
     <string name="instructions">Instructions: </string>
     <string name="video">Video: </string>
-
 
 
 </resources>
