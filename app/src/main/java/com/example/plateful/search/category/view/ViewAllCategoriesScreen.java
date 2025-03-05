@@ -34,7 +34,7 @@ public class ViewAllCategoriesScreen extends Fragment implements MainSearchScree
 
     private TextView textViewSearchByCategory;
 
-    private RecyclerView recyclerViewViewAllCategories; // GridLayout
+    private RecyclerView recyclerViewViewAllCategories;
     private ViewAllCategoriesAdapter viewAllCategoriesAdapter;
 
     private MainSearchScreenPresenter mainSearchScreenPresenter;
