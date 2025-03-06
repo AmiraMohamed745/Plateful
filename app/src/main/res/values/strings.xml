@@ -48,6 +48,15 @@
     <string name="ingredients">Ingredients: </string>
     <string name="instructions">Instructions: </string>
     <string name="video">Video: </string>
+    <string name="your_weekly_plan">Your Weekly Plan</string>
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="saturday">Saturday</string>
+    <string name="friday">Friday</string>
+    <string name="thursday">Thursday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="select_a_date">Select a date</string>
 
 
 </resources>

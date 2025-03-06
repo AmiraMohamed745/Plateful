@@ -7,6 +7,7 @@ import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.RXSchedulers;
 import com.example.plateful.search.category.model.Category;
 import com.example.plateful.search.category.model.CategoryResponse;
+import com.example.plateful.weeklyplan.model.PlannedMeal;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -100,5 +101,20 @@ public class MealRepositoryImpl implements MealRepository {
     public Completable deleteMeal(Meal meal) {
         return mealLocalDataSource.deleteMealFromFavorites(meal)
                 .compose(RXSchedulers.applySchedulersCompletable());
+    }
+
+    @Override
+    public Flowable<List<PlannedMeal>> fetchPlannedMealsForDate(long date) {
+        return mealLocalDataSource.getMealPlansForDate(date);
+    }
+
+    @Override
+    public Completable insertPlannedMeal(PlannedMeal plannedMeal) {
+        return mealLocalDataSource.insertMealIntoPlan(plannedMeal);
+    }
+
+    @Override
+    public Completable deletePlannedMeal(PlannedMeal plannedMeal) {
+        return mealLocalDataSource.deleteMealFromPlan(plannedMeal);
     }
 }

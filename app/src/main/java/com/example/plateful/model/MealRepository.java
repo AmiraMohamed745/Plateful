@@ -2,6 +2,7 @@ package com.example.plateful.model;
 
 import com.example.plateful.home.model.Cuisine;
 import com.example.plateful.search.category.model.Category;
+import com.example.plateful.weeklyplan.model.PlannedMeal;
 
 import java.util.List;
 
@@ -28,5 +29,11 @@ public interface MealRepository {
     Completable insertMeal(Meal meal);
 
     Completable deleteMeal(Meal meal);
+
+    Flowable<List<PlannedMeal>> fetchPlannedMealsForDate(long date);
+
+    Completable insertPlannedMeal(PlannedMeal plannedMeal);
+
+    Completable deletePlannedMeal(PlannedMeal plannedMeal);
 
 }

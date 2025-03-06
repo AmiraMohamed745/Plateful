@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashScreen">
+    app:startDestination="@id/homeScreen">
 
     <fragment
         android:id="@+id/signUpScreen"
@@ -130,7 +130,7 @@
         tools:layout="@layout/fragment_favorite_meals_screen" />
     <fragment
         android:id="@+id/weeklyPlanScreen"
-        android:name="com.example.plateful.weeklyplan.WeeklyPlanScreen"
+        android:name="com.example.plateful.weeklyplan.view.WeeklyPlanScreen"
         android:label="fragment_weekly_plan_screen"
         tools:layout="@layout/fragment_weekly_plan_screen" />
     <action
