@@ -1,6 +1,7 @@
 package com.example.plateful.database;
 
 import com.example.plateful.model.Meal;
+import com.example.plateful.weeklyplan.model.PlannedMeal;
 
 import java.util.List;
 
@@ -14,5 +15,11 @@ public interface MealLocalDataSource {
     Completable deleteMealFromFavorites(Meal meal);
 
     Completable insertMealIntoFavorites(Meal meal);
+
+    Flowable<List<PlannedMeal>> getMealPlansForDate(long date);
+
+    Completable insertMealIntoPlan(PlannedMeal plannedMeal);
+
+    Completable deleteMealFromPlan(PlannedMeal plannedMeal);
 
 }
