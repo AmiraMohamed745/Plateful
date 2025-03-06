@@ -15,5 +15,7 @@
     <color name="lightGrey">#CBCBCB</color>
     <color name="darkGrey">#8E8A8A</color>
     <color name="red">#ff0000</color>
+    <color name="card_chips_background">#F0F0F0</color>
+
 
 </resources>
