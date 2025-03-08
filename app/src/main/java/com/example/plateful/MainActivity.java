@@ -2,13 +2,16 @@ package com.example.plateful;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.plateful.view.DestinationNavigator;
+import com.example.plateful.network.ConnectivityHelper;
+import com.example.plateful.network.ConnectivityListener;
+import com.example.plateful.utils.DestinationNavigator;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Arrays;
@@ -18,12 +21,16 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationBar;
 
+    private ConnectivityHelper connectivityHelper;
+    private TextView textViewNoInternetConnection;
+
     private final List<Integer> bottomNavDestinations = Arrays.asList(
             R.id.homeScreen,
             R.id.favoriteMealsScreen,
             R.id.mainSearchScreen,
             R.id.weeklyPlanScreen
     );
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
                 .findFragmentById(R.id.fragmentContainerView);
         NavController navController = navHostFragment.getNavController();
 
+        connectivityHelper = new ConnectivityHelper(this);
         bottomNavigationBar = findViewById(R.id.bottom_navigation_bar);
+        textViewNoInternetConnection = findViewById(R.id.textView_NoInternetConnection);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (bottomNavDestinations.contains(destination.getId())) {
@@ -58,5 +67,27 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+
+        connectivityHelper.registerConnectivityCallback(new ConnectivityListener() {
+            @Override
+            public void onNetworkAvailable() {
+                runOnUiThread(() -> {
+                        textViewNoInternetConnection.setVisibility(View.GONE);
+                });
+            }
+
+            @Override
+            public void onNetworkLost() {
+                runOnUiThread(() -> {
+                        textViewNoInternetConnection.setVisibility(View.VISIBLE);
+                });
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        connectivityHelper.unregisterConnectivityCallback();
     }
 }

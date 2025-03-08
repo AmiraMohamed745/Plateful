@@ -17,7 +17,7 @@ import com.example.plateful.authentication.model.User;
 import com.example.plateful.authentication.signout.presenter.ProfileScreenPresenter;
 import com.example.plateful.authentication.signout.presenter.ProfileScreenPresenterImpl;
 import com.example.plateful.authentication.socialaccountsignin.model.GoogleSignInHelper;
-import com.example.plateful.view.DestinationNavigator;
+import com.example.plateful.utils.DestinationNavigator;
 
 
 public class ProfileScreen extends Fragment implements ProfileScreenView{

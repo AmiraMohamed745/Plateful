@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.plateful.R;
 import com.example.plateful.model.Meal;
-import com.example.plateful.view.DestinationNavigator;
+import com.example.plateful.utils.DestinationNavigator;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.example.plateful.R;
 import com.example.plateful.database.MealLocalDataSourceImpl;
 import com.example.plateful.model.MealRepositoryImpl;
-import com.example.plateful.view.AlertDialogMessage;
+import com.example.plateful.utils.AlertDialogMessage;
 import com.example.plateful.weeklyplan.model.PlannedMeal;
 import com.example.plateful.weeklyplan.presenter.WeeklyPlanScreenPresenter;
 import com.example.plateful.weeklyplan.presenter.WeeklyPlanScreenPresenterImpl;

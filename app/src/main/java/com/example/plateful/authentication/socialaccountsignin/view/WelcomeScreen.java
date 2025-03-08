@@ -18,7 +18,7 @@ import com.example.plateful.R;
 import com.example.plateful.authentication.socialaccountsignin.model.GoogleSignInHelper;
 import com.example.plateful.authentication.socialaccountsignin.presenter.WelcomeScreenPresenter;
 import com.example.plateful.authentication.socialaccountsignin.presenter.WelcomeScreenPresenterImpl;
-import com.example.plateful.view.DestinationNavigator;
+import com.example.plateful.utils.DestinationNavigator;
 
 
 public class WelcomeScreen extends Fragment implements WelcomeScreenClickListeners, WelcomeScreenView {

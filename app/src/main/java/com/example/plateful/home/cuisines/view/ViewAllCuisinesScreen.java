@@ -18,13 +18,10 @@ import com.example.plateful.R;
 import com.example.plateful.home.cuisines.presenter.ViewAllCuisinesPresenter;
 import com.example.plateful.home.cuisines.presenter.ViewAllCuisinesPresenterImpl;
 import com.example.plateful.home.model.Cuisine;
-import com.example.plateful.home.presenter.HomeScreenPresenter;
-import com.example.plateful.home.presenter.HomeScreenPresenterImpl;
 import com.example.plateful.model.MealRepository;
 import com.example.plateful.model.MealRepositoryImpl;
 import com.example.plateful.network.MealRemoteDataSourceImpl;
-import com.example.plateful.search.category.view.ViewAllCategoriesAdapter;
-import com.example.plateful.view.AlertDialogMessage;
+import com.example.plateful.utils.AlertDialogMessage;
 
 import java.util.List;
 

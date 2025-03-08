@@ -4,11 +4,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -28,8 +26,8 @@ import com.example.plateful.model.MealRepository;
 import com.example.plateful.model.MealRepositoryImpl;
 import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.MealRemoteDataSourceImpl;
-import com.example.plateful.view.AlertDialogMessage;
-import com.example.plateful.view.DestinationNavigator;
+import com.example.plateful.utils.AlertDialogMessage;
+import com.example.plateful.utils.DestinationNavigator;
 import com.google.android.material.carousel.CarouselLayoutManager;
 
 import java.util.List;
@@ -119,7 +117,7 @@ public class HomeScreen extends Fragment implements HomeScreenView {
 
     @Override
     public void showError(String errorMessage) {
-        AlertDialogMessage.makeAlertDialog(errorMessage, requireContext());
+        //AlertDialogMessage.makeAlertDialog(errorMessage, requireContext());
     }
 
     @Override

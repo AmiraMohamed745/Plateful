@@ -57,6 +57,7 @@
     <string name="wednesday">Wednesday</string>
     <string name="tuesday">Tuesday</string>
     <string name="select_a_date">Select a date</string>
+    <string name="no_internet_connection">No internet connection!</string>
 
 
 </resources>

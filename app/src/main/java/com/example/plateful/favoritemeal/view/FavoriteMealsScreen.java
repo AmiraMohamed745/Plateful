@@ -23,8 +23,8 @@ import com.example.plateful.model.MealRepository;
 import com.example.plateful.model.MealRepositoryImpl;
 import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.MealRemoteDataSourceImpl;
-import com.example.plateful.view.AlertDialogMessage;
-import com.example.plateful.view.DestinationNavigator;
+import com.example.plateful.utils.AlertDialogMessage;
+import com.example.plateful.utils.DestinationNavigator;
 
 import java.util.List;
 

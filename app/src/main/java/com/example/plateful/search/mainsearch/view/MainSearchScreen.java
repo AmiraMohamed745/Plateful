@@ -22,8 +22,8 @@ import com.example.plateful.network.MealRemoteDataSourceImpl;
 import com.example.plateful.search.category.model.Category;
 import com.example.plateful.search.mainsearch.presenter.MainSearchScreenPresenter;
 import com.example.plateful.search.mainsearch.presenter.MainSearchScreenPresenterImpl;
-import com.example.plateful.view.AlertDialogMessage;
-import com.example.plateful.view.DestinationNavigator;
+import com.example.plateful.utils.AlertDialogMessage;
+import com.example.plateful.utils.DestinationNavigator;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
@@ -100,7 +100,7 @@ public class MainSearchScreen extends Fragment implements MainSearchScreenView {
 
     @Override
     public void showError(String errorMessage) {
-        AlertDialogMessage.makeAlertDialog(errorMessage, requireContext());
+        //AlertDialogMessage.makeAlertDialog(errorMessage, requireContext());
     }
 
     @Override

@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.plateful.R;
-import com.example.plateful.view.DestinationNavigator;
+import com.example.plateful.utils.DestinationNavigator;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

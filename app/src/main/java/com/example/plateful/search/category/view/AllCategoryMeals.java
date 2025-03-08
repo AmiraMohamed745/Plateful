@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +21,8 @@ import com.example.plateful.network.MealRemoteDataSourceImpl;
 import com.example.plateful.search.category.model.Category;
 import com.example.plateful.search.category.presenter.AllCategoryMealsPresenter;
 import com.example.plateful.search.category.presenter.AllCategoryMealsPresenterImpl;
-import com.example.plateful.search.mainsearch.presenter.MainSearchScreenPresenterImpl;
-import com.example.plateful.search.mainsearch.view.MainSearchScreenView;
-import com.example.plateful.view.AlertDialogMessage;
-import com.example.plateful.view.DestinationNavigator;
+import com.example.plateful.utils.AlertDialogMessage;
+import com.example.plateful.utils.DestinationNavigator;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;

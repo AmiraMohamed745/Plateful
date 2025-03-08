@@ -1,4 +1,4 @@
-package com.example.plateful.view;
+package com.example.plateful.utils;
 
 import android.content.Context;
 import androidx.appcompat.app.AlertDialog;
