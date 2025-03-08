@@ -23,7 +23,7 @@ import com.example.plateful.search.category.model.Category;
 import com.example.plateful.search.mainsearch.presenter.MainSearchScreenPresenter;
 import com.example.plateful.search.mainsearch.presenter.MainSearchScreenPresenterImpl;
 import com.example.plateful.search.mainsearch.view.MainSearchScreenView;
-import com.example.plateful.view.AlertDialogMessage;
+import com.example.plateful.utils.AlertDialogMessage;
 
 import java.util.List;
 

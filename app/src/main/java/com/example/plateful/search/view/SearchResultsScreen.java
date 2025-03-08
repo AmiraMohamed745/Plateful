@@ -23,12 +23,9 @@ import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.MealRemoteDataSourceImpl;
 import com.example.plateful.search.category.model.Category;
 import com.example.plateful.search.category.view.AllCategoryMealsArgs;
-import com.example.plateful.search.mainsearch.presenter.MainSearchScreenPresenterImpl;
-import com.example.plateful.search.mainsearch.view.MainSearchScreenView;
-import com.example.plateful.search.mainsearch.view.SearchByCategoryAdapter;
 import com.example.plateful.search.presenter.SearchResultsPresenter;
 import com.example.plateful.search.presenter.SearchResultsPresenterImpl;
-import com.example.plateful.view.AlertDialogMessage;
+import com.example.plateful.utils.AlertDialogMessage;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;

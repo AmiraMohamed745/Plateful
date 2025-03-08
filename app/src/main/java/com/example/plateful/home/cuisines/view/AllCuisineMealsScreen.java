@@ -20,14 +20,8 @@ import com.example.plateful.home.model.Cuisine;
 import com.example.plateful.model.Meal;
 import com.example.plateful.model.MealRepository;
 import com.example.plateful.model.MealRepositoryImpl;
-import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.MealRemoteDataSourceImpl;
-import com.example.plateful.search.category.model.Category;
-import com.example.plateful.search.category.presenter.AllCategoryMealsPresenterImpl;
-import com.example.plateful.search.category.view.AllCategoryMealsAdapter;
-import com.example.plateful.search.category.view.AllCategoryMealsArgs;
-import com.example.plateful.search.category.view.AllCategoryMealsView;
-import com.example.plateful.view.AlertDialogMessage;
+import com.example.plateful.utils.AlertDialogMessage;
 
 import java.util.List;
 
