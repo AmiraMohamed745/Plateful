@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-// Will probably un-implement Parcelable as I am not using SafeArgs
 public class User {
 
     private String userId;

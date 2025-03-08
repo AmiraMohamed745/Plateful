@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.plateful.R;
 import com.example.plateful.view.DestinationNavigator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class SplashScreen extends Fragment {
@@ -36,7 +38,13 @@ public class SplashScreen extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setUpLottieAnimation(view);
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            DestinationNavigator.navigateToHomeScreen(requireView());
+        } else {
+            setUpLottieAnimation(view);
+        }
     }
 
     private void setUpLottieAnimation(View view) {
