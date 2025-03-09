@@ -12,6 +12,7 @@ import com.example.plateful.model.MealRepositoryImpl;
 import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.MealRemoteDataSourceImpl;
 import com.example.plateful.network.RXSchedulers;
+import com.example.plateful.utils.UserSession;
 import com.example.plateful.weeklyplan.model.PlannedMeal;
 import com.example.plateful.weeklyplan.view.WeeklyPlanScreenView;
 
@@ -34,7 +35,7 @@ public class WeeklyPlanScreenPresenterImpl implements WeeklyPlanScreenPresenter 
     @Override
     public void loadPlannedMeals(long date) {
         compositeDisposable.add(
-                mealRepository.fetchPlannedMealsForDate(date)
+                mealRepository.fetchPlannedMealsForDate(date, UserSession.getCurrentUserId())
                         .compose(RXSchedulers.applySchedulersFlowable())
                         .subscribe(
                                 weeklyPlanScreenView::showPlannedMeals,
@@ -47,6 +48,7 @@ public class WeeklyPlanScreenPresenterImpl implements WeeklyPlanScreenPresenter 
     public void deleteMealFromPlan(PlannedMeal plannedMeal) {
         compositeDisposable.add(
                 mealRepository.deletePlannedMeal(plannedMeal)
+                        .andThen(mealRepository.deletePlannedMealFromBackup(plannedMeal))
                         .compose(RXSchedulers.applySchedulersCompletable())
                         .subscribe(
                                 () -> Log.i(TAG, "Delete meal: Success"),

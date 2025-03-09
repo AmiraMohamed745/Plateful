@@ -5,6 +5,7 @@ import com.example.plateful.home.presenter.HomeScreenPresenterImpl;
 import com.example.plateful.home.view.HomeScreenView;
 import com.example.plateful.model.Meal;
 import com.example.plateful.model.MealRepository;
+import com.example.plateful.utils.UserSession;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
@@ -24,7 +25,7 @@ public class FavoriteMealsScreenPresenterImpl implements FavoriteMealsScreenPres
     @Override
     public void loadFavoriteMeals() {
         compositeDisposable.add(
-                mealRepository.fetchStoredFavoriteMeals()
+                mealRepository.fetchStoredFavoriteMeals(UserSession.getCurrentUserId())
                         .subscribe(
                                 favoriteMealsScreenView::displayFavoriteMeals,
                                 error -> favoriteMealsScreenView.showError(error.getMessage())
@@ -36,6 +37,7 @@ public class FavoriteMealsScreenPresenterImpl implements FavoriteMealsScreenPres
     public void deleteFavoriteMeal(Meal meal) {
         compositeDisposable.add(
                 mealRepository.deleteMeal(meal)
+                        .andThen(mealRepository.deleteFavoriteMealFromBackup(meal))
                         .subscribe(
                                 this::loadFavoriteMeals,
                                 error -> favoriteMealsScreenView.showError(error.getMessage())

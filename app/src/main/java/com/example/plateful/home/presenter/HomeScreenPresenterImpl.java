@@ -5,6 +5,7 @@ import com.example.plateful.home.view.HomeScreenView;
 import com.example.plateful.model.Meal;
 import com.example.plateful.model.MealRepository;
 import com.example.plateful.network.RXSchedulers;
+import com.example.plateful.utils.UserSession;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -35,6 +36,7 @@ public class HomeScreenPresenterImpl implements HomeScreenPresenter {
 
     @Override
     public void addMealToFavorites(Meal meal) {
+        meal.setUserId(UserSession.getCurrentUserId());
         compositeDisposable.add(
                 mealRepository.insertMeal(meal)
                         .subscribe(

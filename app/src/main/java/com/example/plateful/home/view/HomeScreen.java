@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.plateful.R;
+import com.example.plateful.authentication.signout.model.MealCloudDataSourceImpl;
 import com.example.plateful.database.MealLocalDataSource;
 import com.example.plateful.database.MealLocalDataSourceImpl;
 import com.example.plateful.home.model.Cuisine;
@@ -28,6 +29,7 @@ import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.MealRemoteDataSourceImpl;
 import com.example.plateful.utils.AlertDialogMessage;
 import com.example.plateful.utils.DestinationNavigator;
+import com.example.plateful.utils.UserSession;
 import com.google.android.material.carousel.CarouselLayoutManager;
 
 import java.util.List;
@@ -51,9 +53,11 @@ public class HomeScreen extends Fragment implements HomeScreenView {
     private HomeScreenPresenter homeScreenPresenter;
 
     private void setUpPresenter() {
-        MealRemoteDataSource mealRemoteDataSource = new MealRemoteDataSourceImpl(requireContext());
-        MealLocalDataSource mealLocalDataSource = MealLocalDataSourceImpl.getInstance(requireContext());
-        MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource, mealLocalDataSource);
+        MealRepository mealRepository = MealRepositoryImpl.getInstance(
+                new MealRemoteDataSourceImpl(requireContext()),
+                MealLocalDataSourceImpl.getInstance(requireContext()),
+                new MealCloudDataSourceImpl()
+        );
         homeScreenPresenter = new HomeScreenPresenterImpl(this, mealRepository);
     }
 

@@ -15,10 +15,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.plateful.R;
+import com.example.plateful.authentication.signout.model.MealCloudDataSourceImpl;
 import com.example.plateful.database.MealLocalDataSourceImpl;
 import com.example.plateful.model.MealRepositoryImpl;
 import com.example.plateful.model.SessionManager;
+import com.example.plateful.network.MealRemoteDataSourceImpl;
 import com.example.plateful.utils.AlertDialogMessage;
+import com.example.plateful.utils.UserSession;
 import com.example.plateful.weeklyplan.model.PlannedMeal;
 import com.example.plateful.weeklyplan.presenter.WeeklyPlanScreenPresenter;
 import com.example.plateful.weeklyplan.presenter.WeeklyPlanScreenPresenterImpl;
@@ -47,7 +50,12 @@ public class WeeklyPlanScreen extends Fragment implements WeeklyPlanScreenView, 
     private WeeklyPlanScreenPresenter weeklyPlanScreenPresenter;
 
     private void setUpPresenter() {
-        weeklyPlanScreenPresenter = new WeeklyPlanScreenPresenterImpl(this, MealRepositoryImpl.getInstance(null, MealLocalDataSourceImpl.getInstance(requireContext())));
+        weeklyPlanScreenPresenter = new WeeklyPlanScreenPresenterImpl(this,
+                MealRepositoryImpl.getInstance(
+                new MealRemoteDataSourceImpl(requireContext()),
+                MealLocalDataSourceImpl.getInstance(requireContext()),
+                new MealCloudDataSourceImpl()
+        ));
     }
 
     @Override
