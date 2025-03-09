@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.plateful.R;
+import com.example.plateful.authentication.signout.model.MealCloudDataSourceImpl;
+import com.example.plateful.database.MealLocalDataSourceImpl;
 import com.example.plateful.home.cuisines.presenter.ViewAllCuisinesPresenter;
 import com.example.plateful.home.cuisines.presenter.ViewAllCuisinesPresenterImpl;
 import com.example.plateful.home.model.Cuisine;
@@ -22,6 +24,7 @@ import com.example.plateful.model.MealRepository;
 import com.example.plateful.model.MealRepositoryImpl;
 import com.example.plateful.network.MealRemoteDataSourceImpl;
 import com.example.plateful.utils.AlertDialogMessage;
+import com.example.plateful.utils.UserSession;
 
 import java.util.List;
 
@@ -39,7 +42,11 @@ public class ViewAllCuisinesScreen extends Fragment implements ViewAllCuisinesSc
 
 
     private void setUpPresenter() {
-        MealRepository mealRepository = MealRepositoryImpl.getInstance(new MealRemoteDataSourceImpl(requireContext()), null);
+        MealRepository mealRepository = MealRepositoryImpl.getInstance(
+                new MealRemoteDataSourceImpl(requireContext()),
+                MealLocalDataSourceImpl.getInstance(requireContext()),
+                new MealCloudDataSourceImpl()
+        );
         viewAllCuisinesPresenter = new ViewAllCuisinesPresenterImpl(this, mealRepository);
     }
 
