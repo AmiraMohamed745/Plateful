@@ -10,13 +10,15 @@ import io.reactivex.rxjava3.core.Flowable;
 
 public interface MealLocalDataSource {
 
-    Flowable<List<Meal>> getStoredFavoriteMeals();
+    Flowable<List<Meal>> getStoredFavoriteMeals(String userId);
 
     Completable deleteMealFromFavorites(Meal meal);
 
     Completable insertMealIntoFavorites(Meal meal);
 
-    Flowable<List<PlannedMeal>> getMealPlansForDate(long date);
+    Flowable<List<PlannedMeal>> getMealPlansForDate(long date, String UserId);
+
+    Flowable<List<PlannedMeal>> getAllMealPlans(String userId);
 
     Completable insertMealIntoPlan(PlannedMeal plannedMeal);
 
