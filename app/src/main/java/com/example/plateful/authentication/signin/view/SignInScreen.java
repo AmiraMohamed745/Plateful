@@ -17,6 +17,7 @@ import com.example.plateful.authentication.signin.model.SignInAuthenticationData
 import com.example.plateful.authentication.signin.presenter.SignInScreenPresenter;
 import com.example.plateful.authentication.signin.presenter.SignInScreenPresenterImpl;
 import com.example.plateful.authentication.utils.EditableToStringConverter;
+import com.example.plateful.model.SessionManager;
 import com.example.plateful.utils.DestinationNavigator;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -66,6 +67,8 @@ public class SignInScreen extends Fragment implements SignInScreenView{
 
         buttonSignIn.setOnClickListener(onSignUpButtonClicked -> {
             signInScreenPresenter.signIn(extractUserData());
+            SessionManager sessionManager = new SessionManager(requireContext());
+            sessionManager.setGuestMode(false);
         });
     }
 

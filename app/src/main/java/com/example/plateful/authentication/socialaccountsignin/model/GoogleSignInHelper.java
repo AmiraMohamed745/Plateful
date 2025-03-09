@@ -10,10 +10,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
-/**
- * The GoogleSignInClient is deprecated.
- * Use Credential Manager for authentication or Google Identity Services for authorization.
- */
+
 public class GoogleSignInHelper {
 
     private final GoogleSignInClient googleSignInClient;
@@ -42,6 +39,6 @@ public class GoogleSignInHelper {
 
     public void signOutGoogleAccount() {
         googleSignInClient.signOut();
-        googleSignInClient.revokeAccess(); // so that the dialog chooser appears again after a user has signed out
+        googleSignInClient.revokeAccess();
     }
 }

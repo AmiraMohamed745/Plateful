@@ -1,5 +1,7 @@
 package com.example.plateful.home.view;
 
+import static android.view.View.VISIBLE;
+
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.plateful.R;
 import com.example.plateful.model.Meal;
+import com.example.plateful.model.SessionManager;
 import com.example.plateful.utils.DestinationNavigator;
 
 import java.util.ArrayList;
@@ -59,8 +62,16 @@ public class DailyInspirationAdapter extends RecyclerView.Adapter<DailyInspirati
             holder.imageButtonAddToFavorite.setImageResource(R.drawable.ic_outlined_heart);
         }
         holder.imageButtonAddToFavorite.setOnClickListener(view -> {
-            view.setClickable(true);
-            onAddToFavoriteClickListener.onAddToFavoriteImageButtonClicked(meal);
+            SessionManager sessionManager = new SessionManager(context);
+            if(sessionManager.isGuestMode()) {
+                holder.textViewCannotAddToFavorite.setVisibility(View.VISIBLE);
+                holder.imageButtonAddToFavorite.setVisibility(View.GONE);
+            } else {
+                view.setClickable(true);
+                holder.textViewCannotAddToFavorite.setVisibility(View.GONE);
+                onAddToFavoriteClickListener.onAddToFavoriteImageButtonClicked(meal);
+            }
+
         });
         holder.textView_MealName.setOnClickListener(view -> {
             DestinationNavigator.navigateToMealDetailsScreen(view, meal);
@@ -93,6 +104,7 @@ public class DailyInspirationAdapter extends RecyclerView.Adapter<DailyInspirati
         public ImageView imageViewMealImage;
         public ImageButton imageButtonAddToFavorite;
         public TextView textView_MealName;
+        public  TextView textViewCannotAddToFavorite;
         public Button buttonAddToPlan;
         public ConstraintLayout constraintLayoutDailyInspiration;
         public View layout;
@@ -104,6 +116,7 @@ public class DailyInspirationAdapter extends RecyclerView.Adapter<DailyInspirati
             imageViewMealImage = view.findViewById(R.id.imageView_Meal_Image);
             imageButtonAddToFavorite = view.findViewById(R.id.imageButton_add_to_favorite_icon);
             textView_MealName = view.findViewById(R.id.textView_Meal_Name);
+            textViewCannotAddToFavorite = view.findViewById(R.id.textView_CannotAddToFavorite);
             buttonAddToPlan = view.findViewById(R.id.button_Add_To_Plan);
             constraintLayoutDailyInspiration = view.findViewById(R.id.constraintLayout_DailyInspiration);
         }

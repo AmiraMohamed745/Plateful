@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.plateful.R;
 import com.example.plateful.database.MealLocalDataSourceImpl;
 import com.example.plateful.model.MealRepositoryImpl;
+import com.example.plateful.model.SessionManager;
 import com.example.plateful.utils.AlertDialogMessage;
 import com.example.plateful.weeklyplan.model.PlannedMeal;
 import com.example.plateful.weeklyplan.presenter.WeeklyPlanScreenPresenter;
@@ -35,6 +36,7 @@ public class WeeklyPlanScreen extends Fragment implements WeeklyPlanScreenView, 
     private ImageView imageViewProfile;
 
     private TextView textViewDateChosen;
+    private TextView textViewNoPlansAvailableForGuestMode;
 
     private ChipGroup chipGroupDays;
 
@@ -67,6 +69,7 @@ public class WeeklyPlanScreen extends Fragment implements WeeklyPlanScreenView, 
         imageViewProfile = view.findViewById(R.id.imageView_ic_profile_photo);
 
         textViewDateChosen = view.findViewById(R.id.textView_DateChosen);
+        textViewNoPlansAvailableForGuestMode = view.findViewById(R.id.textView_NoPlansAvailableForGuest);
 
         chipGroupDays = view.findViewById(R.id.chipGroupDays);
 
@@ -76,6 +79,7 @@ public class WeeklyPlanScreen extends Fragment implements WeeklyPlanScreenView, 
 
         setUpPresenter();
         setUpWeeklyPlanAdapter();
+        isGuestMode();
 
         chipGroupDays.setOnCheckedStateChangeListener((group, checkedIds) -> {
 
@@ -146,6 +150,14 @@ public class WeeklyPlanScreen extends Fragment implements WeeklyPlanScreenView, 
     @Override
     public void showErrorMessage(String errorMessage) {
         AlertDialogMessage.makeAlertDialog(errorMessage, requireContext());
+    }
+
+    private void isGuestMode() {
+        SessionManager sessionManager = new SessionManager(requireContext());
+        if (sessionManager.isGuestMode()) {
+            textViewNoPlansAvailableForGuestMode.setVisibility(View.VISIBLE);
+            chipGroupDays.setVisibility(View.GONE);
+        }
     }
 
     @Override

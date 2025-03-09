@@ -18,6 +18,7 @@ import com.example.plateful.R;
 import com.example.plateful.authentication.socialaccountsignin.model.GoogleSignInHelper;
 import com.example.plateful.authentication.socialaccountsignin.presenter.WelcomeScreenPresenter;
 import com.example.plateful.authentication.socialaccountsignin.presenter.WelcomeScreenPresenterImpl;
+import com.example.plateful.model.SessionManager;
 import com.example.plateful.utils.DestinationNavigator;
 
 
@@ -71,15 +72,24 @@ public class WelcomeScreen extends Fragment implements WelcomeScreenClickListene
         GoogleSignInHelper googleSignInHelper = new GoogleSignInHelper(requireContext(), webClientId);
         presenter = new WelcomeScreenPresenterImpl(this, this, googleSignInHelper);
 
-        buttonContinueWithGoogle.setOnClickListener(v -> presenter.onGoogleSignInButtonClicked());
+        buttonContinueWithGoogle.setOnClickListener(v -> {
+            presenter.onGoogleSignInButtonClicked();
+            SessionManager sessionManager = new SessionManager(requireContext());
+            sessionManager.setGuestMode(false);
+        });
         buttonSignUpWithEmail.setOnClickListener(onButtonSignUpWithEmail -> onSignUpWithEmail());
         textViewAlreadyHaveAnAccount.setOnClickListener(onLoginText -> onAlreadyHaveAnAccountLogIn());
+        buttonSignInAsGuest.setOnClickListener(view1 -> {
+            presenter.onSignInAsGuestButtonClicked(requireContext());
+            DestinationNavigator.navigateToHomeScreen(requireView());
+        });
     }
 
     @Override
     public void launchGoogleSignInIntent(Intent signInIntent) {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -99,10 +109,10 @@ public class WelcomeScreen extends Fragment implements WelcomeScreenClickListene
         DestinationNavigator.navigateToSignUpScreen(requireView());
     }
 
-    @Override
+/*    @Override
     public void onSignInAsGuest() {
         // Not handled
-    }
+    }*/
 
     @Override
     public void onSuccessfulGoogleSignIn() {
@@ -113,4 +123,5 @@ public class WelcomeScreen extends Fragment implements WelcomeScreenClickListene
     public void onAlreadyHaveAnAccountLogIn() {
         DestinationNavigator.navigateToSignInScreen(requireView());
     }
+
 }

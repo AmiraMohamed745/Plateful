@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clickable="false">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView_DailyInspiration"
@@ -19,6 +20,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="8dp">
 
+
             <ImageView
                 android:id="@+id/imageView_Meal_Image"
                 android:layout_width="0dp"
@@ -30,6 +32,21 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView_CannotAddToFavorite"
+                style="@style/SubTitle_2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/no_internet_banner"
+                android:gravity="center"
+                android:text="Guests can't add meals to favorites."
+                android:textColor="@color/white"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageButton
                 android:id="@+id/imageButton_add_to_favorite_icon"
