@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +25,7 @@ import com.example.plateful.details.presenter.MealDetailsScreenPresenterImpl;
 import com.example.plateful.model.Meal;
 import com.example.plateful.model.MealRepository;
 import com.example.plateful.model.MealRepositoryImpl;
+import com.example.plateful.model.SessionManager;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -126,6 +128,15 @@ public class MealDetailsScreen extends Fragment {
         setUpIngredientsAdapter();
         displayMealDetails(meal);
 
+        SessionManager sessionManager = new SessionManager(requireContext());
+        if (sessionManager.isGuestMode()) {
+            buttonAddToFavorites.setEnabled(false);
+            buttonAddToFavorites.setBackgroundColor(ContextCompat.getColor(requireContext(),
+                    R.color.hintTextColor));
+            buttonAddToPlan.setEnabled(false);
+            buttonAddToPlan.setBackgroundColor(ContextCompat.getColor(requireContext(),
+                    R.color.hintTextColor));
+        }
         buttonAddToPlan.setOnClickListener(view1 -> {
             showDatePicker(meal);
         });

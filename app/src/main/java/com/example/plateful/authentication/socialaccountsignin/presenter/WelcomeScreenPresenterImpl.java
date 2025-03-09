@@ -1,5 +1,6 @@
 package com.example.plateful.authentication.socialaccountsignin.presenter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
@@ -13,15 +14,12 @@ import com.example.plateful.authentication.model.UserRepositoryImpl;
 import com.example.plateful.authentication.socialaccountsignin.model.GoogleSignInHelper;
 import com.example.plateful.authentication.socialaccountsignin.view.WelcomeScreenClickListeners;
 import com.example.plateful.authentication.socialaccountsignin.view.WelcomeScreenView;
+import com.example.plateful.model.SessionManager;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-/**
- * The presenter layer shouldn't usually have access to any Android-specific elements
- * like Intent, Context, etc.
- */
 public class WelcomeScreenPresenterImpl implements WelcomeScreenPresenter{
 
     // For debugging
@@ -47,10 +45,12 @@ public class WelcomeScreenPresenterImpl implements WelcomeScreenPresenter{
         welcomeScreenView.launchGoogleSignInIntent(signInIntent);
     }
 
-    /**
-     * Google-sign-in is treated as a normal registration process where user data is
-     * save to the database so that the information is displayed on the profile screen
-     */
+    @Override
+    public void onSignInAsGuestButtonClicked(Context context) {
+        SessionManager sessionManager = new SessionManager(context);
+        sessionManager.setGuestMode(true);
+    }
+
     @Override
     public void handleGoogleSignInResult(Intent data) {
         try {
