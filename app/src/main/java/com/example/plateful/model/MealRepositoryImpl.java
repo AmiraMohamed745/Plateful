@@ -1,5 +1,6 @@
 package com.example.plateful.model;
 
+import com.example.plateful.authentication.signout.model.MealCloudDataSource;
 import com.example.plateful.database.MealLocalDataSource;
 import com.example.plateful.home.model.Cuisine;
 import com.example.plateful.home.model.CuisineResponse;
@@ -21,18 +22,20 @@ public class MealRepositoryImpl implements MealRepository {
 
     private static final String TAG = MealRepositoryImpl.class.getSimpleName();
 
-    private MealRemoteDataSource mealRemoteDataSource;
-    private MealLocalDataSource mealLocalDataSource;
+    private final MealRemoteDataSource mealRemoteDataSource;
+    private final MealLocalDataSource mealLocalDataSource;
+    private final MealCloudDataSource mealCloudDataSource;
     private static MealRepositoryImpl mealRepositoryImplInstance = null;
 
-    private MealRepositoryImpl(MealRemoteDataSource mealRemoteDataSource, MealLocalDataSource mealLocalDataSource) {
+    private MealRepositoryImpl(MealRemoteDataSource mealRemoteDataSource, MealLocalDataSource mealLocalDataSource, MealCloudDataSource mealCloudDataSource ) {
         this.mealRemoteDataSource = mealRemoteDataSource;
         this.mealLocalDataSource = mealLocalDataSource;
+        this.mealCloudDataSource = mealCloudDataSource;
     }
 
-    public static MealRepositoryImpl getInstance(MealRemoteDataSource mealRemoteDataSource, MealLocalDataSource mealLocalDataSource) {
+    public static MealRepositoryImpl getInstance(MealRemoteDataSource mealRemoteDataSource, MealLocalDataSource mealLocalDataSource, MealCloudDataSource mealCloudDataSource) {
         if (mealRepositoryImplInstance == null) {
-            mealRepositoryImplInstance = new MealRepositoryImpl(mealRemoteDataSource, mealLocalDataSource);
+            mealRepositoryImplInstance = new MealRepositoryImpl(mealRemoteDataSource, mealLocalDataSource, mealCloudDataSource);
         }
         return mealRepositoryImplInstance;
     }
@@ -86,8 +89,8 @@ public class MealRepositoryImpl implements MealRepository {
     }
 
     @Override
-    public Flowable<List<Meal>> fetchStoredFavoriteMeals() {
-        return mealLocalDataSource.getStoredFavoriteMeals()
+    public Flowable<List<Meal>> fetchStoredFavoriteMeals(String uerId) {
+        return mealLocalDataSource.getStoredFavoriteMeals(uerId)
                 .compose(RXSchedulers.applySchedulersFlowable());
     }
 
@@ -104,8 +107,13 @@ public class MealRepositoryImpl implements MealRepository {
     }
 
     @Override
-    public Flowable<List<PlannedMeal>> fetchPlannedMealsForDate(long date) {
-        return mealLocalDataSource.getMealPlansForDate(date);
+    public Flowable<List<PlannedMeal>> fetchPlannedMealsForDate(long date, String uerId) {
+        return mealLocalDataSource.getMealPlansForDate(date, uerId);
+    }
+
+    @Override
+    public Flowable<List<PlannedMeal>> fetchAllPlannedMeals(String uerId) {
+        return mealLocalDataSource.getAllMealPlans(uerId);
     }
 
     @Override
@@ -117,4 +125,36 @@ public class MealRepositoryImpl implements MealRepository {
     public Completable deletePlannedMeal(PlannedMeal plannedMeal) {
         return mealLocalDataSource.deleteMealFromPlan(plannedMeal);
     }
+
+    @Override
+    public Completable backUpFavoriteMeals(List<Meal> favoriteMeals) {
+        return mealCloudDataSource.backUpFavoriteMeals(favoriteMeals);
+    }
+
+    @Override
+    public Completable backUpPlannedMeals(List<PlannedMeal> plannedMeals) {
+        return mealCloudDataSource.backUpPlannedMeals(plannedMeals);
+    }
+
+    @Override
+    public Completable deleteFavoriteMealFromBackup(Meal favoriteMeal) {
+        return mealCloudDataSource.deleteFavoriteMealFromBackup(favoriteMeal);
+    }
+
+    @Override
+    public Completable deletePlannedMealFromBackup(PlannedMeal plannedMeal) {
+        return mealCloudDataSource.deletePlannedMealFromBackup(plannedMeal);
+    }
+
+    @Override
+    public Single<List<Meal>> provideBackedUpFavoriteMeals() {
+        return mealCloudDataSource.provideBackedUpFavoriteMeals();
+    }
+
+    @Override
+    public Single<List<PlannedMeal>> provideBackedUpPlannedMeals() {
+        return mealCloudDataSource.provideBackedUpPlannedMeals();
+    }
+
+
 }

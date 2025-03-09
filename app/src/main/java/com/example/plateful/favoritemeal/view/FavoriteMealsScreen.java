@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.plateful.R;
+import com.example.plateful.authentication.signout.model.MealCloudDataSourceImpl;
 import com.example.plateful.database.MealLocalDataSource;
 import com.example.plateful.database.MealLocalDataSourceImpl;
 import com.example.plateful.favoritemeal.presenter.FavoriteMealsScreenPresenter;
@@ -28,6 +29,7 @@ import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.MealRemoteDataSourceImpl;
 import com.example.plateful.utils.AlertDialogMessage;
 import com.example.plateful.utils.DestinationNavigator;
+import com.example.plateful.utils.UserSession;
 
 import java.util.List;
 
@@ -45,9 +47,11 @@ public class FavoriteMealsScreen extends Fragment implements FavoriteMealsScreen
     private FavoriteMealsScreenPresenter favoriteMealsScreenPresenter;
 
     private void setUpPresenter() {
-        MealRemoteDataSource mealRemoteDataSource = new MealRemoteDataSourceImpl(requireContext());
-        MealLocalDataSource mealLocalDataSource = MealLocalDataSourceImpl.getInstance(requireContext());
-        MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource, mealLocalDataSource);
+        MealRepository mealRepository = MealRepositoryImpl.getInstance(
+                new MealRemoteDataSourceImpl(requireContext()),
+                MealLocalDataSourceImpl.getInstance(requireContext()),
+                new MealCloudDataSourceImpl()
+        );
         favoriteMealsScreenPresenter = new FavoriteMealsScreenPresenterImpl(this, mealRepository);
     }
 

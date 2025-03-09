@@ -1,4 +1,4 @@
-package com.example.plateful.splashscreen.view;
+package com.example.plateful.splashscreen;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

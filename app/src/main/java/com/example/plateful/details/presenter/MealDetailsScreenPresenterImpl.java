@@ -6,6 +6,7 @@ import com.example.plateful.favoritemeal.presenter.FavoriteMealsScreenPresenterI
 import com.example.plateful.model.Meal;
 import com.example.plateful.model.MealRepository;
 import com.example.plateful.network.RXSchedulers;
+import com.example.plateful.utils.UserSession;
 import com.example.plateful.weeklyplan.model.PlannedMeal;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -24,7 +25,8 @@ public class MealDetailsScreenPresenterImpl implements MealDetailsScreenPresente
 
     @Override
     public void addMealToPlan(Meal meal, long date) {
-        PlannedMeal plannedMeal = new PlannedMeal(meal.getIdMeal(), date, meal.getName(), meal.getImageUrl());
+        PlannedMeal plannedMeal = new PlannedMeal(meal.getIdMeal(), meal.getUserId(), date, meal.getName(), meal.getImageUrl());
+        plannedMeal.setUserId(UserSession.getCurrentUserId());
         compositeDisposable.add(
                 mealRepository.insertPlannedMeal(plannedMeal)
                         .compose(RXSchedulers.applySchedulersCompletable())

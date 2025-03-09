@@ -15,10 +15,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.plateful.R;
+import com.example.plateful.authentication.signout.model.MealCloudDataSourceImpl;
 import com.example.plateful.authentication.socialaccountsignin.model.GoogleSignInHelper;
 import com.example.plateful.authentication.socialaccountsignin.presenter.WelcomeScreenPresenter;
 import com.example.plateful.authentication.socialaccountsignin.presenter.WelcomeScreenPresenterImpl;
+import com.example.plateful.database.MealLocalDataSourceImpl;
+import com.example.plateful.model.MealRepositoryImpl;
 import com.example.plateful.model.SessionManager;
+import com.example.plateful.network.MealRemoteDataSourceImpl;
 import com.example.plateful.utils.DestinationNavigator;
 
 
@@ -70,7 +74,15 @@ public class WelcomeScreen extends Fragment implements WelcomeScreenClickListene
 
         String webClientId = "611080036624-fbcvsud6if4ejq93mp0438ob9u74upfd.apps.googleusercontent.com";
         GoogleSignInHelper googleSignInHelper = new GoogleSignInHelper(requireContext(), webClientId);
-        presenter = new WelcomeScreenPresenterImpl(this, this, googleSignInHelper);
+        presenter = new WelcomeScreenPresenterImpl(
+                this,
+                this,
+                googleSignInHelper,
+                MealRepositoryImpl.getInstance(
+                        new MealRemoteDataSourceImpl(requireContext()),
+                        MealLocalDataSourceImpl.getInstance(requireContext()),
+                        new MealCloudDataSourceImpl())
+        );
 
         buttonContinueWithGoogle.setOnClickListener(v -> {
             presenter.onGoogleSignInButtonClicked();
@@ -109,10 +121,6 @@ public class WelcomeScreen extends Fragment implements WelcomeScreenClickListene
         DestinationNavigator.navigateToSignUpScreen(requireView());
     }
 
-/*    @Override
-    public void onSignInAsGuest() {
-        // Not handled
-    }*/
 
     @Override
     public void onSuccessfulGoogleSignIn() {
@@ -122,6 +130,12 @@ public class WelcomeScreen extends Fragment implements WelcomeScreenClickListene
     @Override
     public void onAlreadyHaveAnAccountLogIn() {
         DestinationNavigator.navigateToSignInScreen(requireView());
+    }
+
+    @Override
+    public void onDestroyView() {
+        presenter.cleanUpDisposables();
+        super.onDestroyView();
     }
 
 }

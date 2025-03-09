@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.plateful.R;
+import com.example.plateful.authentication.signout.model.MealCloudDataSourceImpl;
 import com.example.plateful.database.MealLocalDataSourceImpl;
 import com.example.plateful.details.model.Ingredient;
 import com.example.plateful.details.presenter.MealDetailsScreenPresenter;
@@ -26,6 +27,8 @@ import com.example.plateful.model.Meal;
 import com.example.plateful.model.MealRepository;
 import com.example.plateful.model.MealRepositoryImpl;
 import com.example.plateful.model.SessionManager;
+import com.example.plateful.network.MealRemoteDataSourceImpl;
+import com.example.plateful.utils.UserSession;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -65,7 +68,12 @@ public class MealDetailsScreen extends Fragment {
     private MealDetailsScreenPresenter mealDetailsScreenPresenter;
 
     private void setUpPresenter() {
-        mealDetailsScreenPresenter = new MealDetailsScreenPresenterImpl(MealRepositoryImpl.getInstance(null, MealLocalDataSourceImpl.getInstance(requireContext())));
+        mealDetailsScreenPresenter = new MealDetailsScreenPresenterImpl(
+                MealRepositoryImpl.getInstance(
+                        new MealRemoteDataSourceImpl(requireContext()),
+                        MealLocalDataSourceImpl.getInstance(requireContext()),
+                        new MealCloudDataSourceImpl()
+                ));
     }
 
     @Override

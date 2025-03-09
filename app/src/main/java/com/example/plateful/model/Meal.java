@@ -19,6 +19,9 @@ public class Meal implements Parcelable {
     @SerializedName("idMeal")
     private String idMeal;
 
+    @ColumnInfo(name = "user_id")
+    private String userId;
+
     @ColumnInfo(name = "name")
     @SerializedName("strMeal")
     private String name;
@@ -210,9 +213,10 @@ public class Meal implements Parcelable {
     public Meal() {
     }
 
-    public Meal(String idMeal, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, Object strIngredient16, Object strIngredient17, Object strIngredient18, Object strIngredient19, Object strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, Object strMeasure16, Object strMeasure17, Object strMeasure18, Object strMeasure19, Object strMeasure20, boolean isFavorite) {
+    public Meal(String idMeal, String userId, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, Object strIngredient16, Object strIngredient17, Object strIngredient18, Object strIngredient19, Object strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, Object strMeasure16, Object strMeasure17, Object strMeasure18, Object strMeasure19, Object strMeasure20, boolean isFavorite) {
         super();
         this.idMeal = idMeal;
+        this.userId = userId;
         this.name = strMeal;
         this.category = strCategory;
         this.cuisine = strArea;
@@ -321,6 +325,14 @@ public class Meal implements Parcelable {
 
     public void setIdMeal(String idMeal) {
         this.idMeal = idMeal;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getName() {

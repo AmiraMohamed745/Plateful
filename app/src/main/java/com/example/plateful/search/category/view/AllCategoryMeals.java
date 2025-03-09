@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.plateful.R;
+import com.example.plateful.authentication.signout.model.MealCloudDataSourceImpl;
+import com.example.plateful.database.MealLocalDataSourceImpl;
 import com.example.plateful.model.Meal;
 import com.example.plateful.model.MealRepository;
 import com.example.plateful.model.MealRepositoryImpl;
@@ -23,6 +25,7 @@ import com.example.plateful.search.category.presenter.AllCategoryMealsPresenter;
 import com.example.plateful.search.category.presenter.AllCategoryMealsPresenterImpl;
 import com.example.plateful.utils.AlertDialogMessage;
 import com.example.plateful.utils.DestinationNavigator;
+import com.example.plateful.utils.UserSession;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
@@ -38,9 +41,12 @@ public class AllCategoryMeals extends Fragment implements AllCategoryMealsView{
     private AllCategoryMealsPresenter allCategoryMealsPresenter;
 
     private void setUpPresenter() {
-        MealRemoteDataSource mealRemoteDataSource = new MealRemoteDataSourceImpl(requireContext());
-        MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource, null);
-        allCategoryMealsPresenter = new AllCategoryMealsPresenterImpl((AllCategoryMealsView) this, mealRepository);
+        MealRepository mealRepository = MealRepositoryImpl.getInstance(
+                new MealRemoteDataSourceImpl(requireContext()),
+                MealLocalDataSourceImpl.getInstance(requireContext()),
+                new MealCloudDataSourceImpl()
+        );
+        allCategoryMealsPresenter = new AllCategoryMealsPresenterImpl(this, mealRepository);
     }
 
     @Override

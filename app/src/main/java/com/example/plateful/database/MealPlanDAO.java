@@ -23,6 +23,9 @@ public interface MealPlanDAO {
     @Delete
     Completable deletePlannedMeal(PlannedMeal plannedMeal);
 
-    @Query("SELECT * FROM meal_plan_table WHERE planned_date = :date")
-    Flowable<List<PlannedMeal>> getMealPlansForDate(long date);
+    @Query("SELECT * FROM meal_plan_table WHERE planned_date = :date AND user_id = :userId")
+    Flowable<List<PlannedMeal>> getMealPlansForDate(long date, String userId);
+
+    @Query("SELECT * FROM meal_plan_table WHERE user_id = :userId")
+    Flowable<List<PlannedMeal>> getAllMealPlans(String userId);
 }

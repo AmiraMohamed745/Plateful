@@ -10,7 +10,7 @@ import androidx.room.TypeConverters;
 import com.example.plateful.model.Meal;
 import com.example.plateful.weeklyplan.model.PlannedMeal;
 
-@Database(entities = {Meal.class, PlannedMeal.class}, version = 3)
+@Database(entities = {Meal.class, PlannedMeal.class}, version = 7)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 

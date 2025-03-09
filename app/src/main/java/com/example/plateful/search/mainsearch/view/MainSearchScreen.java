@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.plateful.R;
+import com.example.plateful.authentication.signout.model.MealCloudDataSourceImpl;
+import com.example.plateful.database.MealLocalDataSourceImpl;
 import com.example.plateful.model.MealRepository;
 import com.example.plateful.model.MealRepositoryImpl;
 import com.example.plateful.network.MealRemoteDataSource;
@@ -24,6 +26,7 @@ import com.example.plateful.search.mainsearch.presenter.MainSearchScreenPresente
 import com.example.plateful.search.mainsearch.presenter.MainSearchScreenPresenterImpl;
 import com.example.plateful.utils.AlertDialogMessage;
 import com.example.plateful.utils.DestinationNavigator;
+import com.example.plateful.utils.UserSession;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
@@ -44,9 +47,13 @@ public class MainSearchScreen extends Fragment implements MainSearchScreenView {
     private MainSearchScreenPresenter mainSearchScreenPresenter;
 
     private void setUpPresenter() {
-        MealRemoteDataSource mealRemoteDataSource = new MealRemoteDataSourceImpl(requireContext());
-        MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource, null);
-        mainSearchScreenPresenter = new MainSearchScreenPresenterImpl(this, mealRepository);
+        MealRepository mealRepository = MealRepositoryImpl.getInstance(
+                new MealRemoteDataSourceImpl(requireContext()),
+                MealLocalDataSourceImpl.getInstance(requireContext()/*, UserSession.getCurrentUserId()*/),
+                new MealCloudDataSourceImpl()
+        );
+        mainSearchScreenPresenter = new MainSearchScreenPresenterImpl(
+                this, mealRepository);
     }
 
     @Override

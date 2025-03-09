@@ -12,6 +12,15 @@ import com.example.plateful.authentication.signin.view.SignInScreenView;
 import com.example.plateful.authentication.signup.model.SignUpAuthenticationData;
 import com.example.plateful.authentication.utils.InputValidator;
 import com.example.plateful.authentication.utils.StringTrimmer;
+import com.example.plateful.model.Meal;
+import com.example.plateful.model.MealRepository;
+import com.example.plateful.network.RXSchedulers;
+import com.example.plateful.utils.UserSession;
+import com.example.plateful.weeklyplan.model.PlannedMeal;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
 public class SignInScreenPresenterImpl implements SignInScreenPresenter {
@@ -19,12 +28,15 @@ public class SignInScreenPresenterImpl implements SignInScreenPresenter {
     // For debugging
     private static final String TAG = SignInScreenPresenterImpl.class.getSimpleName();
 
-    private SignInScreenView signinScreenView;
-    private AuthenticationRepository authenticationRepository;
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final SignInScreenView signinScreenView;
+    private final AuthenticationRepository authenticationRepository;
+    private final MealRepository mealRepository;
 
-    public SignInScreenPresenterImpl(SignInScreenView signinScreenView) {
+    public SignInScreenPresenterImpl(SignInScreenView signinScreenView, MealRepository mealRepository) {
         this.signinScreenView = signinScreenView;
         this.authenticationRepository = new AuthenticationRepositoryImpl();
+        this.mealRepository = mealRepository;
     }
 
     private void trimData(SignInAuthenticationData data) {
@@ -54,6 +66,8 @@ public class SignInScreenPresenterImpl implements SignInScreenPresenter {
         authenticationRepository.signInUser(data.getEmail(), data.getPassword(), new AuthenticationCallBack() {
             @Override
             public void onSuccess(String userId) {
+                restoreUserBackUpOfFavoriteMeal();
+                restoreUserBackUpOfPlannedMeal();
                 signinScreenView.onUserSignedIn();
             }
 
@@ -71,6 +85,47 @@ public class SignInScreenPresenterImpl implements SignInScreenPresenter {
             return;
         }
         signInUser(data);
+    }
+
+    @Override
+    public void restoreUserBackUpOfFavoriteMeal() {
+        compositeDisposable.add(
+                mealRepository.provideBackedUpFavoriteMeals()
+                        .compose(RXSchedulers.applySchedulersSingle())
+                        .subscribe(
+                                backedUpMeals -> {
+                                    for (Meal meal : backedUpMeals) {
+                                        meal.setUserId(UserSession.getCurrentUserId());
+                                        mealRepository.insertMeal(meal)
+                                                .subscribe();
+                                    }
+                                },
+                                error -> signinScreenView.showError("Failed to restore favorite meals: " + error.getMessage())
+                        )
+        );
+    }
+
+    @Override
+    public void restoreUserBackUpOfPlannedMeal() {
+        compositeDisposable.add(
+                mealRepository.provideBackedUpPlannedMeals()
+                        .compose(RXSchedulers.applySchedulersSingle())
+                        .subscribe(
+                                backedUpPlannedMeals -> {
+                                    for (PlannedMeal plannedMeal : backedUpPlannedMeals) {
+                                        plannedMeal.setUserId(UserSession.getCurrentUserId());
+                                        mealRepository.insertPlannedMeal(plannedMeal)
+                                                .subscribe();
+                                    }
+                                },
+                                error -> signinScreenView.showError("Failed to restore planned meals: " + error.getMessage())
+                        )
+        );
+    }
+
+    @Override
+    public void cleanUpDisposables() {
+        compositeDisposable.clear();
     }
 
 }

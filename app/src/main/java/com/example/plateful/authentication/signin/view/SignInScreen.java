@@ -16,8 +16,12 @@ import com.example.plateful.R;
 import com.example.plateful.authentication.signin.model.SignInAuthenticationData;
 import com.example.plateful.authentication.signin.presenter.SignInScreenPresenter;
 import com.example.plateful.authentication.signin.presenter.SignInScreenPresenterImpl;
+import com.example.plateful.authentication.signout.model.MealCloudDataSourceImpl;
 import com.example.plateful.authentication.utils.EditableToStringConverter;
+import com.example.plateful.database.MealLocalDataSourceImpl;
+import com.example.plateful.model.MealRepositoryImpl;
 import com.example.plateful.model.SessionManager;
+import com.example.plateful.network.MealRemoteDataSourceImpl;
 import com.example.plateful.utils.DestinationNavigator;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -63,7 +67,13 @@ public class SignInScreen extends Fragment implements SignInScreenView{
 
         buttonSignIn = view.findViewById(R.id.button_signIn);
 
-        signInScreenPresenter = new SignInScreenPresenterImpl(this);
+        signInScreenPresenter = new SignInScreenPresenterImpl(
+                this,
+                MealRepositoryImpl.getInstance(
+                        new MealRemoteDataSourceImpl(requireContext()),
+                        MealLocalDataSourceImpl.getInstance(requireContext()),
+                        new MealCloudDataSourceImpl()
+                ));
 
         buttonSignIn.setOnClickListener(onSignUpButtonClicked -> {
             signInScreenPresenter.signIn(extractUserData());
@@ -92,5 +102,11 @@ public class SignInScreen extends Fragment implements SignInScreenView{
                 EditableToStringConverter.convertEditableToString(editTextPassword.getText())
         );
         return data;
+    }
+
+    @Override
+    public void onDestroyView() {
+        signInScreenPresenter.cleanUpDisposables();
+        super.onDestroyView();
     }
 }
