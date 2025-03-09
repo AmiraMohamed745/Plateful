@@ -95,6 +95,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="200dp" />
 
+    <Button
+        android:id="@+id/button_back_up_data"
+        style="@style/PrimaryButton"
+        android:layout_marginBottom="16dp"
+        android:text="@string/back_up_data"
+        app:layout_constraintBottom_toTopOf="@id/button_sign_out"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="39dp"

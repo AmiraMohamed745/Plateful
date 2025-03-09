@@ -60,6 +60,8 @@
     <string name="no_internet_connection">No internet connection!</string>
     <string name="no_favorite_meals_for_guest_mode">No favorite meals for guest mode.</string>
     <string name="no_plans_available_in_guest_mode">No plans available in guest mode.</string>
+    <string name="back_up_data">Back up data</string>
+    <string name="data_backed_up_successfully">Data backed up successfully!</string>
 
 
 </resources>
