@@ -3,6 +3,7 @@ package com.example.plateful.weeklyplan.model;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "meal_plan_table")
@@ -15,6 +16,9 @@ public class PlannedMeal {
     @ColumnInfo(name = "meal_id")
     private String mealId;
 
+    @ColumnInfo(name = "user_id")
+    private String userId;
+
     @ColumnInfo(name = "meal_name")
     private String mealName;
 
@@ -24,8 +28,13 @@ public class PlannedMeal {
     @ColumnInfo(name = "planned_date")
     private long plannedDate;
 
-    public PlannedMeal(@NonNull String mealId, long plannedDate, String mealName, String mealImageUrl) {
+    @Ignore
+    public PlannedMeal() {
+    }
+
+    public PlannedMeal(@NonNull String mealId, String userId, long plannedDate, String mealName, String mealImageUrl) {
         this.mealId = mealId;
+        this.userId = userId;
         this.plannedDate = plannedDate;
         this.mealName = mealName;
         this.mealImageUrl = mealImageUrl;
@@ -48,6 +57,14 @@ public class PlannedMeal {
 
     public void setMealId(@NonNull String mealId) {
         this.mealId = mealId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public long getPlannedDate() {
