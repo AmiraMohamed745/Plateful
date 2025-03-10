@@ -7,6 +7,7 @@ import com.example.plateful.home.view.HomeScreenView;
 import com.example.plateful.model.MealRepository;
 import com.example.plateful.network.RXSchedulers;
 import com.example.plateful.search.category.model.Category;
+import com.example.plateful.search.category.model.CategoryResponse;
 import com.example.plateful.search.ingredients.model.IngredientResponse;
 import com.example.plateful.search.mainsearch.view.MainSearchScreenView;
 
@@ -35,6 +36,8 @@ public class MainSearchScreenPresenterImpl implements MainSearchScreenPresenter 
     public void loadCategories() {
         compositeDisposable.add(
                 mealRepository.fetchMealCategories()
+                        .map(CategoryResponse::getCategories)
+                        .compose(RXSchedulers.applySchedulersSingle())
                         .subscribe(
                                 mainSearchScreenView::displayCategories,
                                 error -> mainSearchScreenView.showError(error.getMessage()))

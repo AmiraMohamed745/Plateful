@@ -2,6 +2,7 @@ package com.example.plateful.home.cuisines.presenter;
 
 import com.example.plateful.home.cuisines.view.ViewAllCuisinesScreenView;
 import com.example.plateful.home.model.Cuisine;
+import com.example.plateful.home.model.CuisineResponse;
 import com.example.plateful.home.presenter.CuisineImageMapper;
 import com.example.plateful.home.presenter.HomeScreenPresenterImpl;
 import com.example.plateful.home.view.HomeScreenView;
@@ -28,6 +29,7 @@ public class ViewAllCuisinesPresenterImpl implements ViewAllCuisinesPresenter{
     @Override
     public void loadCuisines() {
         compositeDisposable.add(mealRepository.fetchMealCuisines()
+                .map(CuisineResponse::getCuisines)
                 .map(cuisines -> {
                     for (Cuisine cuisine : cuisines) {
                         int imageRes = CuisineImageMapper.getImageForCuisine(cuisine.getCuisineName());

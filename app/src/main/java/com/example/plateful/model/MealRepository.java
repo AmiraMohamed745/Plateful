@@ -1,7 +1,9 @@
 package com.example.plateful.model;
 
 import com.example.plateful.home.model.Cuisine;
+import com.example.plateful.home.model.CuisineResponse;
 import com.example.plateful.search.category.model.Category;
+import com.example.plateful.search.category.model.CategoryResponse;
 import com.example.plateful.search.ingredients.model.IngredientResponse;
 import com.example.plateful.weeklyplan.model.PlannedMeal;
 
@@ -14,19 +16,19 @@ import io.reactivex.rxjava3.core.Single;
 public interface MealRepository {
 
     // For remote data source
-    Single<List<Meal>> fetchTenRandomMealsForDailyInspiration();
+    Single<MealResponse> fetchTenRandomMealsForDailyInspiration();
 
-    Single<List<Category>> fetchMealCategories();
+    Single<CategoryResponse> fetchMealCategories();
 
-    Single<List<Meal>> fetchMealsByCategory(String categoryName);
+    Single<MealResponse> fetchMealsByCategory(String categoryName);
 
-    Single<List<Meal>> fetchMealsByNameForCategory(String searchQuery, String categoryName);
+    Single<MealResponse> fetchMealsByNameForCategory(String searchQuery, String categoryName);
 
     Single<MealResponse> fetchMealsByNameForIngredient(String searchQuery, String ingredientName);
 
-    Single<List<Cuisine>> fetchMealCuisines();
+    Single<CuisineResponse> fetchMealCuisines();
 
-    Single<List<Meal>> fetchMealsByCuisine(String cuisineName);
+    Single<MealResponse> fetchMealsByCuisine(String cuisineName);
 
     Single<IngredientResponse> fetchAllIngredients();
 

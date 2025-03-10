@@ -41,40 +41,24 @@ public class MealRepositoryImpl implements MealRepository {
         return mealRepositoryImplInstance;
     }
 
-
     @Override
-    public Single<List<Meal>> fetchTenRandomMealsForDailyInspiration() {
-        return Observable.range(1, 10)
-                .flatMap(item -> mealRemoteDataSource.getRandomMeal().toObservable())
-                .map(mealResponse -> mealResponse.getMeals().get(0))
-                .toList()
-                .compose(RXSchedulers.applySchedulersSingle());
+    public Single<MealResponse> fetchTenRandomMealsForDailyInspiration() {
+        return mealRemoteDataSource.getRandomMeal();
     }
 
     @Override
-    public Single<List<Category>> fetchMealCategories() {
-        return mealRemoteDataSource.getAllCategories()
-                .map(CategoryResponse::getCategories)
-                .compose(RXSchedulers.applySchedulersSingle());
+    public Single<CategoryResponse> fetchMealCategories() {
+        return mealRemoteDataSource.getAllCategories();
     }
 
     @Override
-    public Single<List<Meal>> fetchMealsByCategory(String categoryName) {
-        return mealRemoteDataSource.getMealsByCategory(categoryName)
-                .map(MealResponse::getMeals)
-                .compose(RXSchedulers.applySchedulersSingle());
+    public Single<MealResponse> fetchMealsByCategory(String categoryName) {
+        return mealRemoteDataSource.getMealsByCategory(categoryName);
     }
 
     @Override
-    public Single<List<Meal>> fetchMealsByNameForCategory(String searchQuery, String categoryName) {
-        return mealRemoteDataSource.searchMealByName(searchQuery)
-                .map(
-                        mealResponse -> {
-                            return mealResponse.getMeals().stream()
-                                    .filter(meal -> meal.getCategory().equalsIgnoreCase(categoryName))
-                                    .collect(Collectors.toList());
-                        })
-                .compose(RXSchedulers.applySchedulersSingle());
+    public Single<MealResponse> fetchMealsByNameForCategory(String searchQuery, String categoryName) {
+        return mealRemoteDataSource.searchMealByName(searchQuery);
     }
 
     @Override
@@ -82,16 +66,16 @@ public class MealRepositoryImpl implements MealRepository {
         return mealRemoteDataSource.searchMealByName(searchQuery);
     }
 
-    @Override
-    public Single<List<Cuisine>> fetchMealCuisines() {
-        return mealRemoteDataSource.getAllCuisines("list")
-                .map(CuisineResponse::getCuisines);
-    }
 
     @Override
-    public Single<List<Meal>> fetchMealsByCuisine(String cuisineName) {
-        return mealRemoteDataSource.getMealsByCuisine(cuisineName)
-                .map(MealResponse::getMeals);
+    public Single<CuisineResponse> fetchMealCuisines() {
+        return mealRemoteDataSource.getAllCuisines("list");
+    }
+
+
+    @Override
+    public Single<MealResponse> fetchMealsByCuisine(String cuisineName) {
+        return mealRemoteDataSource.getMealsByCuisine(cuisineName);
     }
 
     @Override
@@ -106,20 +90,17 @@ public class MealRepositoryImpl implements MealRepository {
 
     @Override
     public Flowable<List<Meal>> fetchStoredFavoriteMeals(String uerId) {
-        return mealLocalDataSource.getStoredFavoriteMeals(uerId)
-                .compose(RXSchedulers.applySchedulersFlowable());
+        return mealLocalDataSource.getStoredFavoriteMeals(uerId);
     }
 
     @Override
     public Completable insertMeal(Meal meal) {
-        return mealLocalDataSource.insertMealIntoFavorites(meal)
-                .compose(RXSchedulers.applySchedulersCompletable());
+        return mealLocalDataSource.insertMealIntoFavorites(meal);
     }
 
     @Override
     public Completable deleteMeal(Meal meal) {
-        return mealLocalDataSource.deleteMealFromFavorites(meal)
-                .compose(RXSchedulers.applySchedulersCompletable());
+        return mealLocalDataSource.deleteMealFromFavorites(meal);
     }
 
     @Override
