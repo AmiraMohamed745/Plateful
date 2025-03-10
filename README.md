@@ -63,6 +63,7 @@ Plateful is an Android mobile application designed to help users efficiently pla
 
 
 ## **🎥 Demo Videos**
+https://vimeo.com/1064435076
 
 ## **🛠️ Tools Used**
 
