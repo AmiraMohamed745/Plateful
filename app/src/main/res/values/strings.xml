@@ -62,6 +62,8 @@
     <string name="no_plans_available_in_guest_mode">No plans available in guest mode.</string>
     <string name="back_up_data">Back up data</string>
     <string name="data_backed_up_successfully">Data backed up successfully!</string>
+    <string name="search_by_ingredients">Search by Ingredients</string>
+    <string name="search_by_ingredient">Search by Ingredient</string>
 
 
 </resources>
