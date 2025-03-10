@@ -3,6 +3,7 @@ package com.example.plateful.network;
 import com.example.plateful.home.model.CuisineResponse;
 import com.example.plateful.model.MealResponse;
 import com.example.plateful.search.category.model.CategoryResponse;
+import com.example.plateful.search.ingredients.model.IngredientResponse;
 
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.GET;
@@ -29,4 +30,9 @@ public interface MealService {
     @GET("filter.php")
     Single<MealResponse> getMealsByCuisine(@Query("a") String cuisineName);
 
+    @GET("list.php")
+    Single<IngredientResponse> getAllIngredients(@Query("i") String ingredientParameter);
+
+    @GET("filter.php")
+    Single<MealResponse> getMealsByIngredient(@Query("i") String ingredientName);
 }

@@ -14,6 +14,8 @@ import com.example.plateful.home.model.Cuisine;
 import com.example.plateful.model.Meal;
 import com.example.plateful.search.category.model.Category;
 import com.example.plateful.search.category.view.ViewAllCategoriesScreenDirections;
+import com.example.plateful.search.ingredients.model.Ingredient;
+import com.example.plateful.search.ingredients.view.ViewAllIngredientsScreenDirections;
 import com.example.plateful.search.view.SearchResultsScreenDirections;
 
 public class DestinationNavigator {
@@ -52,9 +54,9 @@ public class DestinationNavigator {
         Navigation.findNavController(view).navigate(action);
     }
 
-    public static void navigateToSearchResultsScreen(View view, Category category) {
+    public static void navigateToSearchResultsScreen(View view, Category category, Ingredient ingredient) {
         NavDirections action =
-                SearchResultsScreenDirections.actionGlobalSearchResultsScreen(category);
+                SearchResultsScreenDirections.actionGlobalSearchResultsScreen(category, ingredient);
         Navigation.findNavController(view).navigate(action);
     }
 
@@ -87,6 +89,16 @@ public class DestinationNavigator {
     public static void navigateToAllCuisineMealsScreen(View view, Cuisine cuisine) {
         ViewAllCuisinesScreenDirections.ActionViewAllCuisinesScreenToAllCuisineMealsScreen action =
                 ViewAllCuisinesScreenDirections.actionViewAllCuisinesScreenToAllCuisineMealsScreen(cuisine);
+        Navigation.findNavController(view).navigate(action);
+    }
+
+    public static void navigateToViewAllIngredientsScreen(View view) {
+        Navigation.findNavController(view).navigate(R.id.action_mainSearchScreen_to_viewAllIngredientsScreen);
+    }
+
+    public static void navigateToAllIngredientsMealsScreen(View view, Ingredient ingredient) {
+        ViewAllIngredientsScreenDirections.ActionViewAllIngredientsScreenToAllIngredientsMeals action =
+                ViewAllIngredientsScreenDirections.actionViewAllIngredientsScreenToAllIngredientsMeals(ingredient);
         Navigation.findNavController(view).navigate(action);
     }
 

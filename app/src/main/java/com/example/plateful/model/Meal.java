@@ -10,6 +10,9 @@ import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity(tableName = "meal_table")
 public class Meal implements Parcelable {
 
@@ -811,5 +814,25 @@ public class Meal implements Parcelable {
         parcel.writeString(strMeasure14);
         parcel.writeString(strMeasure15);
         parcel.writeByte((byte) (isFavorite ? 1 : 0));
+    }
+
+    public List<String> getIngredientList() {
+        List<String> ingredients = new ArrayList<>();
+        if (strIngredient1 != null && !strIngredient1.trim().isEmpty()) ingredients.add(strIngredient1);
+        if (strIngredient2 != null && !strIngredient2.trim().isEmpty()) ingredients.add(strIngredient2);
+        if (strIngredient3 != null && !strIngredient3.trim().isEmpty()) ingredients.add(strIngredient3);
+        if (strIngredient4 != null && !strIngredient4.trim().isEmpty()) ingredients.add(strIngredient4);
+        if (strIngredient5 != null && !strIngredient5.trim().isEmpty()) ingredients.add(strIngredient5);
+        if (strIngredient6 != null && !strIngredient6.trim().isEmpty()) ingredients.add(strIngredient6);
+        if (strIngredient7 != null && !strIngredient7.trim().isEmpty()) ingredients.add(strIngredient7);
+        if (strIngredient8 != null && !strIngredient8.trim().isEmpty()) ingredients.add(strIngredient8);
+        if (strIngredient9 != null && !strIngredient9.trim().isEmpty()) ingredients.add(strIngredient9);
+        if (strIngredient10 != null && !strIngredient10.trim().isEmpty()) ingredients.add(strIngredient10);
+        if (strIngredient11 != null && !strIngredient11.trim().isEmpty()) ingredients.add(strIngredient11);
+        if (strIngredient12 != null && !strIngredient12.trim().isEmpty()) ingredients.add(strIngredient12);
+        if (strIngredient13 != null && !strIngredient13.trim().isEmpty()) ingredients.add(strIngredient13);
+        if (strIngredient14 != null && !strIngredient14.trim().isEmpty()) ingredients.add(strIngredient14);
+        if (strIngredient15 != null && !strIngredient15.trim().isEmpty()) ingredients.add(strIngredient15);
+        return ingredients;
     }
 }

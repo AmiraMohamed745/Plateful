@@ -4,5 +4,6 @@ import java.util.List;
 
 public interface MainSearchScreenPresenter {
     void loadCategories();
+    void loadIngredients();
     void cleanUpDisposables();
 }

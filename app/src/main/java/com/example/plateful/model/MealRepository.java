@@ -2,6 +2,7 @@ package com.example.plateful.model;
 
 import com.example.plateful.home.model.Cuisine;
 import com.example.plateful.search.category.model.Category;
+import com.example.plateful.search.ingredients.model.IngredientResponse;
 import com.example.plateful.weeklyplan.model.PlannedMeal;
 
 import java.util.List;
@@ -19,11 +20,18 @@ public interface MealRepository {
 
     Single<List<Meal>> fetchMealsByCategory(String categoryName);
 
-    Single<List<Meal>> fetchMealsByName(String searchQuery, String categoryName);
+    Single<List<Meal>> fetchMealsByNameForCategory(String searchQuery, String categoryName);
+
+    Single<MealResponse> fetchMealsByNameForIngredient(String searchQuery, String ingredientName);
 
     Single<List<Cuisine>> fetchMealCuisines();
 
     Single<List<Meal>> fetchMealsByCuisine(String cuisineName);
+
+    Single<IngredientResponse> fetchAllIngredients();
+
+    Single<MealResponse> fetchMealsByIngredient(String ingredientName);
+
 
     // For local data source
     Flowable<List<Meal>> fetchStoredFavoriteMeals(String userId);

@@ -7,6 +7,7 @@ import com.example.plateful.home.model.CuisineResponse;
 import com.example.plateful.model.Meal;
 import com.example.plateful.model.MealResponse;
 import com.example.plateful.search.category.model.CategoryResponse;
+import com.example.plateful.search.ingredients.model.IngredientResponse;
 
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import io.reactivex.rxjava3.core.Single;
@@ -78,6 +79,16 @@ public class MealRemoteDataSourceImpl implements MealRemoteDataSource {
     @Override
     public Single<MealResponse> getMealsByCuisine(String cuisineName) {
         return mealService.getMealsByCuisine(cuisineName);
+    }
+
+    @Override
+    public Single<IngredientResponse> getAllIngredients() {
+        return mealService.getAllIngredients("list");
+    }
+
+    @Override
+    public Single<MealResponse> getMealsByIngredient(String ingredientName) {
+        return mealService.getMealsByIngredient(ingredientName);
     }
 
 
