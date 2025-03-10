@@ -86,14 +86,14 @@ public class HomeScreen extends Fragment implements HomeScreenView {
 
         recyclerViewDailyInspiration = view.findViewById(R.id.recyclerView_Daily_Inspiration);
         recyclerViewDailyInspiration.setHasFixedSize(true);
-        recyclerViewDailyInspiration.setNestedScrollingEnabled(false);
+        //recyclerViewDailyInspiration.setNestedScrollingEnabled(false);
         CarouselLayoutManager carouselLayoutManager = new CarouselLayoutManager();
         carouselLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
         recyclerViewDailyInspiration.setLayoutManager(carouselLayoutManager);
 
         recyclerViewBrowseCuisines = view.findViewById(R.id.recyclerView_Browse_Cuisines);
         recyclerViewBrowseCuisines.setHasFixedSize(true);
-        recyclerViewBrowseCuisines.setNestedScrollingEnabled(false);
+       // recyclerViewBrowseCuisines.setNestedScrollingEnabled(false);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 2);
         gridLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerViewBrowseCuisines.setLayoutManager(gridLayoutManager);

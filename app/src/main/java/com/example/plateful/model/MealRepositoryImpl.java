@@ -8,6 +8,7 @@ import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.RXSchedulers;
 import com.example.plateful.search.category.model.Category;
 import com.example.plateful.search.category.model.CategoryResponse;
+import com.example.plateful.search.ingredients.model.IngredientResponse;
 import com.example.plateful.weeklyplan.model.PlannedMeal;
 
 import java.util.List;
@@ -65,7 +66,7 @@ public class MealRepositoryImpl implements MealRepository {
     }
 
     @Override
-    public Single<List<Meal>> fetchMealsByName(String searchQuery, String categoryName) {
+    public Single<List<Meal>> fetchMealsByNameForCategory(String searchQuery, String categoryName) {
         return mealRemoteDataSource.searchMealByName(searchQuery)
                 .map(
                         mealResponse -> {
@@ -74,6 +75,11 @@ public class MealRepositoryImpl implements MealRepository {
                                     .collect(Collectors.toList());
                         })
                 .compose(RXSchedulers.applySchedulersSingle());
+    }
+
+    @Override
+    public Single<MealResponse> fetchMealsByNameForIngredient(String searchQuery, String ingredientName) {
+        return mealRemoteDataSource.searchMealByName(searchQuery);
     }
 
     @Override
@@ -86,6 +92,16 @@ public class MealRepositoryImpl implements MealRepository {
     public Single<List<Meal>> fetchMealsByCuisine(String cuisineName) {
         return mealRemoteDataSource.getMealsByCuisine(cuisineName)
                 .map(MealResponse::getMeals);
+    }
+
+    @Override
+    public Single<IngredientResponse> fetchAllIngredients() {
+        return mealRemoteDataSource.getAllIngredients();
+    }
+
+    @Override
+    public Single<MealResponse> fetchMealsByIngredient(String ingredientName) {
+        return mealRemoteDataSource.getMealsByIngredient(ingredientName);
     }
 
     @Override
