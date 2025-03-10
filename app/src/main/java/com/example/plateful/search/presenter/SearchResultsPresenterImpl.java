@@ -39,7 +39,15 @@ public class SearchResultsPresenterImpl implements SearchResultsPresenter {
                         .distinctUntilChanged()
                         .switchMap(query ->
                                 mealRepository.fetchMealsByNameForCategory(query, categoryName)
-                                        .toObservable())
+                                        .compose(RXSchedulers.applySchedulersSingle())
+                                        .toObservable()
+                                        .map(
+                                                mealResponse -> {
+                                                    return mealResponse.getMeals().stream()
+                                                            .filter(meal -> meal.getCategory().equalsIgnoreCase(categoryName))
+                                                            .collect(Collectors.toList());
+                                                })
+                        )
                         .subscribe(
                                 searchResultsScreenView::displaySearchResults,
                                 error -> searchResultsScreenView.showError(error.getMessage())

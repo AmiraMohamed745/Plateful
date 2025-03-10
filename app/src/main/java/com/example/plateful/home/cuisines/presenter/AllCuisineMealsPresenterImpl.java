@@ -2,6 +2,7 @@ package com.example.plateful.home.cuisines.presenter;
 
 import com.example.plateful.home.cuisines.view.AllCuisineMealsView;
 import com.example.plateful.model.MealRepository;
+import com.example.plateful.model.MealResponse;
 import com.example.plateful.network.RXSchedulers;
 import com.example.plateful.search.category.presenter.AllCategoryMealsPresenterImpl;
 import com.example.plateful.search.category.view.AllCategoryMealsView;
@@ -25,6 +26,7 @@ public class AllCuisineMealsPresenterImpl implements AllCuisineMealsPresenter {
     public void loadCuisineMeals(String cuisineName) {
         compositeDisposable.add(
                 mealRepository.fetchMealsByCuisine(cuisineName)
+                        .map(MealResponse::getMeals)
                         .compose(RXSchedulers.applySchedulersSingle())
                         .subscribe(
                                 allCuisineMealsView::displayCuisineMeals,
