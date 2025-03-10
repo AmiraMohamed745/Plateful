@@ -5,9 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,17 +16,14 @@ import com.example.plateful.R;
 import com.example.plateful.authentication.signin.model.SignInAuthenticationData;
 import com.example.plateful.authentication.signin.presenter.SignInScreenPresenter;
 import com.example.plateful.authentication.signin.presenter.SignInScreenPresenterImpl;
-import com.example.plateful.authentication.signup.model.SignUpAuthenticationData;
-import com.example.plateful.authentication.signup.pesenter.SignUpScreenPresenter;
-import com.example.plateful.authentication.signup.pesenter.SignUpScreenPresenterImpl;
+import com.example.plateful.authentication.signout.model.MealCloudDataSourceImpl;
 import com.example.plateful.authentication.utils.EditableToStringConverter;
-import com.example.plateful.view.DestinationNavigator;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.plateful.database.MealLocalDataSourceImpl;
+import com.example.plateful.model.MealRepositoryImpl;
+import com.example.plateful.model.SessionManager;
+import com.example.plateful.network.MealRemoteDataSourceImpl;
+import com.example.plateful.utils.DestinationNavigator;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 
 public class SignInScreen extends Fragment implements SignInScreenView{
@@ -72,10 +67,18 @@ public class SignInScreen extends Fragment implements SignInScreenView{
 
         buttonSignIn = view.findViewById(R.id.button_signIn);
 
-        signInScreenPresenter = new SignInScreenPresenterImpl(this);
+        signInScreenPresenter = new SignInScreenPresenterImpl(
+                this,
+                MealRepositoryImpl.getInstance(
+                        new MealRemoteDataSourceImpl(requireContext()),
+                        MealLocalDataSourceImpl.getInstance(requireContext()),
+                        new MealCloudDataSourceImpl()
+                ));
 
         buttonSignIn.setOnClickListener(onSignUpButtonClicked -> {
             signInScreenPresenter.signIn(extractUserData());
+            SessionManager sessionManager = new SessionManager(requireContext());
+            sessionManager.setGuestMode(false);
         });
     }
 
@@ -99,5 +102,11 @@ public class SignInScreen extends Fragment implements SignInScreenView{
                 EditableToStringConverter.convertEditableToString(editTextPassword.getText())
         );
         return data;
+    }
+
+    @Override
+    public void onDestroyView() {
+        signInScreenPresenter.cleanUpDisposables();
+        super.onDestroyView();
     }
 }

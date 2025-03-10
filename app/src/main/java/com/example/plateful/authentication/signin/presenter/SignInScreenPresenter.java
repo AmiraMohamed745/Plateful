@@ -5,4 +5,7 @@ import com.example.plateful.authentication.signup.model.SignUpAuthenticationData
 
 public interface SignInScreenPresenter {
     void signIn(SignInAuthenticationData data);
+    void restoreUserBackUpOfFavoriteMeal();
+    void restoreUserBackUpOfPlannedMeal();
+    void cleanUpDisposables();
 }

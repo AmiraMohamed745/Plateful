@@ -10,6 +10,9 @@ import androidx.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity(tableName = "meal_table")
 public class Meal implements Parcelable {
 
@@ -18,6 +21,9 @@ public class Meal implements Parcelable {
     @ColumnInfo(name = "id")
     @SerializedName("idMeal")
     private String idMeal;
+
+    @ColumnInfo(name = "user_id")
+    private String userId;
 
     @ColumnInfo(name = "name")
     @SerializedName("strMeal")
@@ -210,9 +216,10 @@ public class Meal implements Parcelable {
     public Meal() {
     }
 
-    public Meal(String idMeal, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, Object strIngredient16, Object strIngredient17, Object strIngredient18, Object strIngredient19, Object strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, Object strMeasure16, Object strMeasure17, Object strMeasure18, Object strMeasure19, Object strMeasure20, boolean isFavorite) {
+    public Meal(String idMeal, String userId, String strMeal, String strCategory, String strArea, String strInstructions, String strMealThumb, String strYoutube, String strIngredient1, String strIngredient2, String strIngredient3, String strIngredient4, String strIngredient5, String strIngredient6, String strIngredient7, String strIngredient8, String strIngredient9, String strIngredient10, String strIngredient11, String strIngredient12, String strIngredient13, String strIngredient14, String strIngredient15, Object strIngredient16, Object strIngredient17, Object strIngredient18, Object strIngredient19, Object strIngredient20, String strMeasure1, String strMeasure2, String strMeasure3, String strMeasure4, String strMeasure5, String strMeasure6, String strMeasure7, String strMeasure8, String strMeasure9, String strMeasure10, String strMeasure11, String strMeasure12, String strMeasure13, String strMeasure14, String strMeasure15, Object strMeasure16, Object strMeasure17, Object strMeasure18, Object strMeasure19, Object strMeasure20, boolean isFavorite) {
         super();
         this.idMeal = idMeal;
+        this.userId = userId;
         this.name = strMeal;
         this.category = strCategory;
         this.cuisine = strArea;
@@ -321,6 +328,14 @@ public class Meal implements Parcelable {
 
     public void setIdMeal(String idMeal) {
         this.idMeal = idMeal;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -799,5 +814,25 @@ public class Meal implements Parcelable {
         parcel.writeString(strMeasure14);
         parcel.writeString(strMeasure15);
         parcel.writeByte((byte) (isFavorite ? 1 : 0));
+    }
+
+    public List<String> getIngredientList() {
+        List<String> ingredients = new ArrayList<>();
+        if (strIngredient1 != null && !strIngredient1.trim().isEmpty()) ingredients.add(strIngredient1);
+        if (strIngredient2 != null && !strIngredient2.trim().isEmpty()) ingredients.add(strIngredient2);
+        if (strIngredient3 != null && !strIngredient3.trim().isEmpty()) ingredients.add(strIngredient3);
+        if (strIngredient4 != null && !strIngredient4.trim().isEmpty()) ingredients.add(strIngredient4);
+        if (strIngredient5 != null && !strIngredient5.trim().isEmpty()) ingredients.add(strIngredient5);
+        if (strIngredient6 != null && !strIngredient6.trim().isEmpty()) ingredients.add(strIngredient6);
+        if (strIngredient7 != null && !strIngredient7.trim().isEmpty()) ingredients.add(strIngredient7);
+        if (strIngredient8 != null && !strIngredient8.trim().isEmpty()) ingredients.add(strIngredient8);
+        if (strIngredient9 != null && !strIngredient9.trim().isEmpty()) ingredients.add(strIngredient9);
+        if (strIngredient10 != null && !strIngredient10.trim().isEmpty()) ingredients.add(strIngredient10);
+        if (strIngredient11 != null && !strIngredient11.trim().isEmpty()) ingredients.add(strIngredient11);
+        if (strIngredient12 != null && !strIngredient12.trim().isEmpty()) ingredients.add(strIngredient12);
+        if (strIngredient13 != null && !strIngredient13.trim().isEmpty()) ingredients.add(strIngredient13);
+        if (strIngredient14 != null && !strIngredient14.trim().isEmpty()) ingredients.add(strIngredient14);
+        if (strIngredient15 != null && !strIngredient15.trim().isEmpty()) ingredients.add(strIngredient15);
+        return ingredients;
     }
 }

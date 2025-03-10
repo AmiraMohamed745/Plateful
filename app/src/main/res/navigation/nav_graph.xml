@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeScreen">
+    app:startDestination="@id/splashScreen">
 
     <fragment
         android:id="@+id/signUpScreen"
@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_homeScreen_to_profileScreen"
             app:destination="@id/profileScreen" />
+        <action
+            android:id="@+id/action_homeScreen_to_viewAllCuisinesScreen"
+            app:destination="@id/viewAllCuisinesScreen" />
     </fragment>
 
 
@@ -75,11 +78,16 @@
         tools:layout="@layout/fragment_search_results_screen" >
         <argument
             android:name="category"
-            app:argType="com.example.plateful.search.category.model.Category" />
+            app:argType="com.example.plateful.search.category.model.Category"
+            app:nullable="true"/>
+        <argument
+            android:name="ingredient"
+            app:argType="com.example.plateful.search.ingredients.model.Ingredient"
+            app:nullable="true"/>
     </fragment>
     <fragment
         android:id="@+id/splashScreen"
-        android:name="com.example.plateful.splashscreen.view.SplashScreen"
+        android:name="com.example.plateful.splashscreen.SplashScreen"
         tools:layout="@layout/fragment_splash_screen">
         <action
             android:id="@+id/action_splashScreen_to_welcomeScreen"
@@ -98,6 +106,9 @@
         <action
             android:id="@+id/action_mainSearchScreen_to_viewAllCategoriesScreen"
             app:destination="@id/viewAllCategoriesScreen" />
+        <action
+            android:id="@+id/action_mainSearchScreen_to_viewAllIngredientsScreen"
+            app:destination="@id/viewAllIngredientsScreen" />
     </fragment>
     <fragment
         android:id="@+id/viewAllCategoriesScreen"
@@ -127,7 +138,7 @@
         tools:layout="@layout/fragment_favorite_meals_screen" />
     <fragment
         android:id="@+id/weeklyPlanScreen"
-        android:name="com.example.plateful.weeklyplan.WeeklyPlanScreen"
+        android:name="com.example.plateful.weeklyplan.view.WeeklyPlanScreen"
         android:label="fragment_weekly_plan_screen"
         tools:layout="@layout/fragment_weekly_plan_screen" />
     <action
@@ -151,5 +162,43 @@
     <action
         android:id="@+id/action_global_mealDetailsScreen"
         app:destination="@id/mealDetailsScreen" />
+    <fragment
+        android:id="@+id/viewAllCuisinesScreen"
+        android:name="com.example.plateful.home.cuisines.view.ViewAllCuisinesScreen"
+        android:label="fragment_view_all_cuisines_screen"
+        tools:layout="@layout/fragment_view_all_cuisines_screen" >
+        <action
+            android:id="@+id/action_viewAllCuisinesScreen_to_allCuisineMealsScreen"
+            app:destination="@id/allCuisineMealsScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/allCuisineMealsScreen"
+        android:name="com.example.plateful.home.cuisines.view.AllCuisineMealsScreen"
+        android:label="fragment_all_cuisine_meals_screen"
+        tools:layout="@layout/fragment_all_cuisine_meals_screen" >
+        <argument
+            android:name="cuisine"
+            app:argType="com.example.plateful.home.model.Cuisine" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewAllIngredientsScreen"
+        android:name="com.example.plateful.search.ingredients.view.ViewAllIngredientsScreen"
+        android:label="fragment_view_all_ingredients_screen"
+        tools:layout="@layout/fragment_view_all_ingredients_screen" >
+        <action
+            android:id="@+id/action_viewAllIngredientsScreen_to_allIngredientsMeals"
+            app:destination="@id/allIngredientsMeals" />
+    </fragment>
+    <fragment
+        android:id="@+id/allIngredientsMeals"
+        android:name="com.example.plateful.search.ingredients.view.AllIngredientsMeals"
+        android:label="fragment_all_ingredients_meals"
+        tools:layout="@layout/fragment_all_ingredients_meals" >
+        <argument android:name="ingredient"
+            app:argType="com.example.plateful.search.ingredients.model.Ingredient" />
+        <action
+            android:id="@+id/action_allIngredientsMeals_to_searchResultsScreen"
+            app:destination="@id/searchResultsScreen" />
+    </fragment>
 
 </navigation>

@@ -1,14 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".weeklyplan.WeeklyPlanScreen">
+    tools:context=".weeklyplan.view.WeeklyPlanScreen">
 
-    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="32dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottom_horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="32dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/left_vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/right_vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/top_horizontal_guideline_between_profile_photo_and_daily_inspiration_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="82dp" />
+
+    <ImageView
+        android:id="@+id/imageView_ic_profile_photo"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ic_account"
+        app:layout_constraintBottom_toTopOf="@id/top_horizontal_guideline_between_profile_photo_and_daily_inspiration_text"
+        app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/top_horizontal_guideline"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="39dp" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/textView_YourWeeklyPlan"
+        style="@style/HeadingText_4"
+        android:layout_marginTop="16dp"
+        android:text="@string/your_weekly_plan"
+        app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/imageView_ic_profile_photo" />
 
-</FrameLayout>
+<!--    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView_DaysOfTheWeek"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="@id/right_vertical_guideline"
+        app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/textView_YourWeeklyPlan"
+        app:layout_constraintBottom_toTopOf="@id/textView_DateChosen">-->
+
+    <TextView
+        android:id="@+id/textView_DateChosen"
+        style="@style/SubTitle_1"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/chipGroupDays"
+        tools:text="Wednesday, March 5, 2025" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupDays"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            app:chipSpacing="8dp"
+            app:singleSelection="true"
+            app:layout_constraintEnd_toEndOf="@id/right_vertical_guideline"
+            app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@id/textView_YourWeeklyPlan"
+            app:layout_constraintBottom_toTopOf="@id/textView_DateChosen">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSunday"
+                style="@style/DayChipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sunday" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipMonday"
+                style="@style/DayChipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/monday" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipTuesday"
+                style="@style/DayChipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tuesday" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipWednesday"
+                style="@style/DayChipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wednesday" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipThursday"
+                style="@style/DayChipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/thursday" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipFriday"
+                style="@style/DayChipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/friday" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSaturday"
+                style="@style/DayChipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/saturday" />
+
+        </com.google.android.material.chip.ChipGroup>
+<!--    </com.google.android.material.card.MaterialCardView>-->
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_Weekly_Meals"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="@id/right_vertical_guideline"
+        app:layout_constraintStart_toStartOf="@id/left_vertical_guideline"
+        app:layout_constraintTop_toBottomOf="@id/textView_DateChosen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="135dp" />
+
+    <TextView
+        android:id="@+id/textView_NoPlansAvailableForGuest"
+        style="@style/SubTitle_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/no_plans_available_in_guest_mode"
+        android:visibility="gone"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

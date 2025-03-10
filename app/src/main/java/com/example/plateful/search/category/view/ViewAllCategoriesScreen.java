@@ -15,15 +15,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.plateful.R;
+import com.example.plateful.authentication.signout.model.MealCloudDataSourceImpl;
+import com.example.plateful.database.MealLocalDataSourceImpl;
 import com.example.plateful.model.MealRepository;
 import com.example.plateful.model.MealRepositoryImpl;
 import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.MealRemoteDataSourceImpl;
 import com.example.plateful.search.category.model.Category;
+import com.example.plateful.search.ingredients.model.Ingredient;
 import com.example.plateful.search.mainsearch.presenter.MainSearchScreenPresenter;
 import com.example.plateful.search.mainsearch.presenter.MainSearchScreenPresenterImpl;
 import com.example.plateful.search.mainsearch.view.MainSearchScreenView;
-import com.example.plateful.view.AlertDialogMessage;
+import com.example.plateful.utils.AlertDialogMessage;
+import com.example.plateful.utils.UserSession;
 
 import java.util.List;
 
@@ -34,15 +38,18 @@ public class ViewAllCategoriesScreen extends Fragment implements MainSearchScree
 
     private TextView textViewSearchByCategory;
 
-    private RecyclerView recyclerViewViewAllCategories; // GridLayout
+    private RecyclerView recyclerViewViewAllCategories;
     private ViewAllCategoriesAdapter viewAllCategoriesAdapter;
 
     private MainSearchScreenPresenter mainSearchScreenPresenter;
 
     private void setUpPresenter() {
-        MealRemoteDataSource mealRemoteDataSource = new MealRemoteDataSourceImpl(requireContext());
-        MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource, null);
-        mainSearchScreenPresenter = new MainSearchScreenPresenterImpl((MainSearchScreenView) this, mealRepository);
+        MealRepository mealRepository = MealRepositoryImpl.getInstance(
+                new MealRemoteDataSourceImpl(requireContext()),
+                MealLocalDataSourceImpl.getInstance(requireContext()),
+                new MealCloudDataSourceImpl()
+        );
+        mainSearchScreenPresenter = new MainSearchScreenPresenterImpl(this, mealRepository);
     }
 
     @Override
@@ -85,6 +92,11 @@ public class ViewAllCategoriesScreen extends Fragment implements MainSearchScree
     @Override
     public void displayCategories(List<Category> categories) {
         viewAllCategoriesAdapter.setCategories(categories);
+    }
+
+    @Override
+    public void displayIngredients(List<Ingredient> ingredients) {
+
     }
 
     @Override

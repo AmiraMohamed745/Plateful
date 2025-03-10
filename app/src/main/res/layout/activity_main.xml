@@ -20,10 +20,34 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav_container"
         app:navGraph="@navigation/nav_graph" />
 
+    <TextView
+        android:id="@+id/textView_NoInternetConnection"
+        style="@style/SubTitle_1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/no_internet_banner"
+        android:gravity="center"
+        android:text="@string/no_internet_connection"
+        android:textColor="@color/white"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline"/>
+
     <include
         android:id="@+id/bottom_nav_container"
         layout="@layout/bottom_nav_bar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="24dp" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

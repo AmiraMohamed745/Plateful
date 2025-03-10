@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.plateful.R;
+import com.example.plateful.authentication.signout.model.MealCloudDataSourceImpl;
+import com.example.plateful.database.MealLocalDataSourceImpl;
 import com.example.plateful.model.Meal;
 import com.example.plateful.model.MealRepository;
 import com.example.plateful.model.MealRepositoryImpl;
@@ -23,10 +23,9 @@ import com.example.plateful.network.MealRemoteDataSourceImpl;
 import com.example.plateful.search.category.model.Category;
 import com.example.plateful.search.category.presenter.AllCategoryMealsPresenter;
 import com.example.plateful.search.category.presenter.AllCategoryMealsPresenterImpl;
-import com.example.plateful.search.mainsearch.presenter.MainSearchScreenPresenterImpl;
-import com.example.plateful.search.mainsearch.view.MainSearchScreenView;
-import com.example.plateful.view.AlertDialogMessage;
-import com.example.plateful.view.DestinationNavigator;
+import com.example.plateful.utils.AlertDialogMessage;
+import com.example.plateful.utils.DestinationNavigator;
+import com.example.plateful.utils.UserSession;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
@@ -42,9 +41,12 @@ public class AllCategoryMeals extends Fragment implements AllCategoryMealsView{
     private AllCategoryMealsPresenter allCategoryMealsPresenter;
 
     private void setUpPresenter() {
-        MealRemoteDataSource mealRemoteDataSource = new MealRemoteDataSourceImpl(requireContext());
-        MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource, null);
-        allCategoryMealsPresenter = new AllCategoryMealsPresenterImpl((AllCategoryMealsView) this, mealRepository);
+        MealRepository mealRepository = MealRepositoryImpl.getInstance(
+                new MealRemoteDataSourceImpl(requireContext()),
+                MealLocalDataSourceImpl.getInstance(requireContext()),
+                new MealCloudDataSourceImpl()
+        );
+        allCategoryMealsPresenter = new AllCategoryMealsPresenterImpl(this, mealRepository);
     }
 
     @Override
@@ -77,7 +79,7 @@ public class AllCategoryMeals extends Fragment implements AllCategoryMealsView{
         allCategoryMealsPresenter.loadCategoryMeals(category.getCategoryName());
 
         textInputEditTextMainSearchBar.setOnClickListener(view1 -> {
-            DestinationNavigator.navigateToSearchResultsScreen(view1, category);
+            DestinationNavigator.navigateToSearchResultsScreen(view1, category, null);
         });
     }
 

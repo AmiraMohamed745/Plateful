@@ -290,4 +290,14 @@
         <item name="android:alpha">0.2</item>
     </style>
 
+    <style name="DayChipStyle" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipCornerRadius">16dp</item>
+        <item name="chipStrokeWidth">2dp</item>
+        <item name="chipStrokeColor">@color/chip_day_stroke_color</item>
+        <item name="chipBackgroundColor">@color/chip_day_bg_color</item>
+        <item name="android:textColor">@color/chip_day_text_color</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/poppins_medium</item>
+    </style>
+
 </resources>

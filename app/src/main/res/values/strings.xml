@@ -22,6 +22,7 @@
     <string name="already_have_account_log_in">Already have account? Log In</string>
     <string name="daily_inspiration">Daily Inspiration</string>
     <string name="browse_cuisines">Browse Cuisines</string>
+    <string name="browse_all_cuisines">Browse All Cuisines</string>
     <string name="add_to_plan">Add to plan</string>
     <string name="search_for_a_meal">Search for a meal</string>
     <string name="main_search_bar_placeholder">Search</string>
@@ -47,7 +48,22 @@
     <string name="ingredients">Ingredients: </string>
     <string name="instructions">Instructions: </string>
     <string name="video">Video: </string>
-
+    <string name="your_weekly_plan">Your Weekly Plan</string>
+    <string name="sunday">Sunday</string>
+    <string name="monday">Monday</string>
+    <string name="saturday">Saturday</string>
+    <string name="friday">Friday</string>
+    <string name="thursday">Thursday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="select_a_date">Select a date</string>
+    <string name="no_internet_connection">No internet connection!</string>
+    <string name="no_favorite_meals_for_guest_mode">No favorite meals for guest mode.</string>
+    <string name="no_plans_available_in_guest_mode">No plans available in guest mode.</string>
+    <string name="back_up_data">Back up data</string>
+    <string name="data_backed_up_successfully">Data backed up successfully!</string>
+    <string name="search_by_ingredients">Search by Ingredients</string>
+    <string name="search_by_ingredient">Search by Ingredient</string>
 
 
 </resources>

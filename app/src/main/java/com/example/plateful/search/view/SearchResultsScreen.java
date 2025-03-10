@@ -15,20 +15,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.plateful.R;
+import com.example.plateful.authentication.signout.model.MealCloudDataSourceImpl;
 import com.example.plateful.authentication.utils.EditableToStringConverter;
+import com.example.plateful.database.MealLocalDataSourceImpl;
 import com.example.plateful.model.Meal;
 import com.example.plateful.model.MealRepository;
 import com.example.plateful.model.MealRepositoryImpl;
-import com.example.plateful.network.MealRemoteDataSource;
 import com.example.plateful.network.MealRemoteDataSourceImpl;
 import com.example.plateful.search.category.model.Category;
-import com.example.plateful.search.category.view.AllCategoryMealsArgs;
-import com.example.plateful.search.mainsearch.presenter.MainSearchScreenPresenterImpl;
-import com.example.plateful.search.mainsearch.view.MainSearchScreenView;
-import com.example.plateful.search.mainsearch.view.SearchByCategoryAdapter;
+import com.example.plateful.search.ingredients.model.Ingredient;
 import com.example.plateful.search.presenter.SearchResultsPresenter;
 import com.example.plateful.search.presenter.SearchResultsPresenterImpl;
-import com.example.plateful.view.AlertDialogMessage;
+import com.example.plateful.utils.AlertDialogMessage;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
@@ -44,8 +42,11 @@ public class SearchResultsScreen extends Fragment implements SearchResultsScreen
     private SearchResultsPresenter searchResultsPresenter;
 
     private void setUpPresenter() {
-        MealRemoteDataSource mealRemoteDataSource = new MealRemoteDataSourceImpl(requireContext());
-        MealRepository mealRepository = MealRepositoryImpl.getInstance(mealRemoteDataSource, null);
+        MealRepository mealRepository = MealRepositoryImpl.getInstance(
+                new MealRemoteDataSourceImpl(requireContext()),
+                MealLocalDataSourceImpl.getInstance(requireContext()/*, UserSession.getCurrentUserId()*/),
+                new MealCloudDataSourceImpl()
+        );
         searchResultsPresenter = new SearchResultsPresenterImpl(this, mealRepository);
     }
 
@@ -65,7 +66,9 @@ public class SearchResultsScreen extends Fragment implements SearchResultsScreen
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Category category = AllCategoryMealsArgs.fromBundle(getArguments()).getCategory();
+        SearchResultsScreenArgs args = SearchResultsScreenArgs.fromBundle(getArguments());
+        Category category = args.getCategory();
+        Ingredient ingredient = args.getIngredient();
 
         textInputEditTextMainSearchBar = view.findViewById(R.id.textInputEditText_SearchResults);
 
@@ -77,7 +80,12 @@ public class SearchResultsScreen extends Fragment implements SearchResultsScreen
 
         setUpPresenter();
         setUpSearchResultsAdapter();
-        searchResultsPresenter.loadSearchResults(category.getCategoryName());
+
+        if (category != null) {
+            searchResultsPresenter.loadSearchResultsForCategoryMeals(category.getCategoryName());
+        } else if (ingredient != null) {
+            searchResultsPresenter.loadSearchResultsForIngredientMeals(ingredient.getName());
+        }
 
         textInputEditTextMainSearchBar.addTextChangedListener(new TextWatcher() {
             @Override

@@ -7,6 +7,8 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 import com.example.plateful.model.Meal;
+import com.example.plateful.utils.UserSession;
+
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -18,8 +20,8 @@ import io.reactivex.rxjava3.core.Flowable;
 @Dao
 public interface MealDAO {
 
-    @Query("SELECT * FROM meal_table")
-    Flowable<List<Meal>> getAllFavoriteMeals();
+    @Query("SELECT * FROM meal_table WHERE user_id = :userId")
+    Flowable<List<Meal>> getAllFavoriteMeals(String userId);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     Completable insertMeal(Meal meal);

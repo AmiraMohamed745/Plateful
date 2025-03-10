@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,14 +18,28 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.plateful.R;
+import com.example.plateful.authentication.signout.model.MealCloudDataSourceImpl;
+import com.example.plateful.database.MealLocalDataSourceImpl;
 import com.example.plateful.details.model.Ingredient;
+import com.example.plateful.details.presenter.MealDetailsScreenPresenter;
+import com.example.plateful.details.presenter.MealDetailsScreenPresenterImpl;
 import com.example.plateful.model.Meal;
+import com.example.plateful.model.MealRepository;
+import com.example.plateful.model.MealRepositoryImpl;
+import com.example.plateful.model.SessionManager;
+import com.example.plateful.network.MealRemoteDataSourceImpl;
+import com.example.plateful.utils.UserSession;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 
 public class MealDetailsScreen extends Fragment {
@@ -50,6 +65,16 @@ public class MealDetailsScreen extends Fragment {
     private Button buttonAddToFavorites;
     private Button buttonAddToPlan;
 
+    private MealDetailsScreenPresenter mealDetailsScreenPresenter;
+
+    private void setUpPresenter() {
+        mealDetailsScreenPresenter = new MealDetailsScreenPresenterImpl(
+                MealRepositoryImpl.getInstance(
+                        new MealRemoteDataSourceImpl(requireContext()),
+                        MealLocalDataSourceImpl.getInstance(requireContext()),
+                        new MealCloudDataSourceImpl()
+                ));
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -107,8 +132,22 @@ public class MealDetailsScreen extends Fragment {
         buttonAddToFavorites = view.findViewById(R.id.button_addToFavorites);
         buttonAddToPlan = view.findViewById(R.id.button_addToPlan);
 
+        setUpPresenter();
         setUpIngredientsAdapter();
         displayMealDetails(meal);
+
+        SessionManager sessionManager = new SessionManager(requireContext());
+        if (sessionManager.isGuestMode()) {
+            buttonAddToFavorites.setEnabled(false);
+            buttonAddToFavorites.setBackgroundColor(ContextCompat.getColor(requireContext(),
+                    R.color.hintTextColor));
+            buttonAddToPlan.setEnabled(false);
+            buttonAddToPlan.setBackgroundColor(ContextCompat.getColor(requireContext(),
+                    R.color.hintTextColor));
+        }
+        buttonAddToPlan.setOnClickListener(view1 -> {
+            showDatePicker(meal);
+        });
     }
 
     private void setUpIngredientsAdapter() {
@@ -144,5 +183,26 @@ public class MealDetailsScreen extends Fragment {
         return "";
     }
 
-
+    private void showDatePicker(Meal meal) {
+        MaterialDatePicker.Builder<Long> builder = MaterialDatePicker.Builder.datePicker();
+        builder.setTitleText(R.string.select_a_date);
+        builder.setSelection(MaterialDatePicker.todayInUtcMilliseconds());
+        CalendarConstraints.Builder constraintsBuilder = new CalendarConstraints.Builder();
+        constraintsBuilder.setValidator(DateValidatorPointForward.now());
+        builder.setCalendarConstraints(constraintsBuilder.build());
+        MaterialDatePicker<Long> datePicker = builder.build();
+        datePicker.addOnPositiveButtonClickListener(selection -> {
+            Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+            cal.setTimeInMillis(selection);
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+            long chosenDate = cal.getTimeInMillis();
+            mealDetailsScreenPresenter.addMealToPlan(
+                    meal,
+                    chosenDate);
+        });
+        datePicker.show(getChildFragmentManager(), "DATE_PICKER");
+    }
 }

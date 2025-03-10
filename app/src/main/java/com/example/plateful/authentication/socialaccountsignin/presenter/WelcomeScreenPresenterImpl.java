@@ -1,5 +1,6 @@
 package com.example.plateful.authentication.socialaccountsignin.presenter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
@@ -13,15 +14,20 @@ import com.example.plateful.authentication.model.UserRepositoryImpl;
 import com.example.plateful.authentication.socialaccountsignin.model.GoogleSignInHelper;
 import com.example.plateful.authentication.socialaccountsignin.view.WelcomeScreenClickListeners;
 import com.example.plateful.authentication.socialaccountsignin.view.WelcomeScreenView;
+import com.example.plateful.model.Meal;
+import com.example.plateful.model.MealRepository;
+import com.example.plateful.model.SessionManager;
+import com.example.plateful.network.RXSchedulers;
+import com.example.plateful.utils.UserSession;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-/**
- * The presenter layer shouldn't usually have access to any Android-specific elements
- * like Intent, Context, etc.
- */
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 public class WelcomeScreenPresenterImpl implements WelcomeScreenPresenter{
 
     // For debugging
@@ -32,13 +38,17 @@ public class WelcomeScreenPresenterImpl implements WelcomeScreenPresenter{
     private final AuthenticationRepository authenticationRepository;
     private final UserRepository userRepository;
     private final GoogleSignInHelper googleSignInHelper;
+    private final CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private final MealRepository mealRepository;
 
-    public WelcomeScreenPresenterImpl(WelcomeScreenView welcomeScreenView, WelcomeScreenClickListeners welcomeScreenClickListeners, GoogleSignInHelper googleSignInHelper) {
+
+    public WelcomeScreenPresenterImpl(WelcomeScreenView welcomeScreenView, WelcomeScreenClickListeners welcomeScreenClickListeners, GoogleSignInHelper googleSignInHelper, MealRepository mealRepository) {
         this.welcomeScreenView = welcomeScreenView;
         this.welcomeScreenClickListeners = welcomeScreenClickListeners;
         this.googleSignInHelper = googleSignInHelper;
         this.authenticationRepository = new AuthenticationRepositoryImpl();
         userRepository = new UserRepositoryImpl();
+        this.mealRepository = mealRepository;
     }
 
     @Override
@@ -47,10 +57,12 @@ public class WelcomeScreenPresenterImpl implements WelcomeScreenPresenter{
         welcomeScreenView.launchGoogleSignInIntent(signInIntent);
     }
 
-    /**
-     * Google-sign-in is treated as a normal registration process where user data is
-     * save to the database so that the information is displayed on the profile screen
-     */
+    @Override
+    public void onSignInAsGuestButtonClicked(Context context) {
+        SessionManager sessionManager = new SessionManager(context);
+        sessionManager.setGuestMode(true);
+    }
+
     @Override
     public void handleGoogleSignInResult(Intent data) {
         try {
@@ -67,6 +79,8 @@ public class WelcomeScreenPresenterImpl implements WelcomeScreenPresenter{
                             userRepository.saveUser(user, new SaveUserCallback() {
                                 @Override
                                 public void onSuccess() {
+                                    restoreUserBackUpOfFavoriteMeal();
+                                    restoreUserBackUpOfPlannedMeal();
                                     welcomeScreenClickListeners.onSuccessfulGoogleSignIn();
                                 }
 
@@ -89,5 +103,46 @@ public class WelcomeScreenPresenterImpl implements WelcomeScreenPresenter{
             Log.e(TAG, "Google sign in failed", e);
             welcomeScreenView.showError("Google sign-in failed: " + e.getMessage());
         }
+    }
+
+    @Override
+    public void restoreUserBackUpOfFavoriteMeal() {
+        compositeDisposable.add(
+                mealRepository.provideBackedUpFavoriteMeals()
+                        .compose(RXSchedulers.applySchedulersSingle())
+                        .subscribe(
+                                backedUpMeals -> {
+                                    for (Meal meal : backedUpMeals) {
+                                        meal.setUserId(UserSession.getCurrentUserId());
+                                        mealRepository.insertMeal(meal)
+                                                .subscribe();
+                                    }
+                                },
+                                error -> welcomeScreenView.showError("Failed to restore favorite meals: " + error.getMessage())
+                        )
+        );
+    }
+
+    @Override
+    public void restoreUserBackUpOfPlannedMeal() {
+        compositeDisposable.add(
+                mealRepository.provideBackedUpPlannedMeals()
+                        .compose(RXSchedulers.applySchedulersSingle())
+                        .subscribe(
+                                backedUpPlannedMeals -> {
+                                    for (com.example.plateful.weeklyplan.model.PlannedMeal plannedMeal : backedUpPlannedMeals) {
+                                        plannedMeal.setUserId(UserSession.getCurrentUserId());
+                                        mealRepository.insertPlannedMeal(plannedMeal)
+                                                .subscribe();
+                                    }
+                                },
+                                error -> welcomeScreenView.showError("Failed to restore planned meals: " + error.getMessage())
+                        )
+        );
+    }
+
+    @Override
+    public void cleanUpDisposables() {
+        compositeDisposable.clear();
     }
 }

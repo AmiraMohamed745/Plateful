@@ -5,9 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,19 +13,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.plateful.R;
-import com.example.plateful.authentication.model.User;
 import com.example.plateful.authentication.signup.model.SignUpAuthenticationData;
 import com.example.plateful.authentication.signup.pesenter.SignUpScreenPresenter;
 import com.example.plateful.authentication.signup.pesenter.SignUpScreenPresenterImpl;
 import com.example.plateful.authentication.utils.EditableToStringConverter;
-import com.example.plateful.view.DestinationNavigator;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.plateful.model.SessionManager;
+import com.example.plateful.utils.DestinationNavigator;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class SignUpScreen extends Fragment implements SignUpScreenView {
@@ -83,6 +75,8 @@ public class SignUpScreen extends Fragment implements SignUpScreenView {
 
         buttonSignUp.setOnClickListener(onSignUpButtonClicked -> {
             signUpScreenPresenter.signUp(extractUserData());
+            SessionManager sessionManager = new SessionManager(requireContext());
+            sessionManager.setGuestMode(false);
         });
     }
 
