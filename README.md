@@ -17,7 +17,8 @@ Plateful is an Android mobile application designed to help users efficiently pla
 ### **2️⃣ Guest Mode**
 * Sign in as a guest and access limited features like browsing cuisines and searching for meals.
 
-![Guest_mode](https://github.com/user-attachments/assets/99b9dcc8-c4fc-4bea-973f-2e8bbe91cdd1)
+![Guest_mode](https://github.com/user-attachments/assets/494ae83f-965e-4b6d-8d13-df41f51ba560)
+
 
 
 ### **3️⃣ Daily Inspiration**
